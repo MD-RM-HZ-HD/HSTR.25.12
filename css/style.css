@@ -1027,139 +1027,211 @@ article.content li:focus {
 .nav-tool-btn:hover {
     background-color: rgba(255, 255, 255, 0.4);
 }
+/* === 15. GENERATED CONTENT STYLES (From Python Script) === */
 
-/* === 14. PAGE: Interactive Mindmap === */
-
-.mindmap-container {
-    position: relative;
-    width: 100%;
-    height: 80vh; /* Adjust height as needed */
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #e8f0e9;
-}
-
-body.dark .mindmap-container {
-    background-color: #1a2a21;
-}
-
-.mindmap-canvas {
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Pan/zoom is handled by JS */
-    cursor: grab;
-}
-
-.mindmap-tree {
-    display: inline-block; /* Allows transform-origin to work correctly */
-    white-space: nowrap;
-    padding: 2rem;
-    transform-origin: 0 0;
-    transition: transform 0.2s ease-out;
-    user-select: none;
-}
-
-.mindmap-tree ul {
-    padding-right: 20px;
-    position: relative;
-    transition: all 0.3s ease-in-out;
-    list-style: none;
-}
-
-.mindmap-tree li {
-    position: relative;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-/* --- Connectors --- */
-.mindmap-tree ul::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -10px;
-    width: 1px;
-    height: 100%;
-    background-color: #a0a0a0;
-}
-
-body.dark .mindmap-tree ul::before {
-    background-color: #555;
-}
-
-.mindmap-tree li::before {
-    content: '';
-    position: absolute;
-    top: 1.1em; /* Align with middle of the span */
-    right: -10px;
-    width: 10px;
-    height: 1px;
-    background-color: #a0a0a0;
-}
-
-body.dark .mindmap-tree li::before {
-    background-color: #555;
-}
-
-/* --- Nodes --- */
-.mindmap-tree span {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--hr);
-    background-color: #fff;
-    color: #333;
-    font-weight: bold;
+/* --- Headings & Titles --- */
+.q-title {
+    color: #000000;
+    font-weight: 700;
+    padding-right: 1.25rem !important; 
+    border-right: 4px solid #056839; 
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+body.dark .q-title {
+    background-color: #374151; 
+    color: #10B981; 
+    border-right-color: #10B981;
 }
 
-body.dark .mindmap-tree span {
-    background-color: #2d2d2d;
-    color: var(--text);
-    border-color: #444;
+/* H3 Style */
+.h3-content-title {
+    color: #ffffff;  
+    font-weight: 700;
+    padding: 10px;
+    padding-right: 1.25rem;
+    border-right: 4px solid #056839;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    background-color: #000000; 
+    display: inline-block;  
+    width: fit-content;  
+}
+body.dark .h3-content-title {
+    color: #ffffff;  
+    border-right-color: #10B981;
+    background-color: #000000; 
 }
 
-.mindmap-tree span:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-color: var(--accent);
+/* H4 Style */
+.h4-content-title {
+    color: #000000;  
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 6px 10px;
+    margin-top: 0.25rem;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #ffffff;  
+    display: inline-block;  
+    width: fit-content;  
+}
+body.dark .h4-content-title {
+    background-color: #ffffff;  
+    color: #000000;  
 }
 
-.mindmap-tree li.collapsed > ul {
-    display: none;
+/* H5 Style */
+.h5-content-title {
+    color: #ffffff;  
+    font-weight: 700;
+    padding: 10px;
+    padding-right: 1.25rem;
+    border-right: 4px solid #056839;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    background-color: #047857; 
+    display: inline-block;  
+    width: fit-content;  
+}
+body.dark .h5-content-title {
+    color: #ffffff;  
+    border-right-color: #10B981;
+    background-color: #374151; 
 }
 
-/* --- Controls --- */
-.mindmap-controls {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-    display: flex;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 8px;
+/* Content Text */
+.p-content {
+    line-height: 1.75; 
+    margin-bottom: 0.75rem; 
+}
+.li-content {
+    line-height: 1.75; 
+    margin-bottom: 0.5rem; 
+    margin-right: 2rem; 
+}
+.hr-separator {
+    border-top: 1px solid #e5e7eb; 
+    margin-top: 1rem; 
+    margin-bottom: 1rem; 
+}
+body.dark .p-content,
+body.dark .li-content {
+    color: #E5E7EB; 
+}
+
+/* --- Accordion Container Style --- */
+.content-container {
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    background-color: rgb(170, 187, 165);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden; 
+}
+body.dark .content-container {
+     background: #1f2937; 
+     border-color: #4b5563; 
 }
 
-.mindmap-btn {
-    background-color: var(--accent);
-    color: white;
+.accordion-button {
+    width: 100%;
+    background-color: rgb(170, 187, 165);
+    padding: 10px 15px; 
     border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
+    text-align: right;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.1rem; 
+    font-weight: bold;
+    color: #333;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
+}
+body.dark .accordion-button {
+    background: #374151; 
+    color: #f3f4f6; 
+    border-bottom-color: #4b5563; 
 }
 
-.mindmap-btn:hover {
-    background-color: var(--accent-dark);
+.accordion-title-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+}
+
+.accordion-button .icon-toggle {
+    font-size: 1rem;
+    color: #0078D7;
+    width: 20px;
+    flex-shrink: 0;
+    margin-right: 10px; 
+}
+.accordion-button h2 { 
+     display: inline;
+     font-size: 1.1rem; 
+     color: #000000;
+     text-align: right;
+     margin: 0;
+}
+body.dark .accordion-button h2 {
+    color: #f3f4f6 !important; 
+}
+
+.accordion-button audio {
+    height: 40px;
+    width: 100%;
+    max-width: min(400px, 40vw); 
+    min-width: 150px; 
+    flex-grow: 0;
+    flex-shrink: 1; 
+    margin-right: auto;
+    margin-left: 15px;
+}
+
+@media (max-width: 640px) {
+    .accordion-button audio {
+        max-width: 180px; 
+        margin-left: 10px;
+        margin-right: 5px;
+    }
+}
+
+.accordion-panel {
+    padding: 20px; 
+    background-color: rgb(170, 187, 165);
+    border-top: 1px solid #e0e0e0;
+}
+body.dark .accordion-panel {
+    background: #111827; 
+    border-top-color: #4b5563; 
+}
+
+/* Q&A Sections */
+.qa { margin-bottom: 10px; } 
+.a { padding: 10px; padding-right: 1.5rem; }
+body.dark .a { color: #d1d5db; } 
+
+/* --- Nav Bar Tools (Legacy support if needed) --- */
+.nav-tools {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem; 
+}
+.nav-tools .icon-btn, .nav-tools .btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.nav-tools .icon-btn:hover, .nav-tools .btn:hover {
+    background: rgba(255, 255, 255, 0.4);
 }
