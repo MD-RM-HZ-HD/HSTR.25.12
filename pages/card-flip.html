@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>بطاقات المراجعة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Shine animation for the card faces */
+        @keyframes shine-rtl {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Glaring effect for text */
+        @keyframes text-glare {
+            0%, 100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6); }
+        }
+
+        /* Ensure card faces are positioned correctly for the ::after pseudo-element */
+        /* and contain the shine effect */
+        .card-face {
+            overflow: hidden; /* Add this to contain the shine effect */
+        }
+
+        /* Shine effect for the front face when not flipped */
+        .card:not(.flipped) #front-face::after {
+            content: '';
+            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 80%);
+            animation: shine-rtl 2s infinite;
+            pointer-events: none; /* Allow clicks to pass through */
+            z-index: 1; /* Ensure it's above the background but below content */
+        }
+
+        /* Shine effect for the back face when flipped */
+        .card.flipped #back-face::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 80%);
+            animation: shine-rtl 2s infinite;
+            pointer-events: none; /* Allow clicks to pass through */
+            z-index: 1; /* Ensure it's above the background but below content */
+        }
+
+        /* Apply glaring effect to card headers */
+        .card-header {
+            animation: text-glare 2s infinite alternate;
+        }
+    </style>
+</head>
+<body> 
+<div class="main-width-container pt-10">
+	<div id="navbar-placeholder"></div>
+	<header class="page-title-card">
+                <h1>بطاقات المراجعة</h1>
+    <p>حاول التخمين ثم اضغط لتظهر الإجابة</p>
+</header>
+
+        <div class="container-main p-4 md:p-6 mb-1 md:mb-2">
+            <div class="flex justify-between items-center mb-2 md:mb-3">
+                <span class="text-xs md:text-sm font-semibold">التقدم</span>
+                <span id="progress-text" class="text-xs md:text-sm font-semibold">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+
+
+        <div id="score-container" class="hidden">
+            <span id="question-counter"></span>
+        </div>
+
+        <div id="card-and-buttons-container" class="p-6 md:p-8 rounded-2xl comparison-card border-t-8">
+            <div class="card-container relative min-h-[250px] mb-8">
+                <div id="flashcard" class="card" onclick="flipCard()">
+                    <div id="front-face" class="card-face flex flex-col justify-between border border-gray-300 rounded-3xl bg-gradient-to-br from-green-100 to-green-200 shadow-xl">
+                        <div id="front-header" class="card-header text-white bg-gray-400 shadow-md"></div>
+                        <div id="front-content" class="card-content text-gray-800"></div>
+                    </div>
+
+                    <div id="back-face" class="card-face flex flex-col justify-between border border-gray-300 rounded-3xl shadow-xl">
+                        <div id="back-header" class="card-header text-white bg-blue-700 shadow-md"> الحكم</div>
+                        <div id="back-content" class="card-content text-gray-800"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="navigation-buttons" class="mt-8 flex justify-center space-x-4">
+                <button id="prev-btn" class="px-6 py-3 bg-gray-400 text-white font-bold rounded-xl transition duration-200 disabled:opacity-50 hover:bg-gray-500" disabled>
+                    &larr; البطاقة السابقة
+                </button>
+                <button id="next-btn" class="px-6 py-3 bg-teal-500 text-white font-bold rounded-xl transition duration-200 disabled:opacity-50 hover:bg-teal-600">
+                    البطاقة التالية &rarr;
+                </button>
+            </div>
+        </div>
+
+        <div id="end-screen" class="container-main text-center p-8 hidden">
+            <h2 class="text-2xl font-bold mb-4">انتهت المراجعة!</h2>
+            <p class="text-xl mb-6" id="final-message">لقد أتممت جميع بطاقات المراجعة.</p>
+            <button onclick="restartQuiz()" class="quiz-button bg-green-500 text-white py-2 px-6 rounded-lg font-semibold">إعادة المراجعة</button>
+        </div>
+    </div>
+
+    <script src="../data/data_card-flip.js"></script>
+	<script src="../js/script_card-flip.js"></script>
+<script src="../js/nav-loader.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    loadNavbar({ 
+      pageType: 'sub',
+      showTools: false
+    });
+  });
+</script>
+</body>
+</html>

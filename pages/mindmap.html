@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<title>الخريطة الذهنية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* --- تأثيرات العقد --- */
+        @keyframes shine-button {
+            0% { transform: translateX(-100%) skewX(-20deg); }
+            100% { transform: translateX(200%) skewX(-20deg); }
+        }
+        
+        /* --- هذا هو الإصلاح --- */
+        @keyframes glow-light {
+            0%, 100% { box-shadow: 0 0 4px rgba(0,0,0,0.1); }
+            50% { box-shadow: 0 0 12px 4px rgba(0,0,0,0.15); }
+        }
+        @keyframes glow-dark {
+            0%, 100% { box-shadow: 0 0 4px rgba(255,255,255,0.1); }
+            50% { box-shadow: 0 0 12px 4px rgba(255,255,255,0.15); }
+        }
+        /* --- نهاية الإصلاح --- */
+
+
+        /* --- تنسيق الخريطة الذهنية العمودية --- */
+
+        .mindmap-wrapper {
+            width: 100%;
+            overflow-x: auto; 
+            padding: 2rem 1rem;
+            background-color: rgb(170, 187, 165);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        body.dark .mindmap-wrapper {
+            background-color: #1f2937; /* gray-800 to match summary-text.html */
+        }
+        
+        .mindmap-v-tree {
+            display: inline-block; 
+            min-width: 100%;
+        }
+
+        .mindmap-v-tree ul {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            padding-right: 30px;
+        }
+        
+        .mindmap-v-tree li.collapsed > ul {
+            display: none;
+        }
+
+        .mindmap-v-tree li {
+            position: relative;
+            padding: 8px 0;
+            white-space: nowrap; 
+        }
+
+        .mindmap-v-tree li > span {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            min-width: 160px; 
+            text-align: center;
+            position: relative; 
+            z-index: 1; 
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        /* الفروع القابلة للتوسيع */
+        .mindmap-v-tree li:has(ul) > span {
+            overflow: hidden; /* لحبس تأثير اللمعان */
+        }
+        
+        /* الأوراق النهائية (التفاصيل) */
+        .mindmap-v-tree li:not(:has(ul)) > span {
+             animation: glow-light 2.5s infinite ease-in-out; /* <-- تطبيق الإصلاح هنا */
+             white-space: normal; 
+             max-width: 400px;    
+             text-align: right;   
+             font-weight: 400;    
+             cursor: default;     
+        }
+        /* <-- إضافة هذا السطر للإصلاح */
+        body.dark .mindmap-v-tree li:not(:has(ul)) > span {
+             animation-name: glow-dark;
+        }
+
+
+        /* الفروع القابلة للتوسيع: تأثير اللمعان */
+        .mindmap-v-tree li:has(ul) > span::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, 
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.5) 50%,
+                rgba(255, 255, 255, 0) 100%);
+            opacity: 0.6;
+            animation: shine-button 4s infinite linear;
+        }
+        body.dark .mindmap-v-tree li:has(ul) > span::after {
+            background: linear-gradient(to right, 
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%);
+        }
+
+        .mindmap-v-tree li > span:hover {
+             transform: scale(1.03);
+             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        body.dark .mindmap-v-tree li > span {
+            color: #f3f4f6;
+            background-color: #374151;
+            border-color: #4b5563;
+        }
+
+        /* --- تخصيص ألوان العقد حسب المستوى --- */
+        
+        .mindmap-v-tree > ul {
+             padding-right: 0; 
+        }
+        .mindmap-v-tree > ul > li > span {
+            background-color: #0d9488;
+            color: white;
+            border-color: #047857;
+            font-size: 1.25rem;
+        }
+        
+        .mindmap-v-tree > ul > li > ul > li > span {
+            background-color: #f0f9ff;
+            border-color: #7dd3fc;
+            color: #0369a1;
+        }
+        body.dark .mindmap-v-tree > ul > li > ul > li > span {
+            background-color: #0c4a6e;
+            border-color: #0ea5e9;
+            color: #e0f2fe;
+        }
+
+        .mindmap-v-tree > ul > li > ul > li > ul > li > span {
+            background-color: #fdf2f8;
+            border-color: #fbcfe8;
+            color: #9d174d;
+        }
+        body.dark .mindmap-v-tree > ul > li > ul > li > ul > li > span {
+            background-color: #831843;
+            border-color: #ec4899;
+            color: #fce7f3;
+        }
+
+        .mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > span {
+            background-color: #eef2ff; /* indigo-50 */
+            border-color: #a5b4fc; /* indigo-300 */
+            color: #4338ca; /* indigo-700 */
+        }
+        body.dark .mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > span {
+            background-color: #3730a3; /* indigo-800 */
+            border-color: #6366f1; /* indigo-500 */
+            color: #c7d2fe; /* indigo-200 */
+        }
+
+        .mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > ul > li > span {
+            background-color: #fefce8; /* yellow-50 */
+            border-color: #fde047; /* yellow-300 */
+            color: #a16207; /* yellow-700 */
+        }
+        body.dark .mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > ul > li > span {
+            background-color: #713f12; /* yellow-900 */
+            border-color: #eab308; /* yellow-500 */
+            color: #fef9c3; /* yellow-100 */
+        }
+
+        .mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > span {
+            background-color: #f0fdf4; /* green-50 */
+            border-color: #86efac; /* green-300 */
+            color: #15803d; /* green-700 */
+        }
+        body.dark .mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > span {
+            background-color: #166534; /* green-900 */
+            border-color: #22c55e; /* green-500 */
+            color: #dcfce7; /* green-100 */
+        }
+
+        /* --- الخطوط العمودية --- */
+        
+        .mindmap-v-tree ul > li::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -15px; 
+            width: 2px;
+            height: 100%;
+            background-color: #cbd5e1;
+        }
+        body.dark .mindmap-v-tree ul > li::before {
+            background-color: #4b5563;
+        }
+
+        .mindmap-v-tree ul > li::after {
+            content: "";
+            position: absolute;
+            top: 25px; 
+            right: -15px;
+            width: 15px; 
+            height: 2px;
+            background-color: #cbd5e1;
+        }
+        body.dark .mindmap-v-tree ul > li::after {
+            background-color: #4b5563;
+        }
+
+        .mindmap-v-tree ul > li:last-child::before {
+            height: 25px; 
+        }
+        
+        .mindmap-v-tree > ul > li::before,
+        .mindmap-v-tree > ul > li::after {
+            display: none;
+        }
+
+        /* --- Styles for Audio Header (from source-text.html) --- */
+        .content-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            /* margin-bottom: 20px; -- This is handled by mb-4 class */
+            background-color: rgb(170, 187, 165);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden; 
+        }
+        body.dark .content-container {
+             background: #1f2937; /* gray-800 */
+             border-color: #4b5563; /* gray-600 */
+        }
+        
+        .accordion-button {
+            width: 100%;
+            background-color: rgb(170, 187, 165);
+            padding: 1.25rem 1rem; /* MODIFIED: Increased vertical padding */
+            border: none;
+            text-align: right;
+            cursor: pointer;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        body.dark .accordion-button {
+            background: #374151; /* gray-700 */
+            color: #f3f4f6; /* gray-100 */
+        }
+        
+        .accordion-title-group {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align to the right (RTL) */
+        }
+
+        /* Custom styles for the new header text, matching the image */
+        .header-title-style {
+             font-size: 1.5rem; /* MODIFIED: Set larger font size */
+             line-height: 1.3;
+             font-weight: 700; 
+             color: #004d40; /* Dark Teal */
+             margin: 0; 
+             padding: 0;
+        }
+        .header-subtitle-style {
+            font-size: 1rem; /* MODIFIED: Set larger font size */
+            line-height: 1.3;
+            color: #333; 
+            margin: 0; 
+            padding: 0;
+            font-weight: 400; /* Subtitle is not bold */
+        }
+        body.dark .header-title-style {
+            color: #a7f3d0; /* light emerald */
+        }
+        body.dark .header-subtitle-style {
+            color: #d1d5db; /* gray-300 */
+        }
+        
+        .accordion-button audio {
+            height: 40px;
+            width: 100%;
+            max-width: min(400px, 40vw); /* Responsive: won't exceed 40% of viewport or 400px */
+            min-width: 150px; /* Minimum size for small screens */
+            flex-grow: 0;
+            flex-shrink: 1; /* Allow shrinking on small screens */
+            margin-right: auto;
+            margin-left: 15px;
+        }
+
+        /* Extra fix for very small screens */
+        @media (max-width: 640px) {
+            .accordion-button audio {
+                max-width: 180px; /* Smaller on mobile */
+                margin-left: 10px;
+                margin-right: 5px;
+            }
+        }
+        /* --- End of Styles for Audio Header --- */
+
+        /* --- Reset navbar font size --- */
+        #navbar-placeholder {
+            font-size: 1rem; /* Reset to default */
+        }
+
+    </style>
+</head>
+<body class="min-h-screen" 
+      x-data="{ 'fontSize': 18, 'darkMode': false }"
+      :class="{ 'dark': darkMode }"
+      @font-change.window="fontSize = Math.max(10, fontSize + $event.detail)"
+      @font-reset.window="fontSize = 18"
+      @theme-toggle.window="darkMode = !darkMode"> 
+
+	<div class="main-width-container pt-10" :style="{ 'fontSize': fontSize + 'px' }">
+  	<div id="navbar-placeholder"></div>
+
+    <div class="content-container mb-4">
+        <div class="accordion-button" style="cursor: default;">
+            
+            <div class="accordion-title-group" style="flex-direction: column; align-items: flex-end;"> 
+                <h1 class="header-title-style">خريطة ذهنية</h1>
+                <p class="header-subtitle-style">انقر على العقد للتوسيع وعرض التفاصيل.</p>
+            </div>
+
+            <audio controls src="../audio/source.mp3" onclick="event.stopPropagation()">
+                <p class="muted">متصفحك لا يدعم الصوت.</p>
+            </audio>
+            
+        </div>
+    </div>
+
+    <div class="container-main p-0 md:p-0 mb-1 md:mb-2">
+        <div class="mindmap-wrapper">
+            
+            <div class="mindmap-v-tree" id="mindmap-tree-container">
+                </div> 
+        
+        </div> 
+    </div> 
+    
+    <footer class="text-center mt-6 md:mt-8" style="width: 100%;">
+        <p id="footer-message" class="text-xs md:text-sm opacity-90" style="color: var(--text)"></p>
+    </footer>
+
+</div> 
+
+<script src="../data/data_mindmap.js" charset="UTF-8"></script>
+
+<script src="../js/script_mindmap.js"></script>
+<script src="../js/nav-loader.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    loadNavbar({ 
+      pageType: 'sub',
+      showTools: true // <-- (غيّر "true" أو "false" حسب الصفحة)
+    });
+  });
+</script>
+
+</body>
+</html>
