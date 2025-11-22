@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>تاريخ الإسلام</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body x-data="{ 'showIntroModal': true }">
+<div x-show="showIntroModal" 
+     style="display: none; background-color: rgba(0, 0, 0, 0.6);" 
+     class="fixed inset-0 z-[100] flex items-center justify-center p-4"
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     x-transition:leave="transition ease-in duration-200"
+     x-transition:leave-start="opacity-100"
+     x-transition:leave-end="opacity-0">
+    
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md p-6 text-center"
+         @click.outside="showIntroModal = false"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-90"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-90">
+        
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">👋 تذكير </h3>
+        <p class="text-lg text-gray-700 dark:text-gray-200 mb-6">
+            اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ
+        </p>
+        <button @click="showIntroModal = false" 
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+وعَجِّلْ فَرَجَهُمْ
+        </button>
+    </div>
+</div>
+<div class="main-width-container pt-2">
+  <div class="page-title-card">
+    <h1>تاريخ الإسلام</h1>
+  </div>
+
+    <div class="container-main w-full text-center">
+
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <a href="pages/source-text.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-lg flex flex-col justify-center">
+                <p class="text-2xl font-bold mb-1">النـص</p>
+                <p class="text-sm opacity-90 mt-1">مراجعة للنص</p>
+            </a>
+            
+            <a href="pages/mindmap.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-lg flex flex-col justify-center">
+                <p class="text-2xl font-bold mb-1">خريطة ذهنية</p>
+                <p class="text-sm opacity-90 mt-1">ملخص شجري تفاعلي</p>
+            </a>
+            <a href="pages/summary-text.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-slate-500 to-gray-600 text-white shadow-lg flex flex-col justify-center">
+                <p class="text-2xl font-bold mb-1">خريطة ذهنية تفاعلية</p>
+                <p class="text-sm opacity-90 mt-1">خريطة ذهنية تفاعلية بنظام الشجرة</p>
+            </a>
+
+            <a href="pages/qz-true-false.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-green-600 to-emerald-700 text-white shadow-lg">
+                <p class="text-2xl font-bold mb-1">صواب / خطأ</p>
+                <p class="text-sm opacity-90 mt-1">التحقق السريع من صحة العبارات.</p>
+            </a>
+
+            <a href="pages/qz-mc-in.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-indigo-600 to-blue-700 text-white shadow-lg">
+                <p class="text-2xl font-bold mb-1">اختبار تفاعلي</p>
+                <p class="text-sm opacity-90 mt-1">اختبار تفاعلي معزز</p>
+            </a>
+
+            <a href="pages/card-comparison.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-teal-600 to-cyan-700 text-white shadow-lg">
+                <p class="text-2xl font-bold mb-1">بطاقات مقارنة</p>
+                <p class="text-sm opacity-90 mt-1">مقارنة نصية</p>
+            </a>
+
+            <a href="pages/card-flip.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-pink-600 to-rose-700 text-white shadow-lg">
+                <p class="text-2xl font-bold mb-1">بطاقات مراجعة</p>
+                <p class="text-sm opacity-90 mt-1">بطاقات تذكيرية للمراجعة</p>
+            </a>
+
+            <a href="pages/qz-fill-blank.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-orange-600 to-red-700 text-white shadow-lg">
+                <p class="text-2xl font-bold mb-1">املأ الفراغ</p>
+                <p class="text-sm opacity-90 mt-1">ملأ الفراغ المناسب</p>
+            </a>
+
+            <a href="pages/qz-comparison.html" class="btn-quiz block p-6 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 text-white shadow-lg">
+                <p class="text-2xl font-bold mb-1">اختيار مقارنة</p>
+                <p class="text-sm opacity-90 mt-1">تعبئة حقول المقارنات</p>
+            </a>
+            </div>
+        
+        <footer class="mt-12 pt-6 border-t border-Black-300">
+        </footer>
+
+    </div>
+</body>
+</html>
