@@ -3215,6 +3215,15 @@
  </div> 
 
 <script src="../js/nav-loader.js"></script>
-<script src="../js/script_source-text.js"></script>
+<script src="../js/nav-loader.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    loadNavbar({ 
+      pageType: 'sub',
+      showTools: false
+    });
+  });
+</script>
   </body>
 </html>
+
