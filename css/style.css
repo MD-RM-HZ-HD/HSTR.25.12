@@ -59,7 +59,7 @@ html, body {
     padding: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Amiri', sans-serif; !important;
+    font-family: 'Amiri', sans-serif; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.76;
@@ -1236,3 +1236,4 @@ body.dark .a { color: #d1d5db; }
     background: rgba(255, 255, 255, 0.4);
 
 }
+
