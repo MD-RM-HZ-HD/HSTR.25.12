@@ -13,6 +13,7 @@ function loadNavbar(options = {}) {
     <a href="${pagePath}source-text-summary.html" class="px-3 py-2 text-sm font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">الملخص</a>	
     <a href="${pagePath}mindmap.html" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">خريطة ذهنية</a>
     <a href="${pagePath}mindmap_interactive.html" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">خريطة ذهنية تفاعلية</a>
+     <a href="${pagePath}bio-events.html" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">الخط الزمني</a>
   `;
 
   // --- (2) القائمة المنسدلة للامتحانات (سطح المكتب) ---
@@ -50,6 +51,7 @@ function loadNavbar(options = {}) {
     <a href="${pagePath}source-text-summary.html" class="block px-4 py-2 text-sm font-bold text-white hover:bg-white hover:bg-opacity-10">الملخص</a>
     <a href="${pagePath}mindmap.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">خريطة ذهنية</a>
     <a href="${pagePath}mindmap_interactive.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">اخريطة ذهنية تفاعلية</a>
+    <a href="${pagePath}bio-events.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">الخط الزمني</a>
     <div x-data="{ mobileExamOpen: false }" class="border-t border-white border-opacity-20">
       <button @click="mobileExamOpen = !mobileExamOpen" class="w-full text-right px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10 flex items-center justify-between">
         <span>امتحانات</span>
@@ -145,3 +147,4 @@ function loadNavbar(options = {}) {
   }
 
 }
+
