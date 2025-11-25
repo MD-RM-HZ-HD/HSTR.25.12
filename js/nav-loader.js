@@ -10,6 +10,7 @@ function loadNavbar(options = {}) {
   const desktopLinksHtml = `
     <a href="${rootPath}/index.html" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">الرئيسية</a>
     <a href="${pagePath}source-text.html" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">النص</a>
+    <a href="${pagePath}source-text-summary.html" class="px-3 py-2 text-sm font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">الملخص</a>	
     <a href="${pagePath}mindmap.html" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">خريطة ذهنية</a>
     <a href="${pagePath}mindmap_interactive.html" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 transform hover:-translate-y-0.5">خريطة ذهنية تفاعلية</a>
   `;
@@ -46,6 +47,7 @@ function loadNavbar(options = {}) {
   const mobileLinksHtml = `
     <a href="${rootPath}/index.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">الرئيسية</a>
     <a href="${pagePath}source-text.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">النص</a>
+    <a href="${pagePath}source-text-summary.html" class="block px-4 py-2 text-sm font-bold text-white hover:bg-white hover:bg-opacity-10">الملخص</a>
     <a href="${pagePath}mindmap.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">خريطة ذهنية</a>
     <a href="${pagePath}mindmap_interactive.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">اخريطة ذهنية تفاعلية</a>
     <div x-data="{ mobileExamOpen: false }" class="border-t border-white border-opacity-20">
@@ -141,4 +143,5 @@ function loadNavbar(options = {}) {
   } else {
     console.error('لم يتم العثور على العنصر النائب للـ Navbar. تأكد من وجود <div id="navbar-placeholder"></div>');
   }
+
 }
