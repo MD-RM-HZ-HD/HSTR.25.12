@@ -11,7 +11,7 @@
 <body class="min-h-screen" x-data="pageSettings" x-bind="listeners" :class="{ 'dark': darkMode }">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-
+	 <div id="navbar-placeholder"></div>
 	<style>
     /* --- Audio Header Styles (Copied from mindmap.html) --- */
     
@@ -1903,9 +1903,17 @@
  </div> 
 
 <script src="../js/nav-loader.js" defer></script>
-
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    loadNavbar({ 
+      pageType: 'sub',
+      showTools: false
+    });
+  });
+</script>
 </body>
 </html>
+
 
 
 
