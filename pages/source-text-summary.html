@@ -134,7 +134,7 @@
                 <h1 class="header-title-style">الملخص</h1>
             </div>
 
-            <audio controls src="https://www.dropbox.com/scl/fi/4ew4mpp3zm56y1c6gui1u/source-text-summary.mp3?rlkey=dum5qk9k52yvqdk5d0w4nn7qw&st=znjxskg2&dl=1" onclick="event.stopPropagation()">
+            <audio controls src="https://www.dropbox.com/scl/fi/4ew4mpp3zm56y1c6gui1u/source-text-summary.mp3?rlkey=dum5qk9k52yvqdk5d0w4nn7qw&st=znjxskg2&raw=1" onclick="event.stopPropagation()">
                 <p class="muted">متصفحك لا يدعم الصوت.</p>
             </audio>
             
@@ -1902,6 +1902,40 @@
     </div>
  </div> 
 
+<script>
+  // Alpine.js component definitions
+  document.addEventListener('alpine:init', () => {
+    // Accordion item component
+    Alpine.data('accordionItem', (defaultOpen = false) => ({
+      open: defaultOpen,
+      iconText: defaultOpen ? '−' : '+',
+      toggle() {
+        this.open = !this.open;
+        this.iconText = this.open ? '−' : '+';
+      }
+    }));
+
+    // Page settings component
+    Alpine.data('pageSettings', () => ({
+      darkMode: localStorage.getItem('darkMode') === 'true',
+      fontSize: parseInt(localStorage.getItem('fontSize')) || 18,
+      showIntroModal: !localStorage.getItem('introModalSeen'),
+      
+      listeners: {
+        ['@storage.window']() {
+          this.darkMode = localStorage.getItem('darkMode') === 'true';
+          this.fontSize = parseInt(localStorage.getItem('fontSize')) || 18;
+        }
+      },
+      
+      closeModal() {
+        this.showIntroModal = false;
+        localStorage.setItem('introModalSeen', 'true');
+      }
+    }));
+  });
+</script>
+
 <script src="../js/nav-loader.js" defer></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -1913,6 +1947,7 @@
 </script>
 </body>
 </html>
+
 
 
 
