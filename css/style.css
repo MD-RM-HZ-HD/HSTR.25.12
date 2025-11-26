@@ -1,5 +1,4 @@
 /* === 1. GLOBAL STYLES === */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
 
 :root {
     
@@ -59,7 +58,7 @@ html, body {
     padding: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Cairo', sans-serif; 
+    font-family: 'Tajawal', sans-serif; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.76;
@@ -1236,5 +1235,3 @@ body.dark .a { color: #d1d5db; }
     background: rgba(255, 255, 255, 0.4);
 
 }
-
-
