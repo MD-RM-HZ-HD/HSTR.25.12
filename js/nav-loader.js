@@ -18,22 +18,15 @@ function loadNavbar(options = {}) {
 
   // --- (2) القائمة المنسدلة للامتحانات (سطح المكتب) ---
   const examDropdownDesktop = `
-    <div x-data="{ examOpen: false }" class="relative" @click.away="examOpen = false">
-      <button @click="examOpen = !examOpen" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 flex items-center gap-1">
+    <div class="relative">
+      <button id="exams-dropdown-toggle" class="px-3 py-2 text-base font-bold text-white rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 flex items-center gap-1">
         <span>امتحانات</span>
-        <svg class="w-4 h-4 transition-transform" :class="{ 'rotate-180': examOpen }" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg id="exams-dropdown-arrow" class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div x-show="examOpen" 
-           x-transition:enter="transition ease-out duration-200"
-           x-transition:enter-start="opacity-0 transform scale-95"
-           x-transition:enter-end="opacity-100 transform scale-100"
-           x-transition:leave="transition ease-in duration-150"
-           x-transition:leave-start="opacity-100 transform scale-100"
-           x-transition:leave-end="opacity-0 transform scale-95"
-           class="absolute left-0 mt-2 w-56 rounded-lg shadow-xl bg-white overflow-hidden z-50"
-           style="display: none;">
+      <div id="exams-dropdown-menu" 
+           class="hidden absolute left-0 mt-2 w-56 rounded-lg shadow-xl bg-white overflow-hidden z-50">
         <a href="${pagePath}qz-true-false.html" class="block px-4 py-3 text-base font-bold text-gray-800 hover:bg-green-50 transition-colors">صواب/خطأ</a>
         <a href="${pagePath}qz-mc-in.html" class="block px-4 py-3 text-base font-bold text-gray-800 hover:bg-green-50 transition-colors">اختيار تفاعلي</a>
         <a href="${pagePath}qz-fill-blank.html" class="block px-4 py-3 text-base font-bold text-gray-800 hover:bg-green-50 transition-colors">املأ الفراغ</a>
@@ -51,23 +44,15 @@ function loadNavbar(options = {}) {
     <a href="${pagePath}source-text-summary.html" class="block px-4 py-2 text-sm font-bold text-white hover:bg-white hover:bg-opacity-10">الملخص</a>
     <a href="${pagePath}mindmap.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">خريطة ذهنية</a>
     <a href="${pagePath}mindmap_interactive.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">اخريطة ذهنية تفاعلية</a>
-    <a href="${pagePath}bio-events.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">الخط الزمني</a>
-    <div x-data="{ mobileExamOpen: false }" class="border-t border-white border-opacity-20">
-      <button @click="mobileExamOpen = !mobileExamOpen" class="w-full text-right px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10 flex items-center justify-between">
+    <a href="${pagePath}bio-events.html" class="block px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10">الخط الزمني</a>    <div class="border-t border-white border-opacity-20">
+      <button id="mobile-exams-dropdown-toggle" class="w-full text-right px-4 py-3 text-base font-bold text-white hover:bg-white hover:bg-opacity-10 flex items-center justify-between">
         <span>امتحانات</span>
-        <svg class="w-4 h-4 transition-transform" :class="{ 'rotate-180': mobileExamOpen }" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg id="mobile-exams-dropdown-arrow" class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div x-show="mobileExamOpen" 
-           x-transition:enter="transition ease-out duration-200"
-           x-transition:enter-start="opacity-0 max-h-0"
-           x-transition:enter-end="opacity-100 max-h-96"
-           x-transition:leave="transition ease-in duration-150"
-           x-transition:leave-start="opacity-100 max-h-96"
-           x-transition:leave-end="opacity-0 max-h-0"
-           class="bg-white bg-opacity-10 overflow-hidden"
-           style="display: none;">
+      <div id="mobile-exams-dropdown-menu" 
+           class="hidden bg-white bg-opacity-10 overflow-hidden">
         <a href="${pagePath}qz-true-false.html" class="block px-6 py-2 text-sm font-bold text-white hover:bg-white hover:bg-opacity-10">صواب/خطأ</a>
         <a href="${pagePath}qz-mc-in.html" class="block px-6 py-2 text-sm font-bold text-white hover:bg-white hover:bg-opacity-10">اختيار تفاعلي</a>
         <a href="${pagePath}qz-fill-blank.html" class="block px-6 py-2 text-sm font-bold text-white hover:bg-white hover:bg-opacity-10">املأ الفراغ</a>
@@ -148,3 +133,42 @@ function loadNavbar(options = {}) {
 
 }
 
+/**
+ * Global event listener for handling dynamic navbar interactions like dropdowns.
+ */
+document.addEventListener('click', function(e) {
+    // --- Desktop Exams Dropdown ---
+    const desktopToggleBtn = e.target.closest('#exams-dropdown-toggle');
+    if (desktopToggleBtn) {
+        const menu = document.getElementById('exams-dropdown-menu');
+        const arrow = document.getElementById('exams-dropdown-arrow');
+        if (menu) {
+            menu.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        }
+        e.preventDefault();
+        return; // Stop further processing
+    }
+
+    // --- Mobile Exams Dropdown ---
+    const mobileToggleBtn = e.target.closest('#mobile-exams-dropdown-toggle');
+    if (mobileToggleBtn) {
+        const menu = document.getElementById('mobile-exams-dropdown-menu');
+        const arrow = document.getElementById('mobile-exams-dropdown-arrow');
+        if (menu) {
+            menu.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        }
+        e.preventDefault();
+        return; // Stop further processing
+    }
+
+    // --- Close dropdowns if clicking outside ---
+    const desktopMenu = document.getElementById('exams-dropdown-menu');
+    if (desktopMenu && !desktopMenu.classList.contains('hidden') && !e.target.closest('#exams-dropdown-toggle')) {
+        desktopMenu.classList.add('hidden');
+        document.getElementById('exams-dropdown-arrow').classList.remove('rotate-180');
+    }
+    // Note: The mobile menu is handled by Alpine's @click.away, so we don't need to close it manually here.
+    // If we were to remove Alpine completely, we would add a similar check for the mobile menu.
+});

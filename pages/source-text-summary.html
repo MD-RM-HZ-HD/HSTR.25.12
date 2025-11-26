@@ -7,9 +7,35 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>الملخص</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CRITICAL FONT LOADING -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* NUCLEAR OPTION: FORCE FONT IMMEDIATELY */
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video, button, input, textarea, select {
+            font-family: 'Tajawal', sans-serif !important;
+        }
+        
+        /* RESET CSS VARIABLES */
+        :root {
+            --font-heading: 'Tajawal', sans-serif !important;
+            --font-body: 'Tajawal', sans-serif !important;
+        }
+    </style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<body class="min-h-screen" x-data="pageSettings" x-bind="listeners" :class="{ 'dark': darkMode }">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
 	 <div id="navbar-placeholder"></div>
 	<style>
@@ -91,7 +117,7 @@
 </style>
 </head>
 
-<body class="min-h-screen" x-data="pageSettings" :class="{ 'dark': darkMode }">
+<body class="min-h-screen font-sans" x-data="pageSettings" :class="{ 'dark': darkMode }">
 
 <div x-show="showIntroModal" 
      style="display: none; background-color: rgba(0, 0, 0, 0.6);" 
@@ -474,7 +500,7 @@
 <div x-data="accordionItem(true)" class="content-container">
 	<button @click="toggle()" class="accordion-button">
 		<div class="accordion-title-group">
-			<h2 class="section">الدرس 31: ملامح عصر الإمام الهادي عليه السلام (٤)</h2>
+			<h2 class="section">الدرس ٣۱ : ملامح عصر الإمام الهادي عليه السلام (٤)</h2>
 			<span class="icon-toggle" x-text="iconText"></span>
 		</div>
 	</button>
@@ -1927,6 +1953,17 @@
  </div> 
 
 <script>
+  // Added Tailwind config to enforce font
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Tajawal', 'sans-serif'],
+          serif: ['Tajawal', 'sans-serif'], // Override serif to prevent Amiri fallback
+        },
+      },
+    },
+  }
   // Alpine.js component definitions
   document.addEventListener('alpine:init', () => {
     // Accordion item component

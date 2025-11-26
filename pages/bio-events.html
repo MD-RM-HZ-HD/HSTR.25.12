@@ -4,290 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>السيرة التاريخية</title>
+    <!-- CRITICAL FONT LOADING -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* NUCLEAR OPTION: FORCE FONT IMMEDIATELY */
+        /* More targeted font application */
+        body, button, input, textarea, select {
+            font-family: 'Tajawal', sans-serif !important;
+        }
+        
+        /* RESET CSS VARIABLES */
+        :root {
+            --font-heading: 'Tajawal', sans-serif !important;
+            --font-body: 'Tajawal', sans-serif !important;
+        }
+    </style>
     <div id="navbar-placeholder"></div>
     <style>
-        /* استيراد الخطوط */
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800;900&display=swap');
-        
-        :root {
-            --font-heading: 'Tajawal', sans-serif;
-            --font-body: 'Amiri', serif;
+/* --- Updated CSS for bio-events.html --- */
+:root {
+    /* 1. Outer Background (Dark Olive Green) */
+    --bg-body: #344C41; 
+    
+    /* 2. Card & Header Background (Light Sage Green) */
+    --bg-card: rgb(170, 187, 165);
+    
+    /* 3. Text Colors (Dark for contrast on cards) */
+    --text-primary: #0f172a; /* Very Dark Blue/Black */
+    --text-secondary: #334155; /* Dark Gray */
+    
+    /* Borders */
+    --border-color: #1f2937; 
+    --bg-card-glass: rgba(255, 255, 255, 0.45);
+}
 
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --border-color: #cbd5e1;
-            
-            --tree-line: #22c55e;
+/* Page Settings */
+body {
+    background-color: var(--bg-body) !important;
+    color: #ffffff; /* Default text on dark body is white */
+    line-height: 1.8;
+    font-size: 16px;
+    padding-bottom: 80px;
+    overflow-x: hidden;
+}
 
-            --highlight-bg: #fefce8;
-            --highlight-text: #854d0e;
-            
-            --safir-card-bg: #fffbeb;
-            --safir-border: #fbbf24;
-            --safir-text: #78350f;
-        }
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+    width: 95%;
+}
 
-        body.dark-mode {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --border-color: #334155;
-            --tree-line: #15803d;
-            --highlight-bg: #422006;
-            --highlight-text: #fde047;
-            --safir-card-bg: #3f2c08;
-            --safir-border: #b45309;
-            --safir-text: #fef3c7;
-        }
+/* --- Header Styling (Matching index.html) --- */
+header {
+    background-color: var(--bg-card) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 0.75rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
 
-        /* --- إعدادات الجسم الأساسية --- */
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            line-height: 1.8;
-            font-size: 16px;
-            font-weight: 400;
-            padding-bottom: 80px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+header h1 {
+    color: var(--text-primary) !important; /* Dark text for contrast */
+    font-weight: 900 !important;
+    font-size: 1.2rem !important;
+    margin: 0;
+}
 
-        /* --- تنسيقات العناوين --- */
-        h1, h2, h3, h4, h5, h6, 
-        .caliph-full-name, 
-        summary, 
-        .btn,
-        .special-quote {
-            font-family: var(--font-heading);
-        }
+/* --- Card Styling --- */
+/* General rule for all cards */
+.tree-node, .caliph-card, .safir-box, .analysis-box, details {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important; /* Force dark text */
+    border: 1px solid var(--border-color) !important;
+    border-radius: 0.75rem;
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.2) !important; /* Solid shadow */
+    overflow: hidden;
+}
 
-        h1 { font-size: 2rem; font-weight: 800; }
+/* Unified Light Card Style (Matches "Secret Organization") */
+.content-card-light, 
+.tree-node,
+.caliph-card,
+.safir-box,
+.analysis-box,
+.timeline-item {
+    background-color: var(--bg-card-glass) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: none !important; /* Remove heavy shadow from inner cards */
+    border-radius: 0.5rem;
+}
 
-        h3 { 
-            font-size: 1.5rem !important;
-            font-weight: 800 !important; 
-            line-height: 1.4;
-            margin-bottom: 0.8rem;
-        }
+/* Ensure Details/Summary behave correctly */
+details {
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        h4 { 
-            font-size: 1.25rem !important;
-            font-weight: 800 !important;
-            border-bottom: 3px solid currentColor;
-            padding-bottom: 0.5rem;
-            margin-bottom: 0.8rem;
-            width: fit-content;
-        }
+details .tree-node { 
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: none !important;
+}
 
-        p, li, ul {
-            font-size: 1em; /* Approx 17.6px */
-            font-weight: 400;
-        }
+/* Titles inside cards */
+h3, h4, .item-title {
+    color: #064e3b !important; /* Dark Emerald Green */
+    font-weight: 800 !important;
+}
 
-        /* Typography Overhaul for Readability */
-        p, li, .text-secondary, .item-content {
-            font-size: 1rem;
-            line-height: 1.8;
-        }
+/* Text inside cards */
+p, li, span, div {
+    color: var(--text-primary);
+}
 
-        /* Remove bottom border from main Imam titles to avoid double-bordering */
-        .tree-node > div > div > h3 {
-            border-bottom: none !important;
-        }
+/* Exceptions for Badges */
+.badge { color: inherit; }
 
-        /* الاقتباسات */
-        .special-quote {
-            display: block;
-            background-color: #fefce8;
-            color: #854d0e;
-            padding: 0.75em 1em;
-            margin: 0.75em 0;
-            border-radius: 0.5rem;
-            border-right: 5px solid #eab308;
-            font-weight: 500 !important;
-            font-size: 1.0em !important;
-            line-height: 1.2;
-            box-shadow: 0 12px 5px rgba(0, 0, 0, 0.03);
-            text-align: right;
-        }
-        body.dark-mode .special-quote { background-color: #422006; color: #fde047; border-right-color: #facc15; }
+/* --- Details/Accordion Styling --- */
+details { 
+    margin-bottom: 1.5rem; 
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        .container { max-width: 1280px; margin: 0 auto; padding: 1rem; }
-        header { padding-top: 1rem; margin-bottom: 2rem; }
+details > summary {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    padding: 1rem 1.25rem;
+    font-weight: 800;
+    font-size: 1.2em;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+}
 
-        /* --- مربع التفاصيل الجانبي --- */
-        .info-details-box {
-            text-align: right;
-            border-right: 4px solid #10b981;
-            padding-right: 1em;
-            margin-top: 0.5em;
-            font-size: 1.0em; /* User specified */
-            color: var(--text-primary);
-            background-color: transparent;
-            font-family: var(--font-heading);
-            font-weight: 700;
-        }
-        .info-details-box div { margin-bottom: 0.5em; }
+details[open] > summary {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.05) !important;
+}
 
-        /* --- الزر العائم (FAB) --- */
-        .fab-container {
-            position: fixed; bottom: 2rem; left: 2rem; z-index: 2000;
-            display: flex; flex-direction: column-reverse; align-items: center; gap: 1rem;
-        }
-        .fab-main {
-            width: 3.8rem; height: 3.8rem;
-            background: linear-gradient(135deg, #16a34a, #15803d); 
-            color: white; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 1.6rem; box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
-            cursor: pointer; border: none; outline: none; transition: all 0.3s;
-            font-family: var(--font-heading);
-        }
-        .fab-main:hover { transform: scale(1.1); }
-        .fab-main.active { transform: rotate(135deg); background: #ef4444; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4); }
-        
-        .fab-menu {
-            display: flex; flex-direction: column; gap: 0.8rem; opacity: 0;
-            pointer-events: none; transform: translateY(20px) scale(0.9);
-            transition: all 0.3s ease; padding-bottom: 0.5rem;
-        }
-        .fab-menu.show { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
-        
-        .fab-item {
-            width: 3rem; height: 3rem; border-radius: 50%;
-            background: var(--bg-card); color: var(--text-primary);
-            border: 1px solid var(--border-color); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            display: flex; justify-content: center; align-items: center;
-            cursor: pointer; transition: all 0.2s; font-size: 1rem;
-            font-family: var(--font-heading); font-weight: bold; position: relative;
-        }
-        .fab-item:hover { background: var(--bg-body); transform: scale(1.1); border-color: #16a34a; color: #16a34a; }
-        .fab-item::after {
-            content: attr(data-tooltip); position: absolute; left: 120%; top: 50%;
-            transform: translateY(-50%); background: rgba(15, 23, 42, 0.9);
-            color: white; padding: 0.4rem 0.8rem; border-radius: 0.5rem;
-            font-size: 0.8rem; font-weight: bold; white-space: nowrap; opacity: 0;
-            pointer-events: none; transition: opacity 0.2s, transform 0.2s;
-            font-family: var(--font-heading);
-        }
-        .fab-item:hover::after { opacity: 1; transform: translateY(-50%) translateX(5px); }
-        body.dark-mode .fab-item { background: var(--bg-card); border-color: var(--border-color); }
-        body.dark-mode .fab-item:hover { background: #334155; }
+details > div {
+    padding: 1.5rem;
+    background-color: transparent !important; 
+}
 
-        /* --- الهيكل والشجرة --- */
-        /* A. Create a fixed 4rem gutter on the right */
-        .tree-section {
-            padding-right: 4rem;
-            position: relative;
-            margin-top: 1.5rem;
+/* --- Utilities --- */
+.special-quote {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    border-right: 4px solid #b45309;
+    color: #451a03 !important;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.1em 0.6em;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin: 0 2px;
         }
 
-        /* B. Place the vertical backbone exactly in the middle (2rem) */
-        .tree-section::before {
-            content: '';
-            position: absolute;
-            right: 2rem; /* Exact center of the 4rem gutter */
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background-image: linear-gradient(to bottom, var(--tree-line) 0%, var(--tree-line) 50%, transparent 50%);
-            background-size: 100% 10px;
-        }
-
-        .tree-node { position: relative; margin-bottom: 2.5rem; overflow: visible; }
-        /* C. The Horizontal Arm: Spans from Card Edge (0) to Backbone (-2rem) */
-        .tree-node::before {
-            display: none; /* Removed as per user request */
-        }
-        /* D. The Node (Circle): Centered on the intersection */
-        .tree-node::after {
-            content: ''; position: absolute; right: -2.45rem; top: 1.8rem; width: 1rem; height: 1rem; border-radius: 50%; background-color: var(--tree-line); border: 2px solid var(--bg-card); z-index: 2;
-        }
-
-        details {
-            background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0.75rem; overflow: visible !important; margin-bottom: 1rem; box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
-        }
-        details > summary {
-            list-style: none; cursor: pointer; font-weight: 800; font-size: 1.2em;
-            padding: 1rem 1.25rem; background-color: var(--bg-card);
-            color: var(--text-primary); display: flex; align-items: center;
-            justify-content: space-between; gap: 1rem; transition: background-color 0.2s;
-            user-select: none;
-        }
-        details[open] > summary { border-bottom: 1px solid var(--border-color); background-color: var(--bg-body); }
-        details > div { 
-            padding: 1.5rem; background-color: var(--bg-card); 
-            color: var(--text-secondary);
-        }
-
-        .caliph-card {
-            background-color: var(--bg-body);
-            border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1rem;
-            display: flex; flex-direction: column; justify-content: flex-start;
-        }
-        .caliph-full-name {
-            font-size: 1.0em;
-            font-weight: 900;
-            background-color: var(--highlight-bg); color: var(--highlight-text);
-            padding: 0.75rem; border-radius: 0.5rem; margin: 0.75rem 0;
-            border-right: 5px solid var(--highlight-text); display: block;
-        }
-
-        .safir-box {
-            background-color: var(--safir-card-bg); color: var(--safir-text);
-            border-radius: 1rem;
-            padding: 1.5rem; margin-bottom: 1rem; position: relative; overflow: hidden;
-        }
-        .safir-number {
-            background-color: var(--safir-border); color: #fff; width: 30px; height: 30px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: bold; margin-left: 0.5rem; font-family: var(--font-heading);
-        }
-
-        .analysis-box {
-            background-color: var(--bg-body);
-            padding: 1.25rem; border-radius: 0.5rem; margin-top: 1rem;
-            line-height: 1.9;
-            display: flex; flex-direction: column; justify-content: flex-start;
-        }
-
-        ul.list-disc { margin-right: 1.2em; }
-        ul.list-disc li { margin-bottom: 0.5em; }
-
-        .badge {
-            display: inline-block;
-            padding: 0.1em 0.5em; /* Compact padding */
-            border-radius: 9px;     /* Slightly rounded, not pill */
-            font-size: 1.0em;
-            font-weight: 400;
-            border: none;           /* Remove border */
-            margin: 0 2px;
-            font-family: 'Amiri', serif !important;
-        }
         .badge-red { background-color: #fee2e2; color: #991b1b; }
         .badge-green { background-color: #dcfce7; color: #166534; }
         .badge-blue { background-color: #dbeafe; color: #1e40af; }
         .badge-yellow { background-color: #fef9c3; color: #854d0e; }
         .badge-purple { background-color: #f3e8ff; color: #6b21a8; }
-        
-        body.dark-mode .badge-red { background-color: #450a0a; color: #fecaca; }
-        body.dark-mode .badge-green { background-color: #064e3b; color: #dcfce7; }
-        body.dark-mode .badge-blue { background-color: #1e3a8a; color: #dbeafe; }
-        body.dark-mode .badge-yellow { background-color: #422006; color: #fef08a; }
-        body.dark-mode .badge-purple { background-color: #3b0764; color: #f3e8ff; }
-
-        header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #ffffff; padding: 2rem; border-radius: 0.75rem;
-            margin-bottom: 3rem; border-bottom: 4px solid #f59e0b;
-            display: flex; flex-direction: column; align-items: center; 
-            justify-content: center; text-align: center; margin-top: 1rem;
-        }
-        header h1 { margin-bottom: 0.5rem; color: white; }
-        header p { font-size: 1.1em; opacity: 0.9; color: #cbd5e1; margin: 0; font-family: var(--font-body); }
 
         /* --- الشبكة الديناميكية (Dynamic Grid) --- */
         .grid-responsive {
@@ -296,133 +190,102 @@
             gap: 1.5rem;
         }
 
-         /* --- تنسيق العناصر الفرعية (كما في الصورة) --- */
-        .item-block {
-            margin-bottom: 20px;
-        }
-        .item-block:last-child { margin-bottom: 0; }
-        
-        /* العنوان المظلل */
-        .item-title {
-            display: block;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            font-size: 1.1em;
-            background-color: rgba(0,0,0,0.05);
-            padding: 5px 10px;
-            border-radius: 6px;
-            border-right: 4px solid currentColor;
-            width: fit-content;
-        }
-        
-        .item-content {
-            color: var(--text-secondary);
-            font-size: 1em;
-            text-align: justify;
-            padding-right: 10px;
-            margin-top: 5px;
-        }
-
-       /* Strip badge styling when inside headings/titles */
-       h1 .badge, h2 .badge, h3 .badge, h4 .badge, .item-title .badge, .box-header .badge {
-           background-color: transparent !important;
-           border: none !important;
-           box-shadow: none !important;
-           padding: 0 !important;
-           color: inherit !important; /* Take the parent title's color */
-           font-size: inherit !important;
-           font-weight: inherit !important;
-       }
-
-       .tree-node, .caliph-card, .safir-box, .analysis-box {
-           border: 2px solid var(--border-color) !important;
-           /* Positive X (2px) puts shadow on the Right. 2px Y puts it Down. No Blur (0px). */
-           box-shadow: 2px 2px 0px 0px #cbd5e1 !important; 
-           transition: transform 0.2s ease, box-shadow 0.2s ease;
-       }
-       
-       /* Darker shadow for Dark Mode */
-       body.dark-mode .tree-node, 
-       body.dark-mode .caliph-card, 
-       body.dark-mode .safir-box, 
-       body.dark-mode .analysis-box {
-           box-shadow: 2px 2px 0px 0px #1e293b !important; 
-       }
-
-       /* Hover Effect */
-       .tree-node:hover, .caliph-card:hover, .safir-box:hover, .analysis-box:hover {
-           transform: translate(-1px, -1px);
-           box-shadow: 3px 3px 0px 0px #94a3b8 !important;
-       }
-
-
         /* ======== Media Queries للهواتف والشاشات الصغيرة ======== */
         @media screen and (max-width: 768px) {
-            body {
-                font-size: 14px;
-                line-height: 1.7;
-            }
-
-            h1 { font-size: 1.75rem !important; }
-            h3 { font-size: 1.3rem !important; }
-            h4 { font-size: 1.1rem !important; }
-
-            .container { 
-                padding: 0.75rem;
-                padding-top: 90px !important;
-            }
-
-            header {
-                padding-top: 0.5rem;
-            }
-
-            .fab-main {
-                width: 3.2rem;
-                height: 3.2rem;
-                font-size: 1.4rem;
-            }
-
-            .fab-item {
-                width: 2.6rem;
-                height: 2.6rem;
-                font-size: 1.2rem;
-            }
+    .container { padding-top: 100px; }
+    h1 { font-size: 1.5rem !important; }
         }
 
-        /* للشاشات الصغيرة جداً */
-        @media screen and (max-width: 480px) {
-            body {
-                font-size: 13px;
-            }
+/* 1. Navbar Text Fix */
+#exams-dropdown-toggle, 
+nav a, 
+nav button {
+    color: #ffffff !important;
+}
 
-            h1 { font-size: 1.5rem !important; }
-            h3 { font-size: 1.2rem !important; }
-            h4 { font-size: 1rem !important; }
+/* 2. Spacing Fixes */
+.container {
+    padding-top: 80px !important; /* Reduced space from top */
+}
+header {
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    padding: 1rem !important;
+}
 
-            .container {
-                padding-top: 85px !important;
-            }
-        }
+/* 3. Badge High Contrast (Pop out) */
+.badge {
+    background-color: #ffffff !important; /* White bg to separate from card */
+    border: 1px solid rgba(0,0,0,0.15) !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    padding: 0.2em 0.8em !important;
+    z-index: 10;
+    position: relative;
+}
+/* Keep text colors */
+.badge-red { color: #991b1b !important; }
+.badge-green { color: #166534 !important; }
+.badge-blue { color: #1e40af !important; }
+.badge-yellow { color: #854d0e !important; }
+.badge-purple { color: #6b21a8 !important; }
+.badge-gray { color: #374151 !important; }
+
+/* 4. Headings Contrast (Background Highlight) */
+.tree-node h3, 
+.caliph-card h4, 
+.analysis-box h4,
+.timeline-item h3,
+.safir-box h3,
+.item-title {
+    background-color: rgba(255, 255, 255, 0.5) !important; /* Distinct bg */
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    width: fit-content; /* Only wrap text */
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Ensure Timeline Items text doesn't overlap */
+.timeline-item h3 {
+    margin-bottom: 0.25rem;
+}
+
+/* 1. Force "Exams" Top Button to be White */
+#exams-dropdown-toggle {
+    color: #ffffff !important;
+}
+
+/* 2. Force Dropdown Menu Links to be Black/Dark */
+#exams-dropdown-menu a {
+    color: #1f2937 !important; /* Dark Slate for readability */
+    text-align: right; /* Ensure RTL alignment */
+}
+
+/* Optional: Hover effect for dropdown items */
+#exams-dropdown-menu a:hover {
+    background-color: #f3f4f6; /* Light gray hover */
+    color: #000000 !important;
+}
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Tajawal', 'sans-serif'],
+              serif: ['Tajawal', 'sans-serif'], // Override serif to prevent Amiri fallback
+            },
+          },
+        },
+      }
+    </script>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
 
 
-    <div class="container" style="padding-top: 60px;">
-        
-        <div class="fab-container">
-            <button class="fab-main" id="fabMainBtn" onclick="toggleFabMenu()" title="الإعدادات والأدوات">⚙️</button>
-            <div class="fab-menu" id="fabMenu">
-                <button onclick="expandAll()" class="fab-item" data-tooltip="توسيع الكل">📂</button>
-                <button onclick="collapseAll()" class="fab-item" data-tooltip="طي الكل">📁</button>
-                <button onclick="toggleDarkMode()" class="fab-item" id="themeBtn" data-tooltip="الوضع الليلي">🌙</button>
-                <button onclick="adjustFontSize(1)" class="fab-item" data-tooltip="تكبير الخط">A+</button>
-                <button onclick="adjustFontSize(-1)" class="fab-item" data-tooltip="تصغير الخط">A-</button>
-            </div>
-        </div>
+    <div class="container" style="padding-top: 90px;">
 
         <header>
             <h1>تفاصيل عصر الإمامين الهادي والعسكري (ع)</h1>
@@ -436,14 +299,14 @@
                         <span class="text-3xl">🌿</span>
                         <div class="flex flex-col text-right">
                             <span>الأئمة الأطهار (عليهم السلام)</span>
-                            <span class="text-sm font-normal opacity-75 font-body">الملف القيادي والشخصي، التحديات الفكرية، والمعجزات</span>
+                            <span class="text-sm font-normal opacity-75">الملف القيادي والشخصي، التحديات الفكرية، والمعجزات</span>
                         </div>
                     </div>
                     <span>▼</span>
                 </summary>
                 
                 <div class="tree-section">
-                    <div class="tree-node bg-card rounded-xl p-6 border border-color shadow-sm">
+                    <div class="tree-node rounded-xl p-6">
                         <div class="flex flex-col items-start gap-4 mb-6">
                             <div class="w-full">
                                 <h3 class="text-green-700 dark:text-green-400">1. الإمام علي بن محمد الهادي (ع)</h3>
@@ -459,7 +322,7 @@
 
                         <div class="grid-responsive">
                             <div class="analysis-box">
-                                <h4 class="text-green-700 dark:text-green-400">🎓 التحدي الفكري والعقائدي</h4>
+                                <h4>🎓 التحدي الفكري والعقائدي</h4>
                                 <div class="mb-6">
                                     <div class="item-title text-green-700 dark:text-green-400">ملف <span class="badge badge-purple">خلق القرآن</span>:</div>
                                     <div class="text-secondary leading-relaxed pr-2">تصدى الإمام لهذه الفتنة السياسية التي ابتدعها العباسيون. بعث رسالة لأتباعه ببغداد:
@@ -486,7 +349,7 @@
                             </div>
 
                             <div class="analysis-box">
-                                <h4 class="text-red-700 dark:text-red-400">⚔️ الصراع مع السلطة والمواقف</h4>
+                                <h4>⚔️ الصراع مع السلطة والمواقف</h4>
                                 <div class="mb-6">
                                     <div class="item-title text-red-700 dark:text-red-400">الإشخاص (النفي):</div>
                                     <div class="text-secondary leading-relaxed pr-2">بوشاية <span class="badge badge-red">بريحة العباسي</span> وبريد <span class="badge badge-blue">بطيحة</span>، نقله <span class="badge badge-blue">يحيى بن هرثمة</span> لسامراء (234هـ).</div>
@@ -498,7 +361,7 @@
                                 <div class="mb-6">
                                     <div class="item-title text-red-700 dark:text-red-400">مجلس "باتوا على قلل الأجبال":</div>
                                     <div class="text-secondary leading-relaxed pr-2">دخل على المتوكل وهو يشرب الخمر، فأنشده القصيدة التي أبكت المتوكل وحطم كأسه، وأمر برفع الشراب.</div>
-                                    <div class="my-4 p-4 bg-gray-50 rounded-lg border border-gray-300 text-center font-bold text-gray-800" style="font-family: 'Amiri', serif; font-size: 1.2em; line-height: 2;">
+                                    <div class="my-4 p-4 bg-gray-50 rounded-lg border border-gray-300 text-center font-bold text-gray-800" style="font-size: 1.2em; line-height: 2;">
                                         باتوا على قُلَلِ الأجبال تحرسُهُم<br>غُلْبُ الرجالِ فما أغنتهمُ القُللُ<br>
                                         واستنزلوا بعد عزٍّ من معاقلهم<br>فأودعوا حُفَراً يا بئس ما نزلوا
                                     </div>
@@ -518,7 +381,7 @@
                         </div>
                     </div>
 
-                    <div class="tree-node bg-card rounded-xl p-6 border border-color shadow-sm">
+                    <div class="tree-node rounded-xl p-6 mt-6">
                         <div class="flex flex-col items-start gap-4 mb-6">
                             <div class="w-full">
                                 <h3 class="text-green-700 dark:text-green-400">2. الإمام الحسن بن علي العسكري (ع)</h3>
@@ -532,38 +395,38 @@
                         </div>
 
                         <div class="grid-responsive">
-                            <div class="analysis-box">
-                                <h4 class="text-blue-700 dark:text-blue-400">🛡️ حماية العقيدة ومواجهة الفرق</h4>
+                            <div class="analysis-box"> 
+                                <h4>🛡️ حماية العقيدة ومواجهة الفرق</h4>
                                 <div class="mb-6">
-                                    <div class="item-title text-blue-700 dark:text-blue-400">إسقاط فيلسوف العراق (<span class="badge badge-blue">الكندي</span>):</div>
+                                    <div class="item-title text-green-800 dark:text-green-400">إسقاط فيلسوف العراق (<span class="badge badge-blue">الكندي</span>):</div>
                                     <div class="text-secondary leading-relaxed pr-2">كان يؤلف كتاب <span class="badge badge-purple">تناقض القرآن</span>. أرسل له الإمام تلميذاً بسؤال:
                                         <div class="special-quote">"لعل الله أراد غير ما فهمت؟"</div>
                                         فتاب <span class="badge badge-blue">الكندي</span> وأحرق كتابه.
                                     </div>
                                 </div>
                                 <div class="mb-6">
-                                    <div class="item-title text-blue-700 dark:text-blue-400">فتنة الراهب والمطر:</div>
+                                    <div class="item-title text-green-800 dark:text-green-400">فتنة الراهب والمطر:</div>
                                     <div class="text-secondary leading-relaxed pr-2">راهب مسيحي استسقى فنزل المطر، فارتد الناس. كشف الإمام أنه يمسك "عظماً من عظام الأنبياء" (ما كشف نبي عظم نبي إلا وهطلت السماء).</div>
                                 </div>
                                 <div class="mb-6">
-                                    <div class="item-title text-blue-700 dark:text-blue-400">التصدي للغلاة (المفوضة):</div>
+                                    <div class="item-title text-green-800 dark:text-green-400">التصدي للغلاة (المفوضة):</div>
                                     <div class="text-secondary leading-relaxed pr-2">لعن <span class="badge badge-red">علي بن حسكة</span> و<span class="badge badge-red">القاسم اليقطيني</span> و<span class="badge badge-red">فارس بن حاتم</span>، وأمر بقتلهم لتحريفهم الدين وقولهم بألوهية الأئمة أو تفويض الخلق لهم.</div>
                                 </div>
                                 <div class="mb-6">
-                                    <div class="item-title text-blue-700 dark:text-blue-400">الرد على الثنوية:</div>
+                                    <div class="item-title text-green-800 dark:text-green-400">الرد على الثنوية:</div>
                                     <div class="text-secondary leading-relaxed pr-2">أشار لواحد منهم بإصبعه:
                                         <div class="special-quote">"أحد أحد"</div>
                                         فسقط مغشياً عليه.
                                     </div>
                                 </div>
                                 <div class="mb-6">
-                                    <div class="item-title text-blue-700 dark:text-blue-400">الصوفية:</div>
+                                    <div class="item-title text-green-800 dark:text-green-400">الصوفية:</div>
                                     <div class="text-secondary leading-relaxed pr-2">حذر منهم ومن علمائهم الذين يميلون للفلسفة ويضلون الشيعة.</div>
                                 </div>
                             </div>
 
                             <div class="analysis-box">
-                                <h4 class="text-purple-700 dark:text-purple-400">⛓️ التنظيم السري والسجون</h4>
+                                <h4>⛓️ التنظيم السري والسجون</h4>
                                 <div class="mb-6">
                                     <div class="item-title text-purple-700 dark:text-purple-400">نظام الوكلاء (التمهيد):</div>
                                     <div class="text-secondary leading-relaxed pr-2">استخدم "الخشبة" (رجل باب مدورة) محشوة بالرسائل لنقل التوجيهات بسرية تامة عبر الوكيل "عثمان بن سعيد".</div>
@@ -589,7 +452,7 @@
                         </div>
                     </div>
 
-                    <div class="tree-node bg-card rounded-xl p-6 border border-color shadow-sm">
+                    <div class="tree-node rounded-xl p-6 mt-6">
                         <div class="mb-6">
                             <h3 class="text-green-700 dark:text-green-400 mb-4">3. الإمام محمد بن الحسن المهدي (عج)</h3>
                             <span class="badge badge-blue mb-4">ولد 15 شعبان 255هـ - حي يرزق</span>
@@ -630,7 +493,7 @@
                         <span class="text-2xl">💎</span>
                         <div class="flex flex-col text-right">
                             <span>الجهاز الإداري: السفراء، الوكلاء، والفقهاء</span>
-                            <span class="text-sm font-normal opacity-75 font-body">النيابة الخاصة والتمهيد للمرجعية</span>
+                            <span class="text-sm font-normal opacity-75">النيابة الخاصة والتمهيد للمرجعية</span>
                         </div>
                     </div>
                     <span>▼</span>
@@ -641,7 +504,7 @@
                         <h3 class="text-center border-b border-yellow-500 pb-4 mb-6">⭐ السفراء الأربعة (الغيبة الصغرى)</h3>
                         
                         <div class="grid-responsive">
-                            <div class="caliph-card" style="border-color: var(--safir-border); background: rgba(255,255,255,0.1);">
+                            <div class="caliph-card">
                                 <div class="flex items-center mb-2">
                                     <span class="safir-number">1</span>
                                     <h4 class="mr-2">عثمان بن سعيد العمري</h4>
@@ -655,7 +518,7 @@
                                 </ul>
                             </div>
 
-                            <div class="caliph-card" style="border-color: var(--safir-border); background: rgba(255,255,255,0.1);">
+                            <div class="caliph-card">
                                 <div class="flex items-center mb-2">
                                     <span class="safir-number">2</span>
                                     <h4 class="mr-2">محمد بن عثمان العمري</h4>
@@ -667,7 +530,7 @@
                                 </ul>
                             </div>
 
-                            <div class="caliph-card" style="border-color: var(--safir-border); background: rgba(255,255,255,0.1);">
+                            <div class="caliph-card">
                                 <div class="flex items-center mb-2">
                                     <span class="safir-number">3</span>
                                     <h4 class="mr-2">الحسين بن روح النوبختي</h4>
@@ -678,7 +541,7 @@
                                 </ul>
                             </div>
 
-                            <div class="caliph-card" style="border-color: var(--safir-border); background: rgba(255,255,255,0.1);">
+                            <div class="caliph-card">
                                 <div class="flex items-center mb-2">
                                     <span class="safir-number">4</span>
                                     <h4 class="mr-2">علي بن محمد السمري</h4>
@@ -694,7 +557,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-card p-6 rounded-xl border border-color mt-6">
+                    <div class="analysis-box p-6 mt-6">
                         <div class="flex justify-between items-center border-b border-color pb-2 mb-4">
                             <h4 class="font-bold text-lg">📜 مدرسة الفقهاء والوكلاء (التمهيد للمرجعية)</h4>
                             <span class="badge badge-purple">البناء المؤسسي</span>
@@ -727,7 +590,7 @@
                         <span class="text-2xl">👑</span>
                         <div class="flex flex-col text-right">
                             <span>سلاطين القهر: الخلفاء العباسيين</span>
-                            <span class="text-sm font-normal opacity-75 font-body">من المعتصم إلى المعتمد (فترة نفوذ الأتراك)</span>
+                            <span class="text-sm font-normal opacity-75">من المعتصم إلى المعتمد (فترة نفوذ الأتراك)</span>
                         </div>
                     </div>
                     <span>▼</span>
@@ -773,7 +636,7 @@
 
                     <div class="caliph-card border-l-4 border-l-red-600">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg text-red-700 dark:text-red-400">3. المتوكل على الله</h3>
+                            <h3 class="font-bold text-lg">3. المتوكل على الله</h3>
                             <span class="badge badge-red">الطاغية</span>
                         </div>
                         <span class="caliph-full-name">جعفر بن المعتصم</span>
@@ -805,7 +668,7 @@
 
                     <div class="caliph-card border-l-4 border-l-green-600">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg text-green-700 dark:text-green-400">4. المنتصر بالله</h3>
+                            <h3 class="font-bold text-lg">4. المنتصر بالله</h3>
                             <span class="badge badge-green">الانفراجة</span>
                         </div>
                         <span class="caliph-full-name">مُحمَّد بن المتوكل</span>
@@ -863,7 +726,7 @@
 
                     <div class="caliph-card border-l-4 border-l-yellow-600">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg text-yellow-700 dark:text-yellow-400">7. المهتدي بالله</h3>
+                            <h3 class="font-bold text-lg">7. المهتدي بالله</h3>
                             <span class="badge badge-yellow">المخادع</span>
                         </div>
                         <span class="caliph-full-name">مُحمَّد بن الواثق</span>
@@ -885,7 +748,7 @@
 
                     <div class="caliph-card border-l-4 border-l-red-600">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg text-red-700 dark:text-red-400">8. المعتمد على الله</h3>
+                            <h3 class="font-bold text-lg">8. المعتمد على الله</h3>
                             <span class="badge badge-red">قاتل العسكري</span>
                         </div>
                         <span class="caliph-full-name">أحمد بن المتوكل</span>
@@ -914,7 +777,7 @@
                         <span class="text-2xl">🔥</span>
                         <div class="flex flex-col text-right">
                             <span>الثورات والاضطرابات</span>
-                            <span class="text-sm font-normal opacity-75 font-body">الزنج، العلويون، والخوارج</span>
+                            <span class="text-sm font-normal opacity-75">الزنج، العلويون، والخوارج</span>
                         </div>
                     </div>
                     <span>▼</span>
@@ -922,7 +785,7 @@
 
                 <div class="tree-section">
                     <div class="analysis-box border-r-4 border-orange-500">
-                        <h3 class="font-bold text-xl text-orange-800 dark:text-orange-300 mb-2">1. ثورة الزنج (255-270هـ)</h3>
+                        <h3 class="font-bold text-xl mb-2">1. ثورة الزنج (255-270هـ)</h3>
                         <p><strong>القائد:</strong> علي بن محمد (<span class="badge badge-red">صاحب الزنج</span>). ادعى النسب العلوي.</p>
                         <p><strong>موقف الإمام العسكري:</strong> صرح بوضوح:</p>
                         <div class="special-quote">"<span class="badge badge-red">صاحب الزنج</span> ليس منا أهل البيت"</div>
@@ -976,7 +839,7 @@
                         <span class="text-2xl">📅</span>
                         <div class="flex flex-col text-right">
                             <span>السجل الزمني الدقيق وشامل</span>
-                            <span class="text-sm font-normal opacity-75 font-body">من ولادة الهادي (ع) إلى الغيبة الكبرى</span>
+                            <span class="text-sm font-normal opacity-75">من ولادة الهادي (ع) إلى الغيبة الكبرى</span>
                         </div>
                     </div>
                     <span>▼</span>
@@ -984,22 +847,22 @@
 
                 <div class="tree-section pt-4">
                     
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #22c55e;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #22c55e;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #22c55e;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #22c55e;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #166534;">ولادة النور</h3>
+                                <h3 class="font-bold text-lg">ولادة النور</h3>
                                 <span class="badge badge-green">212 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">ولادة الإمام علي بن محمد الهادي (عليه السلام) في شهر ذي الحجة في صريا بالمدينة المنورة.</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #22c55e;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #22c55e;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #22c55e;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #22c55e;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #166534;">بداية الإمامة المبكرة</h3>
+                                <h3 class="font-bold text-lg">بداية الإمامة المبكرة</h3>
                                 <span class="badge badge-green">220 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1010,22 +873,22 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #6b7280;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #6b7280;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #6b7280;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #6b7280;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #374151;">هلاك المعتصم</h3>
+                                <h3 class="font-bold text-lg">هلاك المعتصم</h3>
                                 <span class="badge" style="color: #374151; border-color: #374151;">227 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">نهاية حكم المعتصم العباسي بعد 8 سنوات من الحكم (218-227 هـ).</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #a855f7;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #a855f7;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #a855f7;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #a855f7;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #6b21a8;">تصعيد فتنة <span class="badge badge-purple">خلق القرآن</span></h3>
+                                <h3 class="font-bold text-lg">تصعيد فتنة <span class="badge badge-purple">خلق القرآن</span></h3>
                                 <span class="badge badge-purple">231 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1036,11 +899,11 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #3b82f6;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #3b82f6;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #3b82f6;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #3b82f6;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #1e40af;">أحداث مفصلية كبرى</h3>
+                                <h3 class="font-bold text-lg">أحداث مفصلية كبرى</h3>
                                 <span class="badge badge-blue">232 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1052,11 +915,11 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #dc2626;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #dc2626;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #dc2626;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #dc2626;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #991b1b;">حادثة الإشخاص القسري</h3>
+                                <h3 class="font-bold text-lg">حادثة الإشخاص القسري</h3>
                                 <span class="badge badge-red">234 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1068,33 +931,33 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #f97316;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #f97316;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #c2410c;">فترة الحروب والاضطرابات الكبرى</h3>
+                                <h3 class="font-bold text-lg">فترة الحروب والاضطرابات الكبرى</h3>
                                 <span class="badge" style="color: #c2410c; border-color: #c2410c;">238-253 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">سلسلة من الحروب الدامية والنهب في مختلف أنحاء الدولة العباسية بسبب ضعف السلطة المركزية.</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #eab308;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #eab308;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #eab308;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #eab308;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #854d0e;">رسالة الإشخاص الدعائية</h3>
+                                <h3 class="font-bold text-lg">رسالة الإشخاص الدعائية</h3>
                                 <span class="badge badge-yellow">243 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">إرسال المتوكل رسالة رسمية للإمام الهادي عبر <span class="badge badge-blue">يحيى بن هرثمة</span> يظهر فيها احترامه ويدعوه للقدوم إلى سامراء (كانت دعائية لكسب العامة وإخفاء النوايا الحقيقية).</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #4b5563;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #4b5563;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #4b5563;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #4b5563;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #1f2937;">نهاية الطاغية المتوكل</h3>
+                                <h3 class="font-bold text-lg">نهاية الطاغية المتوكل</h3>
                                 <span class="badge" style="color: #1f2937; border-color: #1f2937;">247 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1105,11 +968,11 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #9ca3af;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #9ca3af;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #9ca3af;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #9ca3af;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #374151;">تقلبات الخلافة السريعة</h3>
+                                <h3 class="font-bold text-lg">تقلبات الخلافة السريعة</h3>
                                 <span class="badge" style="color: #374151; border-color: #374151;">248 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1119,11 +982,11 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #dc2626;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #dc2626;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #dc2626;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #dc2626;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #991b1b;">سيطرة الأتراك الكاملة</h3>
+                                <h3 class="font-bold text-lg">سيطرة الأتراك الكاملة</h3>
                                 <span class="badge badge-red">252 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1134,11 +997,11 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #16a34a;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #16a34a;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #16a34a;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #16a34a;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #15803d;">استشهاد الإمام الهادي (عليه السلام)</h3>
+                                <h3 class="font-bold text-lg">استشهاد الإمام الهادي (عليه السلام)</h3>
                                 <span class="badge badge-green">254 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1149,11 +1012,11 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #3b82f6;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #3b82f6;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #3b82f6;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #3b82f6;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #1e40af;">ولادة الأمل وتغيرات سياسية عاصفة</h3>
+                                <h3 class="font-bold text-lg">ولادة الأمل وتغيرات سياسية عاصفة</h3>
                                 <span class="badge badge-blue">255 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1164,11 +1027,11 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #f97316;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #f97316;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #9a3412;">عام الاضطرابات الكبرى</h3>
+                                <h3 class="font-bold text-lg">عام الاضطرابات الكبرى</h3>
                                 <span class="badge" style="color: #c2410c; border-color: #c2410c;">256 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1180,22 +1043,22 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #9ca3af;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #9ca3af;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #9ca3af;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #9ca3af;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #374151;">حركة ابن الصوفي</h3>
+                                <h3 class="font-bold text-lg">حركة ابن الصوفي</h3>
                                 <span class="badge" style="color: #374151; border-color: #374151;">259 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">هزيمة إبراهيم بن محمد (ابن الصوفي) العلوي في صعيد مصر والقبض عليه وإرساله لابن طولون.</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #dc2626;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #dc2626;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #dc2626;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #dc2626;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #991b1b;">استشهاد الإمام العسكري وبداية الغيبة</h3>
+                                <h3 class="font-bold text-lg">استشهاد الإمام العسكري وبداية الغيبة</h3>
                                 <span class="badge badge-red">260 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1207,55 +1070,55 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #f97316;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #f97316;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #9a3412;">اضطرابات ما وراء النهر</h3>
+                                <h3 class="font-bold text-lg">اضطرابات ما وراء النهر</h3>
                                 <span class="badge" style="color: #c2410c; border-color: #c2410c;">261-279 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">سلسلة من الاضطرابات والفتن في منطقة ما وراء النهر استمرت 18 عاماً.</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #f97316;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #f97316;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #9a3412;">اضطرابات إضافية</h3>
+                                <h3 class="font-bold text-lg">اضطرابات إضافية</h3>
                                 <span class="badge" style="color: #c2410c; border-color: #c2410c;">265 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">موجة أخرى من الاضطرابات في مناطق مختلفة من الدولة العباسية.</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #6b7280;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #6b7280;">
+                    <div class="relative flex items-start gap-4 mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #6b7280; border-color: rgb(170, 187, 165);"></div>
+                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4 content-card-light" style="border-right-color: #6b7280;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #1f2937;">نهاية حقبة</h3>
+                                <h3 class="font-bold text-lg">نهاية حقبة</h3>
                                 <span class="badge" style="color: #1f2937; border-color: #1f2937;">270 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">القضاء النهائي على ثورة الزنج بعد 14 سنة من القتال والدمار، وهلاك المعتمد العباسي.</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #a855f7;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #a855f7;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #a855f7;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #a855f7;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #6b21a8;">وفاة عالم كبير</h3>
+                                <h3 class="font-bold text-lg">وفاة عالم كبير</h3>
                                 <span class="badge badge-purple">290 هـ</span>
                             </div>
                             <p style="color: var(--text-secondary);">وفاة محمد بن الحسن بن فروخ الصفار (صاحب كتاب بصائر الدرجات)، من أبرز أصحاب الإمام العسكري ورواة حديثه.</p>
                         </div>
                     </div>
 
-                    <div class="relative flex items-start gap-4 mb-6">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 border-[var(--bg-card)] z-10" style="background-color: #000;"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-right: 4px solid #000;">
+                    <div class="relative block mb-6 timeline-item">
+                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #000;"></div>
+                        <div class="p-4 relative border-r-4" style="border-right-color: #000;">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg" style="color: #000;" class="dark:text-white">بداية الغيبة الكبرى</h3>
+                                <h3 class="font-bold text-lg">بداية الغيبة الكبرى</h3>
                                 <span class="badge" style="color: #000; border-color: #000;">329 هـ</span>
                             </div>
                             <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
@@ -1267,8 +1130,8 @@
                     </div>
 
                     <div class="grid-responsive mt-8">
-                        <div class="analysis-box" style="border-right-color: #eab308; background-color: var(--bg-card);">
-                            <h4 class="font-bold text-lg mb-3" style="color: #854d0e;">📝 ملاحظات مهمة</h4>
+                        <div class="analysis-box" style="border-right-color: #eab308;">
+                            <h4 class="font-bold text-lg mb-3">📝 ملاحظات مهمة</h4>
                             <ul class="list-disc list-inside space-y-2" style="color: var(--text-secondary);">
                                 <li><strong>مدة إمامة الهادي (ع):</strong> 34 سنة (220-254 هـ).</li>
                                 <li><strong>مدة إمامة العسكري (ع):</strong> 6 سنوات (254-260 هـ) - الأقصر.</li>
@@ -1278,8 +1141,8 @@
                             </ul>
                         </div>
 
-                        <div class="analysis-box" style="border-right-color: #ef4444; background-color: var(--bg-card);">
-                            <h4 class="font-bold text-lg mb-3" style="color: #991b1b;">⚙️ خصائص العصر العباسي الثاني (232-329 هـ)</h4>
+                        <div class="analysis-box" style="border-right-color: #ef4444;">
+                            <h4 class="font-bold text-lg mb-3">⚙️ خصائص العصر العباسي الثاني (232-329 هـ)</h4>
                             <ul class="list-disc list-inside space-y-2" style="color: var(--text-secondary);">
                                 <li>سيطرة <strong>الأتراك</strong> الكاملة وتحول الخلفاء لدمى بيدهم.</li>
                                 <li>كثرة خلع وقتل الخلفاء (المتوكل، المنتصر، المستعين، المعتز، المهتدي).</li>
@@ -1296,54 +1159,6 @@
 
     </div>
 
-    <script>
-        function toggleFabMenu() {
-            const fabMainBtn = document.getElementById('fabMainBtn');
-            const fabMenu = document.getElementById('fabMenu');
-            fabMainBtn.classList.toggle('active');
-            fabMenu.classList.toggle('show');
-        }
-
-        function expandAll() {
-            document.querySelectorAll('details').forEach(detail => detail.open = true);
-        }
-
-        function collapseAll() {
-            document.querySelectorAll('details').forEach(detail => detail.open = false);
-        }
-
-        function toggleDarkMode() {
-            const body = document.body;
-            const themeBtn = document.getElementById('themeBtn');
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                themeBtn.textContent = '☀️';
-                themeBtn.dataset.tooltip = 'الوضع النهاري';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeBtn.textContent = '🌙';
-                themeBtn.dataset.tooltip = 'الوضع الليلي';
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        function adjustFontSize(change) {
-            const currentSize = parseFloat(getComputedStyle(document.body).fontSize);
-            document.body.style.fontSize = (currentSize + change) + 'px';
-            localStorage.setItem('fontSize', document.body.style.fontSize);
-        }
-
-        // On page load, apply saved settings
-        document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('theme') === 'dark') {
-                toggleDarkMode();
-            }
-            const savedFontSize = localStorage.getItem('fontSize');
-            if (savedFontSize) {
-                document.body.style.fontSize = savedFontSize;
-            }
-        });
-    </script>
 <script src="../js/nav-loader.js" defer></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -1355,4 +1170,3 @@
 </script>
 </body>
 </html>
-
