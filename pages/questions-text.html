@@ -1,576 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>سبب نزول آية التثبُّت وعموم اللفظ</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../css/style.css">
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-        }
-        
-        /* --- Styles for headings, paragraphs, and lists --- */        
-        .q-title {
-            color: #000000;
-            font-weight: 700;
-            padding-right: 1.25rem !important; /* Added !important */
-            border-right: 4px solid #056839; /* Green border */
-            background-color: #f0f0f0;
-            padding: 10px;
-            padding-right: 1.25rem;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .dark .q-title {
-            background-color: #374151; /* gray-700 */
-            color: #10B981; /* emerald-500 */
-            border-right-color: #10B981;
-        }
-
-        /* H3 Style - Black background, white text, fit content */
-.h3-content-title {
-    color: #ffffff;  
-    font-weight: 700;
-    padding: 10px;
-    padding-right: 1.25rem;
-    border-right: 4px solid #056839;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 0.75rem;
-    background-color: #000000; 
-    display: inline-block;  
-    width: fit-content;  
-}
-.dark .h3-content-title {
-    color: #ffffff;  /* keep white in dark mode */
-    border-right-color: #10B981;
-    background-color: #000000;  /* keep black in dark mode */
-}
-
-    /* H4 Style - White background, black text, fit content */
-.h4-content-title {
-    color: #000000;  /* black text */
-    font-weight: 700;
-    font-size: 1.05rem;
-    padding: 6px 10px;
-    margin-top: 0.25rem;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #ffffff;  /* white background */
-    display: inline-block;  /* fit on text only */
-    width: fit-content;  /* fit on text only */
-}
-.dark .h4-content-title {
-    background-color: #ffffff;  /* keep white in dark mode */
-    color: #000000;  /* keep black in dark mode */
-}
-        
-        .p-content {
-            line-height: 1.75; /* relaxed */
-            margin-bottom: 0.75rem; /* mb-3 */
-        }
-        .li-content {
-            line-height: 1.75; /* relaxed */
-            margin-bottom: 0.5rem; /* mb-2 */
-            margin-right: 2rem; /* Further indent list items */
-        }
-        .hr-separator {
-            border-top: 1px solid #e5e7eb; /* gray-200 */
-            margin-top: 1rem; /* mt-4 */
-            margin-bottom: 1rem; /* mb-4 */
-        }
-
-        /* --- Accordion Container Style --- */
-        .content-container {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            background-color: rgb(170, 187, 165);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden; 
-        }
-        .dark .content-container {
-             background: #1f2937; /* gray-800 */
-             border-color: #4b5563; /* gray-600 */
-        }
-        
-        .accordion-button {
-            width: 100%;
-            background-color: rgb(170, 187, 165);
-            padding: 10px 15px; /* Reduced padding */
-            border: none;
-            text-align: right;
-            cursor: pointer;
-            font-size: 1.1rem; /* Slightly smaller */
-            font-weight: bold;
-            color: #333;
-            display: flex;
-            align-items: center;
-        }
-        .dark .accordion-button {
-            background: #374151; /* gray-700 */
-            color: #f3f4f6; /* gray-100 */
-            border-bottom-color: #4b5563; /* gray-600 */
-        }
-        
-        .accordion-title-group {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end; /* Align to the right (RTL) */
-        }
-
-        .accordion-button .icon-toggle {
-            font-size: 1rem;
-            color: #0078D7;
-            width: 20px;
-            flex-shrink: 0;
-            margin-right: 10px; /* Space between toggle and title */
-        }
-        .accordion-button h2 { /* H2 is inside the button */
-             display: inline;
-             font-size: 1.1rem; /* Match button */
-             color: #000000;
-             text-align: right;
-        }
-        .dark .accordion-button h2 {
-            color: #f3f4f6 !important; /* gray-100, with !important to ensure override */
-        }
-
-        .accordion-panel {
-            padding: 20px; /* More padding inside */
-            background-color: rgb(170, 187, 165);
-            border-top: 1px solid #e0e0e0;
-        }
-        .dark .accordion-panel {
-            background: #111827; /* gray-900 */
-            border-top-color: #4b5563; /* gray-600 */
-        }
-        
-        /* #[MODIFIED] Reduced margin */
-        .qa { margin-bottom: 10px; } 
-        /* #[MODIFIED] Padding for nested content */
-        .a { padding: 10px; padding-right: 1.5rem; }
-        .dark .a { color: #d1d5db; } /* gray-300 */
-
-        .dark .p-content,
-        .dark .li-content {
-            color: #E5E7EB; /* gray-200 */
-        }
-
-        /* --- Nav Bar Tools --- */
-        .nav-tools {
-            display: flex;
-            align-items: center;
-            margin-left: 1rem; /* ml-4 */
-        }
-        .nav-tools .icon-btn, .nav-tools .btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            margin-left: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-        .nav-tools .icon-btn:hover, .nav-tools .btn:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
-    </style>
-</head>
-
-<body class="min-h-screen" x-data="{ 'showIntroModal': true }"> 
-<div x-show="showIntroModal" 
-     style="display: none; background-color: rgba(0, 0, 0, 0.6);" 
-     class="fixed inset-0 z-[100] flex items-center justify-center p-4"
-     x-transition:enter="transition ease-out duration-300"
-     x-transition:enter-start="opacity-0"
-     x-transition:enter-end="opacity-100"
-     x-transition:leave="transition ease-in duration-200"
-     x-transition:leave-start="opacity-100"
-     x-transition:leave-end="opacity-0">
-    
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md p-6 text-center"
-         @click.outside="showIntroModal = false"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 scale-90"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-90">
-        
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">👋 تذكير </h3>
-        <p class="text-lg text-gray-700 dark:text-gray-200 mb-6">
-            اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ
-        </p>
-        <button @click="showIntroModal = false" 
-                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-وعَجِّلْ فَرَجَهُمْ
-        </button>
-    </div>
-</div>
-
-<div class="main-width-container pt-10">
-	<div id="navbar-placeholder"></div>
- 
-    <div class="top-row">
-        <article class="content" 
-                 x-data="{ 'fontSize': 18, 'darkMode': false }"
-                 :style="{ 'fontSize': fontSize + 'px' }"
-                 :class="{ 'dark': darkMode }"
-                 @font-change.window="fontSize = Math.max(10, fontSize + $event.detail)"
-                 @font-reset.window="fontSize = 18"
-                 @theme-toggle.window="darkMode = !darkMode">
-<div x-data="{ 'open': true }" class="content-container">
-	<button @click="open = !open" class="accordion-button">
-		<div class="accordion-title-group">
-			<h2 class="section">سبب نزول آية التثبُّت وعموم اللفظ</h2>
-			<span class="icon-toggle" x-show="!open">◀</span>
-			<span class="icon-toggle" x-show="open" style="display: none;">▼</span>
-		</div>
-	</button>
-	<div x-show="open" x-transition class="accordion-panel">
-		<section>
-			<div class="qa" id="h2----" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>سبب النزول وملخص القصة:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">نزلت الآية بسبب حادثة <strong>الوليد بن عقبة</strong> (أو المغيرة) حين أرسله النبي صلى الله عليه وآله وسلم لجباية الزكاة من بني المصطلق.</p>
-				<p>خاف الوليد منهم وفرّ عائداً إلى المدينة مدّعياً كذباً أنهم ارتدوا ورفضوا دفع الزكاة.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">نزلت الآية لتأمر بـ <strong>التثبُّت من خبر الفاسق</strong> قبل إصابة قوم بجهالة.</p>
-				</div>
-			</div>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>قاعدة التمسك:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">يُتمسَّك بـ <strong>عموم لفظ الآية</strong> وليس بخصوصية سبب نزولها.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">هذا هو <strong>القول المشهور والصحيح</strong> في أصول الفقه.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>التعليل</strong><strong>:</strong> أن النص القرآني يحمل معنى عاماً وشاملاً، والحكم لا ينحصر في مناسبة نزولها فقط، بل ينطبق على جميع الموارد التي تشترك في خصوصياتها مع مورد النزول.</p>
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-<div x-data="{ 'open': false }" class="content-container">
-	<button @click="open = !open" class="accordion-button">
-		<div class="accordion-title-group">
-			<h2 class="section">سبب حرق عثمان للمصاحف</h2>
-			<span class="icon-toggle" x-show="!open">◀</span>
-			<span class="icon-toggle" x-show="open" style="display: none;">▼</span>
-		</div>
-	</button>
-	<div x-show="open" x-transition class="accordion-panel">
-		<section>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>السبب الرئيس:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">كان الدافع الأساسي لتوحيد المصاحف هو <strong>وقوع الاختلاف الشديد في قراءات القرآن</strong> بين المسلمين في مختلف الأقطار.</p>
-				</div>
-			</div>
-			<div class="qa" id="h2-" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>الإجراء:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">قرر عثمان عام <strong>25 </strong><strong>للهجرة</strong> تنفيذ مهمة التوحيد.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">أمر بجمع المصاحف والصحف التي فيها قرآن من كل أفق، ثم <strong>سلَقها بالماء الحار والخل، أو أحرقها</strong>، لتوحيد الناس على مصحف واحد منعاً للفرقة والاختلاف.</p>
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-<div x-data="{ 'open': false }" class="content-container">
-	<button @click="open = !open" class="accordion-button">
-		<div class="accordion-title-group">
-			<h2 class="section">قصة مصحف الإمام علي عليه السلام</h2>
-			<span class="icon-toggle" x-show="!open">◀</span>
-			<span class="icon-toggle" x-show="open" style="display: none;">▼</span>
-		</div>
-	</button>
-	<div x-show="open" x-transition class="accordion-panel">
-		<section>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>حقيقة الجمع:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">بعد وفاة النبي صلى الله عليه وآله وسلم مباشرة وبوصية منه، انصرف <strong>الإمام علي عليه السلام</strong> إلى جمع القرآن وتأليفه.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">وقد قام بترتيب سوره وفق <strong>ترتيب النزول</strong>.</p>
-				</div>
-			</div>
-			<div class="qa" id="h2---" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>عرض المصحف ورفضه:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p>عندما أتم جمعه، خرج به إلى الناس يحمله، وأخبرهم بأنه جمعه كاملاً كما أُنزل وعلَّمه النبي صلى الله عليه وآله وسلم تأويله.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">لكن القوم رفضوه قائلين: <strong>&quot;</strong><strong>يا علي، اردُده فلا حاجة لنا فيه، ما أغنانا بما معنا من القرآن عمّا تدعونا إليه</strong><strong>!&quot;</strong>.</p>
-				</div>
-			</div>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>مصير المصحف:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">بقي هذا المصحف يتوارثه الأئمة من ولده. وهو الآن مع <strong>الإمام الحجّة المهدي عجل الله تعالى فرجه الشريف</strong> وسوف يُخرجه عند ظهوره.</p>
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-<div x-data="{ 'open': false }" class="content-container">
-	<button @click="open = !open" class="accordion-button">
-		<div class="accordion-title-group">
-			<h2 class="section">جهود الشيعة في القرآن</h2>
-			<span class="icon-toggle" x-show="!open">◀</span>
-			<span class="icon-toggle" x-show="open" style="display: none;">▼</span>
-		</div>
-	</button>
-	<div x-show="open" x-transition class="accordion-panel">
-		<section>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>الجمع والإعراب:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">كان <strong>الإمام علي عليه السلام</strong> هو <strong>أول من تصدَّى لجمع القرآن</strong> بعد النبي صلى الله عليه وآله وسلم.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">وهو مَن أمر <strong>أبا الأسود الدؤلي</strong> (من أصحابه) بوضع أسس <strong>علم إعراب القرآن ونقْطه</strong>.</p>
-				</div>
-			</div>
-			<div class="qa" id="h2-" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>القراءات:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">كان أربعة (أو ستة) من <strong>القرّاء السبعة شيعة</strong>.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>📌</strong><strong> </strong><strong>ملاحظة هامة</strong><strong>:</strong> قراءة <strong>حفْص الحاضرة</strong> هي قراءة شيعيَّة خالصة.</p>
-				</div>
-			</div>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>الكتابة والضبط:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>علي بن أبي طالب (ع)</strong> كان <strong>أبرز كتّاب الوحي</strong>.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">وقد قام <strong>خالد بن أبي الهياج</strong> (صاحبه) بـ <strong>تجويد خطه</strong> في كتابة المصحف.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>الخليل بن أحمد الفراهيدي</strong> هو من ضبط <strong>الحركات الحاضرة</strong> (الشكل والهمز والتشديد والإشمام).</p>
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-<div x-data="{ 'open': false }" class="content-container">
-	<button @click="open = !open" class="accordion-button">
-		<div class="accordion-title-group">
-			<h2 class="section">ضوابط التمييز بين المكي والمدني</h2>
-			<span class="icon-toggle" x-show="!open">◀</span>
-			<span class="icon-toggle" x-show="open" style="display: none;">▼</span>
-		</div>
-	</button>
-	<div x-show="open" x-transition class="accordion-panel">
-		<section>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>الضابطة المشهورة:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">هي <strong>الضابطة الزمانية</strong>.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>مكي</strong><strong>:</strong> كلّ ما نزل <strong>قبل الهجرة</strong> أو أثنائها.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>مدني</strong><strong>:</strong> كلّ ما نزل <strong>بعد الهجرة</strong> (حتى لو نزل في مكة).</p>
-				</div>
-			</div>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>ضوابط أخرى:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<div id="h3--" x-data="{ 'open': true }">
-					<div class="h3-content-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-						<span>أ. المكانية:</span>
-						<span class="icon-toggle">
-							<span x-show="!open">◀</span>
-							<span x-show="open" style="display: none;">▼</span>
-						</span>
-					</div>
-					<div class="a" x-show="open" x-transition>
-					<p>ما نزل في مكة وضواحيها مكي، وما نزل في المدينة وضواحيها مدني.</p>
-					</div>
-				</div>
-				<div id="h3--" x-data="{ 'open': true }">
-					<div class="h3-content-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-						<span>ب. الخطابية:</span>
-						<span class="icon-toggle">
-							<span x-show="!open">◀</span>
-							<span x-show="open" style="display: none;">▼</span>
-						</span>
-					</div>
-					<div class="a" x-show="open" x-transition>
-					<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">الخطاب بـ <strong>&quot;</strong><strong>يا أيها الناس...&quot; مكية</strong>.</p>
-					<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">الخطاب بـ <strong>&quot;</strong><strong>﴿الَّذِينَ آمَنُواْ...﴾&quot; مدنية</strong>.</p>
-					</div>
-				</div>
-				<div id="h3------" x-data="{ 'open': true }">
-					<div class="h3-content-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-						<span>ج. سياق الآيات والمضامين (إضافة الطباطبائي)</span>
-						<span class="icon-toggle">
-							<span x-show="!open">◀</span>
-							<span x-show="open" style="display: none;">▼</span>
-						</span>
-					</div>
-					<div class="a" x-show="open" x-transition>
-					<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>:</strong> يُعتمد على <strong>التدبُّر في سياقها وما تحوي من مضامين</strong> لتمييز ما يناسب حال مكة أو المدينة.</p>
-					</div>
-				</div>
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-<div x-data="{ 'open': false }" class="content-container">
-	<button @click="open = !open" class="accordion-button">
-		<div class="accordion-title-group">
-			<h2 class="section">المعنى اللغوي للقرآن</h2>
-			<span class="icon-toggle" x-show="!open">◀</span>
-			<span class="icon-toggle" x-show="open" style="display: none;">▼</span>
-		</div>
-	</button>
-	<div x-show="open" x-transition class="accordion-panel">
-		<section>
-			<div class="qa" id="h2-----" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>لماذا سُمي القرآن بهذا الاسم؟</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">سمى القرآن بهذا الاسم لأنه <strong>اسم مهموز (قرآن) مصدر لـ &quot;قرأتُ&quot; بمعنى التلاوة</strong>.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">وسُمّي به الكتاب المقروء، أي: <strong>المقروء أو ما يُقرأ</strong>.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>تنويه: (القول الأقوى)</strong><strong>:</strong> هذا هو أقوى الأقوال لتسمية القرآن.</p>
-				</div>
-			</div>
-			<div class="qa" id="h2-------" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>الأقوال السبعة في الأصل الاشتقاقي للفظ &quot;القرآن&quot;:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>1. </strong><strong>اسم علم جامد غير مشتق</strong><strong>:</strong> وهو خاصّ بكلام الله النازل بالوحي.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>2. </strong><strong>مشتقّ من &quot;قَرَنَ&quot; (غير مهموز)</strong><strong>:</strong> لأنه يضم السُوَر والآيات والحروف بعضها إلى البعض الآخر.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>3. </strong><strong>مشتقّ من &quot;القرائن&quot; (غير مهموز)</strong><strong>:</strong> لأن آياته يصدّق بعضها بعضها الآخر.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>4. </strong><strong>مشتقّ من &quot;القِرن&quot; (غير مهموز)</strong><strong>:</strong> بمعنى القرين.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>5. </strong><strong>مشتقّ من &quot;القُرْء&quot; (مهموز)</strong><strong>:</strong> بمعنى الجمع.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>6. </strong><strong>مصدر لـ &quot;قرأتُ&quot; (مهموز)</strong><strong>:</strong> بمعنى التلاوة.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>7. </strong><strong>مشتقّ من &quot;القرى&quot; (مهموز)</strong><strong>:</strong> بمعنى الضيافة.</p>
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-<div x-data="{ 'open': false }" class="content-container">
-	<button @click="open = !open" class="accordion-button">
-		<div class="accordion-title-group">
-			<h2 class="section">كاتب إعراب القرآن</h2>
-			<span class="icon-toggle" x-show="!open">◀</span>
-			<span class="icon-toggle" x-show="open" style="display: none;">▼</span>
-		</div>
-	</button>
-	<div x-show="open" x-transition class="accordion-panel">
-		<section>
-			<div class="qa" id="h2--" x-data="{ 'open': true }">
-				<div class="q-title" @click="open = !open" style="display: flex; justify-content: space-between; align-items: center;">
-					<span>الاسم والدور:</span>
-					<span class="icon-toggle">
-						<span x-show="!open">◀</span>
-						<span x-show="open" style="display: none;">▼</span>
-					</span>
-				</div>
-				<div class="a" x-show="open" x-transition>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">هو <strong>أبو الأسود الدؤلي (ت: 69هـ)</strong>.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }"><strong>الدور</strong><strong>:</strong> يُعدُّ رائداً في تدوين <strong>علم إعراب القرآن والواضع لأُسسه</strong>.</p>
-				<p class="p-content" :style="{ 'fontSize': fontSize + 'px' }">وقد قام بذلك تحت إشراف وأمر <strong>الإمام علي عليه السلام</strong>.</p>
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-      </article>
-    </div>
- </div> 
- 
- <script src="../js/nav-loader.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    loadNavbar({ 
-      pageType: 'sub',
-      showTools: true  // <-- (غيّر "true" أو "false" حسب الصفحة)
-    });
-  });
-</script>
- </body>
-</html>
