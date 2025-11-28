@@ -310,7 +310,7 @@ document.head.insertAdjacentHTML('beforeend', `<style>
         opacity: 1;
         -webkit-text-fill-color: #15803d; /* لمتصفحات WebKit */
     }
-    body.dark textarea.review-mode:disabled {
+    html.dark body textarea.review-mode:disabled {
         background-color: #052e16; /* أخضر غامق جداً */
         color: #bbf7d0; /* أخضر فاتح */
         -webkit-text-fill-color: #bbf7d0;

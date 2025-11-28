@@ -1,84 +1,126 @@
 /**
  * script_mindmap_interactive.js
- * - يرسم الخريطة
- * - يجعل العقد مطوية افتراضياً
- * - يتيح النقر على النصوص للتوسيع
+ * يرسم الخريطة التفاعلية باستخدام مكتبة Markmap
+ * ويدعم التفاعل مع القائمة العلوية
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    renderMindmap();
+    renderInteractiveMap();
 });
 
-function renderMindmap() {
+function renderInteractiveMap() {
     const container = document.getElementById('markmap-container');
-    
+    const svgEl = document.querySelector('#markmap');
+
+    // التحقق من البيانات
     if (typeof mindmapData === 'undefined') {
-        console.error("Error: mindmapData is undefined.");
-        container.innerHTML = '<h3 style="text-align:center; margin-top:50px; color:red;">خطأ: لم يتم تحميل البيانات.</h3>';
+        if(container) container.innerHTML = '<h3 style="text-align:center; margin-top:50px; color:red;">خطأ: لم يتم تحميل البيانات (تأكد من data_mindmap.js).</h3>';
         return;
     }
 
-    // 1. تحويل البيانات مع خاصية الطي (Fold)
-    function transformData(node, depth = 0) {
-        // depth 0 (الجذر) مفتوح، الباقي مطوي
-        const foldStatus = depth === 0 ? 0 : 1; 
+    // دالة لتحويل البيانات لتناسب Markmap مع التحكم في الطي (Fold)
+    function transformData(node, foldLevel = 1) {
+        return transformRecursively(node, 0, foldLevel);
+    }
 
-        return {
-            content: node.title, 
-            children: node.children ? node.children.map(c => transformData(c, depth + 1)) : [],
-            payload: { fold: foldStatus } 
+    function transformRecursively(node, depth, mode) {
+        let shouldFold = 0; // افتراضياً مفتوح
+
+        if (mode === 0) {
+            shouldFold = 0; // فتح الكل
+        } else if (mode === 1 || mode === 2) {
+            if (depth > 0) shouldFold = 1; // طي الأبناء
+            if (mode === 1 && depth === 1) shouldFold = 1; 
+        }
+
+        const newNode = {
+            content: node.title,
+            children: [],
+            payload: { fold: shouldFold }
         };
+
+        if (node.children && node.children.length > 0) {
+            newNode.children = node.children.map(c => transformRecursively(c, depth + 1, mode));
+        }
+
+        return newNode;
+    }
+
+    // إعدادات المكتبة
+    const { Markmap } = window.markmap;
+    
+    // ---------------------------------------------------------
+    // التعديل 1: تعطيل autoFit لمنع التصغير التلقائي عند النقر
+    // ---------------------------------------------------------
+    const options = {
+        autoFit: false, // تم التغيير من true إلى false
+        duration: 500,
+        spacingHorizontal: 80,
+    };
+
+    // دالة لرسم/تحديث الخريطة
+    function drawMap(mode) {
+        // 1. تنظيف الـ SVG القديم
+        svgEl.innerHTML = '';
+        
+        // 2. تجهيز البيانات الجديدة حسب الوضع (0: الكل، 1: افتراضي، 2: طي)
+        const rootData = transformData(mindmapData, mode);
+        
+        // تأكد دائماً أن الجذر مفتوح
+        rootData.payload = { fold: 0 }; 
+
+        // 3. الرسم
+        // ---------------------------------------------------------
+        // التعديل 2: التقاط المتغير mm لعمل fit يدوياً
+        // ---------------------------------------------------------
+        const mm = Markmap.create(svgEl, options, rootData);
+        
+        // نقوم بعمل Fit يدوياً فقط عند إنشاء الخريطة بالكامل (مثل التحميل الأول أو أزرار القائمة)
+        // لكن عند النقر العادي على العقد، لن يتم استدعاء هذا السطر ولن يتم التصغير
+        mm.fit(); 
     }
 
     try {
-        const rootData = transformData(mindmapData);
-        const { Markmap } = window.markmap;
-        const svgEl = document.querySelector('#markmap');
-        
-        const options = {
-            autoFit: true,
-            duration: 500,
-        };
+        // الرسم الأولي (الوضع الافتراضي: 1)
+        drawMap(1);
 
-        // إنشاء الخريطة
-        const mm = Markmap.create(svgEl, options, rootData);
-        
-        // تحديث الحجم عند تغيير حجم النافذة
-        window.addEventListener('resize', () => { mm.fit(); });
-
-        // ============================================================
-        // جديد: تفعيل النقر على النص للتوسيع (Click Text to Expand)
-        // ============================================================
-        svgEl.addEventListener('click', function(e) {
-            // نبحث عن العنصر الذي تم نقره
-            let target = e.target;
-
-            // نصعد في شجرة DOM حتى نجد "المجموعة" <g> التي تحتوي العقدة
-            // العقد في markmap تكون داخل وسم <g> يحتوي على <circle> و <foreignObject>
-            while (target && target !== svgEl) {
-                if (target.tagName === 'g') {
-                    // وجدنا المجموعة، نبحث عن الدائرة داخلها
-                    const circle = target.querySelector('circle');
-                    
-                    // إذا وجدنا دائرة، والحدث لم يكن نقراً على الدائرة نفسها (لتجنب التكرار)
-                    if (circle && e.target !== circle) {
-                        // نقوم بمحاكاة نقرة على الدائرة
-                        // لأن مكتبة Markmap تربط حدث الفتح/الإغلاق بالدائرة فقط
-                        const clickEvent = new MouseEvent('click', {
+        // ==========================================
+        // تفعيل النقر على النصوص (Simulated Click)
+        // ==========================================
+        svgEl.addEventListener('click', (e) => {
+            const target = e.target;
+            // هل النقر على نص أو خلفية نص؟
+            if (target.tagName === 'tspan' || target.tagName === 'text' || target.closest('foreignObject')) {
+                const g = target.closest('g');
+                if (g) {
+                    // ابحث عن الدائرة في نفس المجموعة
+                    const circle = g.querySelector('circle');
+                    if (circle) {
+                        const event = new MouseEvent('click', {
                             view: window,
                             bubbles: true,
                             cancelable: true
                         });
-                        circle.dispatchEvent(clickEvent);
+                        circle.dispatchEvent(event);
                     }
-                    return; // انتهينا
                 }
-                target = target.parentElement;
             }
         });
-        // ============================================================
+
+        // ==========================================
+        // الاستجابة لأحداث الشريط العلوي (Navbar)
+        // ==========================================
+        
+        window.addEventListener('expand-all', () => {
+            drawMap(0); // 0 = وضع فتح الكل
+        });
+
+        window.addEventListener('collapse-all', () => {
+            drawMap(2); // 2 = وضع طي الكل
+        });
 
     } catch (error) {
-        console.error("Error rendering markmap:", error);
+        console.error("Markmap Error:", error);
+        container.innerHTML = `<p style="color:red; text-align:center">خطأ في الرسم: ${error.message}</p>`;
     }
 }

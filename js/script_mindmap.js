@@ -1,78 +1,120 @@
+/**
+ * script_mindmap.js
+ * المنطق الخاص بالخريطة الذهنية العمودية
+ * - تظهر مفتوحة بالكامل تلقائياً
+ * - يدعم النقر للفتح/الطي
+ * - يدعم أزرار "توسيع الكل" و "طي الكل" في الشريط العلوي
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    // هذا المتغير 'container' هو نفسه الـ div الذي يحمل كلاس .mindmap-v-tree
-    const container = document.getElementById('mindmap-tree-container'); 
+    const container = document.getElementById('mindmap-tree-container');
     
-    if (!container || typeof mindmapData === 'undefined') {
-        console.error("خطأ: لم يتم العثور على حاوية الخريطة أو البيانات.");
-        if(container) container.innerHTML = "<p>خطأ: لم يتم تحميل البيانات.</p>";
+    // 1. حقن ستايل الإخفاء والإظهار برمجياً
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .mindmap-v-tree li.collapsed > ul { display: none !important; }
+        /* رفع النص فوق الخطوط لضمان استجابة النقر */
+        .mindmap-v-tree li > span { cursor: pointer; position: relative; z-index: 10; } 
+        .mindmap-v-tree li > span:hover { transform: scale(1.02); }
+    `;
+    document.head.appendChild(style);
+
+    // 2. التحقق من وجود البيانات والحاوية
+    if (!container) return;
+    if (typeof mindmapData === 'undefined') {
+        container.innerHTML = `<div style="text-align:center; padding:20px; color:red; font-weight:bold;">
+            خطأ: المتغير mindmapData غير موجود.<br>
+            تأكد أن ملف data_mindmap.js يبدأ بـ: const mindmapData = ...
+        </div>`;
         return;
     }
 
-    // --- المهمة الأولى: بناء الـ HTML من البيانات ---
-    // (هذه الدالة صحيحة ولا تحتاج تعديل)
+    // 3. دالة لبناء الهيكل (HTML)
     function buildTreeHTML(node) {
-        if (!node.children || node.children.length === 0) {
-            return `<li><span>${node.title}</span></li>`;
+        const hasChildren = node.children && node.children.length > 0;
+        let html = `<li>`;
+        
+        const cssClass = hasChildren ? 'branch-node' : 'leaf-node';
+        // الأيقونة الافتراضية الآن هي (▼) لأن كل شيء مفتوح
+        const icon = hasChildren ? '<span class="toggle-icon" style="font-size:0.8em; opacity:0.7; margin-left:5px;">▼</span>' : '';
+        
+        html += `<span class="${cssClass}">${node.title} ${icon}</span>`;
+        
+        if (hasChildren) {
+            html += `<ul>`;
+            node.children.forEach(child => {
+                html += buildTreeHTML(child);
+            });
+            html += `</ul>`;
         }
-        let childrenHTML = '<ul>';
-        for (const child of node.children) {
-            childrenHTML += buildTreeHTML(child);
-        }
-        childrenHTML += '</ul>';
-        return `<li><span>${node.title}</span>${childrenHTML}</li>`;
+        
+        html += `</li>`;
+        return html;
     }
 
-    // نبدأ بناء الشجرة من العقدة الجذرية
-    container.innerHTML = `<ul>${buildTreeHTML(mindmapData)}</ul>`;
+    // 4. رسم الشجرة داخل الصفحة
+    container.innerHTML = `<ul class="root-ul">${buildTreeHTML(mindmapData)}</ul>`;
 
-
-    // --- المهمة الثانية: إضافة منطق الطي والتوسيع (إصدار مُحسَّن وأكثر توافقية) ---
-    
-    // بدلاً من استخدام ":has()"، سنمر على جميع عناصر "li"
-    // ونتحقق من وجود "ul" بداخلها يدوياً
+    // 5. ضبط الحالة الأولية (جعل الكل مفتوحاً)
     const allListItems = container.querySelectorAll('li');
-
     allListItems.forEach(li => {
-        const span = li.querySelector('span:first-of-type');
-        if (!span) return;
-
-        // ابحث عن "ul" كابن مباشر
-        let directChildUl = null;
-        for (const child of li.children) {
-            if (child.tagName === 'UL') {
-                directChildUl = child;
-                break;
-            }
-        }
-
-        if (directChildUl) {
-            // *** هذا فرع (Branch Node) ***
+        // نمر على كل العناصر لنتأكد من عدم وجود كلاس الإخفاء
+        if (li.querySelector('ul')) {
+            li.classList.remove('collapsed'); // إزالة الإخفاء (للتأكيد)
             
-            // 1. تحديد الحالة الافتراضية
-            const isRootNode = li.parentElement.parentElement.id === 'mindmap-tree-container';
-            const isLevel1Node = li.parentElement.parentElement.parentElement.parentElement.id === 'mindmap-tree-container';
-
-            if (isRootNode || isLevel1Node) {
-                li.classList.add('expanded');
-                li.classList.remove('collapsed');
-            } else {
-                li.classList.add('collapsed');
-                li.classList.remove('expanded');
-            }
-
-            // 2. إضافة حدث النقر
-            span.addEventListener('click', (e) => {
-                e.stopPropagation();
-                li.classList.toggle('collapsed');
-                li.classList.toggle('expanded');
-            });
-
-        } else {
-            // *** هذه ورقة (Leaf Node) ***
-            span.style.cursor = 'default';
-            span.addEventListener('click', (e) => {
-                e.stopPropagation(); // امنع النقر هنا من إغلاق الفرع الأب
-            });
+            // ضبط الأيقونة على وضع الفتح (▼)
+            const iconSpan = li.querySelector('.toggle-icon');
+            if(iconSpan) iconSpan.innerText = '▼'; 
         }
+    });
+
+    // 6. تفعيل النقر الفردي (Collapse/Expand) عند رغبة المستخدم في الإغلاق
+    container.addEventListener('click', function(e) {
+        const targetSpan = e.target.closest('li > span');
+        
+        if (targetSpan && container.contains(targetSpan)) {
+            const li = targetSpan.parentElement;
+            
+            if (li.querySelector('ul')) {
+                e.preventDefault(); 
+                e.stopPropagation(); 
+                
+                // تبديل الحالة
+                li.classList.toggle('collapsed');
+                
+                // تحديث الأيقونة
+                const iconSpan = targetSpan.querySelector('.toggle-icon');
+                if (iconSpan) {
+                    iconSpan.innerText = li.classList.contains('collapsed') ? '◀' : '▼';
+                }
+            }
+        }
+    });
+
+    // ==========================================
+    // 7. الاستجابة لأحداث الشريط العلوي (Navbar)
+    // ==========================================
+
+    window.addEventListener('expand-all', () => {
+        const allLis = container.querySelectorAll('li');
+        allLis.forEach(li => {
+            if (li.querySelector('ul')) {
+                li.classList.remove('collapsed');
+                const icon = li.querySelector('.toggle-icon');
+                if(icon) icon.innerText = '▼'; 
+            }
+        });
+    });
+
+    window.addEventListener('collapse-all', () => {
+        const allLis = container.querySelectorAll('li');
+        allLis.forEach(li => {
+            // نغلق الفروع (ما عدا الجذر)
+            if (li.querySelector('ul') && !li.parentElement.classList.contains('root-ul')) {
+                li.classList.add('collapsed');
+                const icon = li.querySelector('.toggle-icon');
+                if(icon) icon.innerText = '◀';
+            }
+        });
     });
 });

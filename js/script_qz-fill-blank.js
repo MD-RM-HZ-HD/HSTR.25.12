@@ -309,7 +309,7 @@ document.head.insertAdjacentHTML('beforeend', `<style>
         -webkit-text-fill-color: #15803d; /* لمتصفحات WebKit */
         cursor: default; /* إرجاع المؤشر للشكل الافتراضي بعد الكشف */
     }
-    body.dark input[type="text"].review-mode:disabled {
+    html.dark body input[type="text"].review-mode:disabled {
         background-color: #052e16; /* أخضر غامق جداً */
         color: #bbf7d0; /* أخضر فاتح */
         -webkit-text-fill-color: #bbf7d0;

@@ -2,8 +2,6 @@
 let currentQuestionIndex = 0;
 let score = 0;
 let nextQuestionTimer; // ⬅️ متغير للاحتفاظ بمؤقت السؤال التالي
-let idleAnimationTimer = null; // ⬅️ مؤقت لحركة الأزرار
-let currentHighlightIndex = 0; // ⬅️ مؤشر للزر المضيء
 
 // عناصر DOM
 const quizContainer = document.getElementById('quiz-container');
@@ -20,42 +18,15 @@ function updateProgress() {
     progressText.textContent = Math.round(progress) + '%';
 }
 
-// ⬅️ دالة لإيقاف حركة الأزرار
+// ⬅️ دالة إيقاف الحركة (تم تعطيلها)
 function stopIdleAnimation() {
-    if (idleAnimationTimer) {
-        clearInterval(idleAnimationTimer);
-        idleAnimationTimer = null;
-    }
-    // إزالة الهايلايت من جميع الأزرار عند الإيقاف
-    document.querySelectorAll('.btn-option').forEach(btn => {
-        btn.classList.remove('btn-idle-highlight'); 
-    });
+    // تم تعطيل الوظيفة لإزالة التأثيرات
 }
 
-// ⬅️ دالة لبدء حركة الأزرار
+// ⬅️ دالة بدء الحركة (تم تعطيلها)
 function startIdleAnimation() {
-    stopIdleAnimation(); // إيقاف أي حركة سابقة
-    currentHighlightIndex = 0;
-    const buttons = document.querySelectorAll('.btn-option');
-    if (buttons.length === 0) return;
-
-    idleAnimationTimer = setInterval(() => {
-        // إزالة الهايلايت من جميع الأزرار
-        buttons.forEach(btn => btn.classList.remove('btn-idle-highlight'));
-        
-        if (document.querySelectorAll('.btn-option:disabled').length > 0) {
-            stopIdleAnimation(); // إيقاف الحركة إذا كانت الأزرار معطلة (تمت الإجابة)
-            return;
-        }
-
-        // إضافة الهايلايت للزر الحالي
-        buttons[currentHighlightIndex].classList.add('btn-idle-highlight');
-        
-        // الانتقال للزر التالي
-        currentHighlightIndex = (currentHighlightIndex + 1) % buttons.length;
-    }, 700); // تغيير اللون كل 700 مللي ثانية (يمكنك تغيير هذا الرقم)
+    // تم تعطيل الوظيفة لإزالة التأثيرات
 }
-
 
 // دالة تفعيل زر "السؤال التالي"
 function enableNextButton() {
@@ -71,12 +42,10 @@ function disableNextButton() {
 // دالة الانتقال للسؤال التالي (الزر اليدوي)
 window.nextQuestion = function() {
     clearTimeout(nextQuestionTimer); // ⬅️ إلغاء المؤقت التلقائي عند الضغط اليدوي
-    stopIdleAnimation();
     disableNextButton();
     currentQuestionIndex++;
     renderQuestion(); 
 }
-
 
 // دالة عرض السؤال (تحديث للتحكم بزر التالي)
 function renderQuestion() {
@@ -98,17 +67,17 @@ function renderQuestion() {
     
     disableNextButton();
 
-// بناء أزرار الخيارات
-            let optionsHtml = '';
-            currentQ.options.forEach((option, index) => {
-                optionsHtml += `
-                    <button onclick="submitAnswer(${index})" 
-                            class="btn-answer btn-option"
-                            id="btn-option-${index}">
-                        <span class="btn-text">${option}</span>
-                    </button>
-                `;
-            });
+    // بناء أزرار الخيارات
+    let optionsHtml = '';
+    currentQ.options.forEach((option, index) => {
+        optionsHtml += `
+            <button onclick="submitAnswer(${index})" 
+                    class="btn-answer btn-option"
+                    id="btn-option-${index}">
+                <span class="btn-text">${option}</span>
+            </button>
+        `;
+    });
 
     quizContainer.innerHTML = `
         <div class="question-card mc-inline">
@@ -130,12 +99,11 @@ function renderQuestion() {
 
     questionCounter.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
     scoreDisplay.textContent = score;
-    startIdleAnimation(); // ⬅️ بدء حركة الأزرار
+    // startIdleAnimation(); // ⬅️ تم إيقاف استدعاء الحركة هنا
 }
 
-// دالة معالجة الإجابة (تفعيل الزر اليدوي والاحتفاظ بالمؤقت التلقائي)
+// دالة معالجة الإجابة
 window.submitAnswer = function(userAnswerIndex) {
-    stopIdleAnimation(); // ⬅️ إيقاف حركة الأزرار عند الإجابة
     const currentQ = questions[currentQuestionIndex];
     const feedbackDiv = document.getElementById('feedback');
     
@@ -154,7 +122,6 @@ window.submitAnswer = function(userAnswerIndex) {
     if (!isCorrect) {
         selectedButton.classList.add('btn-incorrect');
     }
-
 
     if (isCorrect) {
         score++;
@@ -191,7 +158,7 @@ window.submitAnswer = function(userAnswerIndex) {
     startNextQuestionTimer();
 }
 
-// ⬅️ دالة جديدة: بدء مؤقت الانتقال التلقائي للسؤال التالي
+// دالة بدء مؤقت الانتقال التلقائي للسؤال التالي
 function startNextQuestionTimer() {
     enableNextButton();
     let countdown = 15;
@@ -210,78 +177,73 @@ function startNextQuestionTimer() {
         }
     }, 1000);
 
-    // المؤقت الرئيسي للانتقال بعد 15 ثوانٍ
+    // المؤقت الرئيسي للانتقال بعد 15 ثانية
     nextQuestionTimer = setTimeout(() => {
         clearInterval(countdownInterval); // إيقاف تحديث النص
         nextQuestion();
     }, 15000);
 }
 
+// دالة عرض النتائج النهائية
+function showFinalResults() {
+    const percentage = Math.round((score / questions.length) * 100);
+    let message = '';
+    let emoji = '';
 
-  // دالة عرض النتائج النهائية
-    function showFinalResults() {
-        stopIdleAnimation(); // ⬅️ إيقاف أي حركة متبقية
-        const percentage = Math.round((score / questions.length) * 100);
-        let message = '';
-        let emoji = '';
+    if (percentage >= 90) {
+        message = 'ممتاز! أداء رائع';
+        emoji = '🏆';
+    } else if (percentage >= 70) {
+        message = 'جيد جداً! واصل التميز';
+        emoji = '⭐';
+    } else if (percentage >= 50) {
+        message = 'جيد! يمكنك التحسن أكثر';
+        emoji = '👍';
+    } else {
+        message = 'حاول مرة أخرى';
+        emoji = '📚';
+    }
 
-        if (percentage >= 90) {
-            message = 'ممتاز! أداء رائع';
-            emoji = '🏆';
-        } else if (percentage >= 70) {
-            message = 'جيد جداً! واصل التميز';
-            emoji = '⭐';
-        } else if (percentage >= 50) {
-            message = 'جيد! يمكنك التحسن أكثر';
-            emoji = '👍';
-        } else {
-            message = 'حاول مرة أخرى';
-            emoji = '📚';
-        }
+    quizContainer.innerHTML = `
+        <div class="text-center py-8 md:py-12">
+            <div class="text-5xl md:text-7xl mb-4 md:mb-6">${emoji}</div>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 md:mb-4">انتهى الاختبار!</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-6 md:mb-8">${message}</p>
 
-        quizContainer.innerHTML = `
-            <div class="text-center py-8 md:py-12">
-                <div class="text-5xl md:text-7xl mb-4 md:mb-6">${emoji}</div>
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 md:mb-4">انتهى الاختبار!</h2>
-                <p class="text-lg md:text-xl text-gray-600 mb-6 md:mb-8">${message}</p>
-
-                <div class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-2xl p-6 md:p-8 mb-4 md:mb-6">
-                    <p class="text-3xl md:text-5xl font-bold mb-1 md:mb-2">${score} / ${questions.length}</p>
-                    <p class="text-xl md:text-2xl">${percentage}%</p>
-                </div>
-
-                <button onclick="location.reload()"
-                        class="btn-answer bg-gradient-to-r from-green-500 to-emerald-600 text-white">
-                    🔄 إعادة الاختبار
-                </button>
+            <div class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-2xl p-6 md:p-8 mb-4 md:mb-6">
+                <p class="text-3xl md:text-5xl font-bold mb-1 md:mb-2">${score} / ${questions.length}</p>
+                <p class="text-xl md:text-2xl">${percentage}%</p>
             </div>
-        `;
 
-        progressFill.style.width = '100%';
-        progressText.textContent = '100%';
-        clearTimeout(nextQuestionTimer); // ⬅️ التأكد من إلغاء أي مؤقت في النهاية
-        disableNextButton(); // ⬅️ تعطيل زر التالي في صفحة النتائج
+            <button onclick="location.reload()"
+                    class="btn-answer bg-gradient-to-r from-green-500 to-emerald-600 text-white">
+                🔄 إعادة الاختبار
+            </button>
+        </div>
+    `;
+
+    progressFill.style.width = '100%';
+    progressText.textContent = '100%';
+    clearTimeout(nextQuestionTimer); 
+    disableNextButton(); 
+}
+
+// دالة خلط المصفوفة
+function shuffleArray(array) {
+    if (!array || array.length === 0) return;
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
+}
 
-    // بدء الاختبار عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', initQuiz);
+// دالة تهيئة الاختبار
+function initQuiz() {
+    document.title = document.querySelector('.page-title-card h1').textContent;
+    shuffleArray(questions);
+    questionCounter.textContent = `1 / ${questions.length}`;
+    renderQuestion();
+}
 
-    // دالة خلط المصفوفة
-    function shuffleArray(array) {
-        if (!array || array.length === 0) return;
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
-    // دالة تهيئة الاختبار
-    function initQuiz() {
-        document.title = document.querySelector('.page-title-card h1').textContent;
-        shuffleArray(questions);
-        // Initialize counter text on load
-        questionCounter.textContent = `1 / ${questions.length}`;
-        renderQuestion();
-    }
-    // بدء الاختبار عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', initQuiz);
+// بدء الاختبار عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', initQuiz);
