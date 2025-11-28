@@ -8,62 +8,9 @@
     <title>بطاقات المراجعة</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        /* Shine animation for the card faces */
-        @keyframes shine-rtl {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Glaring effect for text */
-        @keyframes text-glare {
-            0%, 100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
-            50% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6); }
-        }
-
-        /* Ensure card faces are positioned correctly for the ::after pseudo-element */
-        /* and contain the shine effect */
-        .card-face {
-            overflow: hidden; /* Add this to contain the shine effect */
-        }
-
-        /* Shine effect for the front face when not flipped */
-        .card:not(.flipped) #front-face::after {
-            content: '';
-            position: relative;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 80%);
-            animation: shine-rtl 2s infinite;
-            pointer-events: none; /* Allow clicks to pass through */
-            z-index: 1; /* Ensure it's above the background but below content */
-        }
-
-        /* Shine effect for the back face when flipped */
-        .card.flipped #back-face::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 80%);
-            animation: shine-rtl 2s infinite;
-            pointer-events: none; /* Allow clicks to pass through */
-            z-index: 1; /* Ensure it's above the background but below content */
-        }
-
-        /* Apply glaring effect to card headers */
-        .card-header {
-            animation: text-glare 2s infinite alternate;
-        }
-    </style>
-</head>
+    </head>
 <body> 
 <div class="main-width-container pt-10">
 	<div id="navbar-placeholder"></div>
@@ -123,12 +70,10 @@
 	<script src="../js/script_card-flip.js"></script>
 <script src="../js/nav-loader.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
     loadNavbar({ 
-      pageType: 'sub',
-      showTools: false
+        pageType: 'subpage',
+        showTools: false  // ❌ لإخفاء الأدوات
     });
-  });
 </script>
 </body>
 </html>

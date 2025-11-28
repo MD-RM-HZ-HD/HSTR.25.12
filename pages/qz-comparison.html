@@ -8,7 +8,7 @@
     <title>مقارنة وتعبئة - املأ الفراغ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
         /* تنسيقات إضافية لبطاقة المقارنة */
@@ -19,7 +19,7 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
-        body.dark .comparison-box {
+        html.dark body .comparison-box {
              background-color: rgba(0, 0, 0, 0.2);
              border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -27,7 +27,7 @@
 </head>
 <body> 
 <div class="main-width-container pt-10">
-  <div id="navbar-placeholder"></div>
+   <div id="navbar-placeholder"></div>
         
 <header class="page-title-card">
     <h1>مقارنة وتعبئة</h1>
@@ -69,12 +69,10 @@
 	
 <script src="../js/nav-loader.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
     loadNavbar({ 
-      pageType: 'sub',
-      showTools: false
+        pageType: 'subpage',
+        showTools: false  // ❌ لإخفاء الأدوات
     });
-  });
 </script>
 </body>
 </html>

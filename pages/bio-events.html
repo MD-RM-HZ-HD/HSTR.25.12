@@ -4,1169 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>السيرة التاريخية</title>
-    <!-- CRITICAL FONT LOADING -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        /* NUCLEAR OPTION: FORCE FONT IMMEDIATELY */
-        /* More targeted font application */
-        body, button, input, textarea, select {
-            font-family: 'Tajawal', sans-serif !important;
-        }
-        
-        /* RESET CSS VARIABLES */
-        :root {
-            --font-heading: 'Tajawal', sans-serif !important;
-            --font-body: 'Tajawal', sans-serif !important;
-        }
-    </style>
-    <div id="navbar-placeholder"></div>
-    <style>
-/* --- Updated CSS for bio-events.html --- */
-:root {
-    /* 1. Outer Background (Dark Olive Green) */
-    --bg-body: #344C41; 
-    
-    /* 2. Card & Header Background (Light Sage Green) */
-    --bg-card: rgb(170, 187, 165);
-    
-    /* 3. Text Colors (Dark for contrast on cards) */
-    --text-primary: #0f172a; /* Very Dark Blue/Black */
-    --text-secondary: #334155; /* Dark Gray */
-    
-    /* Borders */
-    --border-color: #1f2937; 
-    --bg-card-glass: rgba(255, 255, 255, 0.45);
-}
 
-/* Page Settings */
-body {
-    background-color: var(--bg-body) !important;
-    color: #ffffff; /* Default text on dark body is white */
-    line-height: 1.8;
-    font-size: 16px;
-    padding-bottom: 80px;
-    overflow-x: hidden;
-}
-
-/* Container */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1rem;
-    width: 95%;
-}
-
-/* --- Header Styling (Matching index.html) --- */
-header {
-    background-color: var(--bg-card) !important;
-    border: 2px solid var(--border-color) !important;
-    border-radius: 0.75rem;
-    padding: 1.5rem 1rem;
-    margin-bottom: 2rem;
-    margin-top: 1.5rem;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-
-header h1 {
-    color: var(--text-primary) !important; /* Dark text for contrast */
-    font-weight: 900 !important;
-    font-size: 1.2rem !important;
-    margin: 0;
-}
-
-/* --- Card Styling --- */
-/* General rule for all cards */
-.tree-node, .caliph-card, .safir-box, .analysis-box, details {
-    background-color: var(--bg-card) !important;
-    color: var(--text-primary) !important; /* Force dark text */
-    border: 1px solid var(--border-color) !important;
-    border-radius: 0.75rem;
-    box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.2) !important; /* Solid shadow */
-    overflow: hidden;
-}
-
-/* Unified Light Card Style (Matches "Secret Organization") */
-.content-card-light, 
-.tree-node,
-.caliph-card,
-.safir-box,
-.analysis-box,
-.timeline-item {
-    background-color: var(--bg-card-glass) !important;
-    border: 1px solid rgba(0,0,0,0.1) !important;
-    box-shadow: none !important; /* Remove heavy shadow from inner cards */
-    border-radius: 0.5rem;
-}
-
-/* Ensure Details/Summary behave correctly */
-details {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-details .tree-node { 
-    border: 1px solid rgba(0,0,0,0.1) !important;
-    box-shadow: none !important;
-}
-
-/* Titles inside cards */
-h3, h4, .item-title {
-    color: #064e3b !important; /* Dark Emerald Green */
-    font-weight: 800 !important;
-}
-
-/* Text inside cards */
-p, li, span, div {
-    color: var(--text-primary);
-}
-
-/* Exceptions for Badges */
-.badge { color: inherit; }
-
-/* --- Details/Accordion Styling --- */
-details { 
-    margin-bottom: 1.5rem; 
-    width: 100%;
-    box-sizing: border-box;
-}
-
-details > summary {
-    background-color: var(--bg-card) !important;
-    color: var(--text-primary) !important;
-    padding: 1rem 1.25rem;
-    font-weight: 800;
-    font-size: 1.2em;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid transparent;
-}
-
-details[open] > summary {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    background-color: rgba(0,0,0,0.05) !important;
-}
-
-details > div {
-    padding: 1.5rem;
-    background-color: transparent !important; 
-}
-
-/* --- Utilities --- */
-.special-quote {
-    background-color: rgba(255, 255, 255, 0.5) !important;
-    border-right: 4px solid #b45309;
-    color: #451a03 !important;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    margin: 0.5rem 0;
-}
-
-.badge {
-    display: inline-block;
-    padding: 0.1em 0.6em;
-    border-radius: 6px;
-    font-size: 0.9em;
-    font-weight: 600;
-    margin: 0 2px;
-        }
-
-        .badge-red { background-color: #fee2e2; color: #991b1b; }
-        .badge-green { background-color: #dcfce7; color: #166534; }
-        .badge-blue { background-color: #dbeafe; color: #1e40af; }
-        .badge-yellow { background-color: #fef9c3; color: #854d0e; }
-        .badge-purple { background-color: #f3e8ff; color: #6b21a8; }
-
-        /* --- الشبكة الديناميكية (Dynamic Grid) --- */
-        .grid-responsive {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        /* ======== Media Queries للهواتف والشاشات الصغيرة ======== */
-        @media screen and (max-width: 768px) {
-    .container { padding-top: 100px; }
-    h1 { font-size: 1.5rem !important; }
-        }
-
-/* 1. Navbar Text Fix */
-#exams-dropdown-toggle, 
-nav a, 
-nav button {
-    color: #ffffff !important;
-}
-
-/* 2. Spacing Fixes */
-.container {
-    padding-top: 80px !important; /* Reduced space from top */
-}
-header {
-    margin-top: 0.5rem !important;
-    margin-bottom: 1rem !important;
-    padding: 1rem !important;
-}
-
-/* 3. Badge High Contrast (Pop out) */
-.badge {
-    background-color: #ffffff !important; /* White bg to separate from card */
-    border: 1px solid rgba(0,0,0,0.15) !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    padding: 0.2em 0.8em !important;
-    z-index: 10;
-    position: relative;
-}
-/* Keep text colors */
-.badge-red { color: #991b1b !important; }
-.badge-green { color: #166534 !important; }
-.badge-blue { color: #1e40af !important; }
-.badge-yellow { color: #854d0e !important; }
-.badge-purple { color: #6b21a8 !important; }
-.badge-gray { color: #374151 !important; }
-
-/* 4. Headings Contrast (Background Highlight) */
-.tree-node h3, 
-.caliph-card h4, 
-.analysis-box h4,
-.timeline-item h3,
-.safir-box h3,
-.item-title {
-    background-color: rgba(255, 255, 255, 0.5) !important; /* Distinct bg */
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.5rem;
-    width: fit-content; /* Only wrap text */
-    margin-bottom: 0.75rem;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-
-/* Ensure Timeline Items text doesn't overlap */
-.timeline-item h3 {
-    margin-bottom: 0.25rem;
-}
-
-/* 1. Force "Exams" Top Button to be White */
-#exams-dropdown-toggle {
-    color: #ffffff !important;
-}
-
-/* 2. Force Dropdown Menu Links to be Black/Dark */
-#exams-dropdown-menu a {
-    color: #1f2937 !important; /* Dark Slate for readability */
-    text-align: right; /* Ensure RTL alignment */
-}
-
-/* Optional: Hover effect for dropdown items */
-#exams-dropdown-menu a:hover {
-    background-color: #f3f4f6; /* Light gray hover */
-    color: #000000 !important;
-}
-    </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Tajawal', 'sans-serif'],
-              serif: ['Tajawal', 'sans-serif'], // Override serif to prevent Amiri fallback
-            },
-          },
-        },
-      }
-    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    
+<style>
+    /* إجبار القوائم المنسدلة والقوائم الفرعية على أخذ الخلفية الخضراء */
+    #navbar-placeholder .dropdown-menu {
+        background-color: #198754 !important; /* نفس درجة الأخضر المستخدمة في القائمة */
+        color: white !important;
+        border: none !important; /* لإزالة الإطار الأبيض إن وجد */
+    }
+
+    /* التأكد من أن روابط القائمة تظهر باللون الأبيض */
+    #navbar-placeholder .dropdown-item {
+        color: white !important;
+    }
+
+    /* تغيير لون الخلفية عند تمرير الماوس (Hover) لتمييز العنصر */
+    #navbar-placeholder .dropdown-item:hover,
+    #navbar-placeholder .dropdown-item:focus {
+        background-color: #157347 !important; /* درجة أخضر أغمق قليلاً */
+        color: white !important;
+    }
+</style>
 </head>
-<body>
-    <div id="navbar-placeholder"></div>
 
+<body class="bio-page">
+    
+    <div class="main-width-container pt-10">
+        
+        <div id="navbar-placeholder"></div>
 
-    <div class="container" style="padding-top: 90px;">
-
-        <header>
-            <h1>تفاصيل عصر الإمامين الهادي والعسكري (ع)</h1>
+        <header class="page-title-card">
+            <h1>الخط الزمني</h1>
         </header>
 
-        <div class="space-y-6">
-
-            <details open class="group">
-                <summary>
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">🌿</span>
-                        <div class="flex flex-col text-right">
-                            <span>الأئمة الأطهار (عليهم السلام)</span>
-                            <span class="text-sm font-normal opacity-75">الملف القيادي والشخصي، التحديات الفكرية، والمعجزات</span>
-                        </div>
-                    </div>
-                    <span>▼</span>
-                </summary>
-                
-                <div class="tree-section">
-                    <div class="tree-node rounded-xl p-6">
-                        <div class="flex flex-col items-start gap-4 mb-6">
-                            <div class="w-full">
-                                <h3 class="text-green-700 dark:text-green-400">1. الإمام علي بن محمد الهادي (ع)</h3>
-                                <span class="badge badge-green">212 هـ - 254 هـ</span>
-                            </div>
-                            
-                            <div class="info-details-box w-full">
-                                <div><strong>الولادة:</strong> ذو الحجة 212هـ (صريا - المدينة)</div>
-                                <div><strong>الشهادة:</strong> 3 رجب 254هـ (سامراء - مسموماً)</div>
-                                <div><strong>الإقامة:</strong> 14 سنة بالمدينة، 20 سنة بسامراء (سر من رأى).</div>
-                            </div>
-                        </div>
-
-                        <div class="grid-responsive">
-                            <div class="analysis-box">
-                                <h4>🎓 التحدي الفكري والعقائدي</h4>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-700 dark:text-green-400">ملف <span class="badge badge-purple">خلق القرآن</span>:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">تصدى الإمام لهذه الفتنة السياسية التي ابتدعها العباسيون. بعث رسالة لأتباعه ببغداد:
-                                        <div class="special-quote">"الجدال في القرآن بدعة... وليس الخالق إلا الله وما سواه مخلوق"</div>
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-700 dark:text-green-400">الجبر والتفويض:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">حسم الجدل برسالته لأهل الأهواز:
-                                        <div class="special-quote">"لا جبر ولا تفويض بل أمر بين أمرين"</div>
-                                        ضرب مثلاً: من أرسل عبداً للسوق ولم يعطه ثمناً ثم عاقبه (جبر)، أو من أهمل العبد بالكامل (تفويض).
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-700 dark:text-green-400">المعلم <span class="badge badge-green">الجنيدي</span>:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">عينه المعتصم (الناصبي) لغرس بغض أهل البيت في الإمام الصبي. النتيجة: تحول <span class="badge badge-green">الجنيدي</span> للولاء قائلاً:
-                                        <div class="special-quote">"والله إنه خير أهل الأرض"</div>
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-700 dark:text-green-400">مناظرات <span class="badge badge-blue">يحيى بن أكثم</span>:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">أفحمه الإمام في مسائل معقدة مثل: (سجود يعقوب كان طاعة لله، آصف بن برخيا، الخنثى، شهادة المرأة، وصلاة الفجر جهرية).</div>
-                                </div>
-                            </div>
-
-                            <div class="analysis-box">
-                                <h4>⚔️ الصراع مع السلطة والمواقف</h4>
-                                <div class="mb-6">
-                                    <div class="item-title text-red-700 dark:text-red-400">الإشخاص (النفي):</div>
-                                    <div class="text-secondary leading-relaxed pr-2">بوشاية <span class="badge badge-red">بريحة العباسي</span> وبريد <span class="badge badge-blue">بطيحة</span>، نقله <span class="badge badge-blue">يحيى بن هرثمة</span> لسامراء (234هـ).</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-red-700 dark:text-red-400">خان الصعاليك:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">أنزله المتوكل فيه أول وصوله إهانةً له قبل نقله لدار مستقلة.</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-red-700 dark:text-red-400">مجلس "باتوا على قلل الأجبال":</div>
-                                    <div class="text-secondary leading-relaxed pr-2">دخل على المتوكل وهو يشرب الخمر، فأنشده القصيدة التي أبكت المتوكل وحطم كأسه، وأمر برفع الشراب.</div>
-                                    <div class="my-4 p-4 bg-gray-50 rounded-lg border border-gray-300 text-center font-bold text-gray-800" style="font-size: 1.2em; line-height: 2;">
-                                        باتوا على قُلَلِ الأجبال تحرسُهُم<br>غُلْبُ الرجالِ فما أغنتهمُ القُللُ<br>
-                                        واستنزلوا بعد عزٍّ من معاقلهم<br>فأودعوا حُفَراً يا بئس ما نزلوا
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-red-700 dark:text-red-400">دعاء المظلوم:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">دعا على المتوكل بعدما أهانه بمشي الرَّجَّالة في يوم قائظ:
-                                        <div class="special-quote">"تمتعوا في داركم ثلاثة أيام"</div>
-                                        قُتل المتوكل بعد 3 أيام.
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-red-700 dark:text-red-400">زينب الكذابة:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">ادعت أنها زينب بنت علي، فأمر الإمام بإنزالها "بركة السباع" لأن لحم ولد فاطمة محرم على السباع، فخافت واعترفت.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tree-node rounded-xl p-6 mt-6">
-                        <div class="flex flex-col items-start gap-4 mb-6">
-                            <div class="w-full">
-                                <h3 class="text-green-700 dark:text-green-400">2. الإمام الحسن بن علي العسكري (ع)</h3>
-                                <span class="badge badge-green">232 هـ - 260 هـ</span>
-                            </div>
-                            <div class="info-details-box w-full">
-                                <div><strong>الولادة:</strong> ربيع الآخر 232هـ (المدينة).</div>
-                                <div><strong>الشهادة:</strong> 8 ربيع الأول 260هـ (سامراء - مسموماً).</div>
-                                <div><strong>المدة:</strong> 6 سنوات (أقصر مدة إمامة في أصعب ظرف).</div>
-                            </div>
-                        </div>
-
-                        <div class="grid-responsive">
-                            <div class="analysis-box"> 
-                                <h4>🛡️ حماية العقيدة ومواجهة الفرق</h4>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-800 dark:text-green-400">إسقاط فيلسوف العراق (<span class="badge badge-blue">الكندي</span>):</div>
-                                    <div class="text-secondary leading-relaxed pr-2">كان يؤلف كتاب <span class="badge badge-purple">تناقض القرآن</span>. أرسل له الإمام تلميذاً بسؤال:
-                                        <div class="special-quote">"لعل الله أراد غير ما فهمت؟"</div>
-                                        فتاب <span class="badge badge-blue">الكندي</span> وأحرق كتابه.
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-800 dark:text-green-400">فتنة الراهب والمطر:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">راهب مسيحي استسقى فنزل المطر، فارتد الناس. كشف الإمام أنه يمسك "عظماً من عظام الأنبياء" (ما كشف نبي عظم نبي إلا وهطلت السماء).</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-800 dark:text-green-400">التصدي للغلاة (المفوضة):</div>
-                                    <div class="text-secondary leading-relaxed pr-2">لعن <span class="badge badge-red">علي بن حسكة</span> و<span class="badge badge-red">القاسم اليقطيني</span> و<span class="badge badge-red">فارس بن حاتم</span>، وأمر بقتلهم لتحريفهم الدين وقولهم بألوهية الأئمة أو تفويض الخلق لهم.</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-800 dark:text-green-400">الرد على الثنوية:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">أشار لواحد منهم بإصبعه:
-                                        <div class="special-quote">"أحد أحد"</div>
-                                        فسقط مغشياً عليه.
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-green-800 dark:text-green-400">الصوفية:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">حذر منهم ومن علمائهم الذين يميلون للفلسفة ويضلون الشيعة.</div>
-                                </div>
-                            </div>
-
-                            <div class="analysis-box">
-                                <h4>⛓️ التنظيم السري والسجون</h4>
-                                <div class="mb-6">
-                                    <div class="item-title text-purple-700 dark:text-purple-400">نظام الوكلاء (التمهيد):</div>
-                                    <div class="text-secondary leading-relaxed pr-2">استخدم "الخشبة" (رجل باب مدورة) محشوة بالرسائل لنقل التوجيهات بسرية تامة عبر الوكيل "عثمان بن سعيد".</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-purple-700 dark:text-purple-400">السجون:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">سُجن عند <span class="badge badge-red">صالح بن وصيف</span>، و<span class="badge badge-red">نحرير</span> (الذي رماه للأسود والسباع فخضعت له ولم تأكله)، وسجن <span class="badge badge-red">علي بن جرين</span>.</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-purple-700 dark:text-purple-400">سياسة الكتمان:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">أمر شيعته:
-                                        <div class="special-quote">"لا يسلمن عليّ أحد منكم ولا يشير إليّ بيده فإنكم لا تأمنون على أنفسكم"</div>
-                                    </div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title text-purple-700 dark:text-purple-400">التربية الروحية:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">
-                                        <div class="special-quote">"ليست العبادة كثرة الصيام والصلاة، إنما العبادة كثرة التفكر في أمر الله"</div>
-                                        "لا تمارِ فيذهب بهاؤك".
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tree-node rounded-xl p-6 mt-6">
-                        <div class="mb-6">
-                            <h3 class="text-green-700 dark:text-green-400 mb-4">3. الإمام محمد بن الحسن المهدي (عج)</h3>
-                            <span class="badge badge-blue mb-4">ولد 15 شعبان 255هـ - حي يرزق</span>
-                        </div>
-                        
-                        <div class="grid-responsive">
-                            <div class="analysis-box">
-                                <h4 class="font-bold">👶 الولادة والإعداد</h4>
-                                <div class="mb-6">
-                                    <div class="item-title">السرية:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">"الخلف من سوسن". بشّر الإمام العسكري عمته حكيمة بولادته ليلة النصف من شعبان.</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title">عرضه على الخواص:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">بعد 3 أيام من ولادته، عرضه على أصحابه.</div>
-                                </div>
-                                <div class="mb-6">
-                                    <div class="item-title">وفد الأربعين:</div>
-                                    <div class="text-secondary leading-relaxed pr-2">أهم حدث تمهيدي؛ جمع الإمام العسكري 40 من وجهاء الشيعة (بينهم محمد بن عثمان وعثمان بن سعيد) وأراهم الإمام المهدي وقال:
-                                        <div class="special-quote">"هذا إمامكم من بعدي... ولن تروه بعد يومكم هذا"</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="analysis-box">
-                                <h4 class="font-bold">⚡ الظهور الأول (يوم الوفاة)</h4>
-                                <p>عند الصلاة على جثمان الإمام العسكري، تقدم عمه <span class="badge badge-red">جعفر الكذاب</span> للصلاة، فخرج صبي (المهدي) وجذب رداء عمه وقال:</p>
-                                <div class="special-quote">"تأخر يا عم، أنا أحق بالصلاة على أبي"</div>
-                                <p>فصلى عليه وغاب، لتبدأ الغيبة الصغرى.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </details>
-
-            <details open class="group">
-                <summary>
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">💎</span>
-                        <div class="flex flex-col text-right">
-                            <span>الجهاز الإداري: السفراء، الوكلاء، والفقهاء</span>
-                            <span class="text-sm font-normal opacity-75">النيابة الخاصة والتمهيد للمرجعية</span>
-                        </div>
-                    </div>
-                    <span>▼</span>
-                </summary>
-
-                <div class="tree-section">
-                    <div class="safir-box">
-                        <h3 class="text-center border-b border-yellow-500 pb-4 mb-6">⭐ السفراء الأربعة (الغيبة الصغرى)</h3>
-                        
-                        <div class="grid-responsive">
-                            <div class="caliph-card">
-                                <div class="flex items-center mb-2">
-                                    <span class="safir-number">1</span>
-                                    <h4 class="mr-2">عثمان بن سعيد العمري</h4>
-                                </div>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><strong>اللقب:</strong> <span class="badge badge-green">السمان</span> (يتاجر بالسمن لنقل الأموال والرسائل داخله).</li>
-                                    <li><strong>الموثوقية:</strong> قال الإمام الهادي:
-                                        <div class="special-quote">"العمري وابنه ثقتان، فما أديا إليك فعني يؤديان"</div>
-                                    </li>
-                                    <li><strong>الدور:</strong> حلقة الوصل المباشرة في أحلك الظروف الأمنية.</li>
-                                </ul>
-                            </div>
-
-                            <div class="caliph-card">
-                                <div class="flex items-center mb-2">
-                                    <span class="safir-number">2</span>
-                                    <h4 class="mr-2">محمد بن عثمان العمري</h4>
-                                </div>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><strong>النص عليه:</strong> نص عليه العسكري في حياته وأيضاً والده.</li>
-                                    <li><strong>المدة:</strong> تولى السفارة قرابة 40 سنة.</li>
-                                    <li><strong>الإنجاز:</strong> عزز نظام الوكلاء وكتب كتباً في الفقه.</li>
-                                </ul>
-                            </div>
-
-                            <div class="caliph-card">
-                                <div class="flex items-center mb-2">
-                                    <span class="safir-number">3</span>
-                                    <h4 class="mr-2">الحسين بن روح النوبختي</h4>
-                                </div>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><strong>الحكمة:</strong> عُرف بالتقية الشديدة وحسن التعامل حتى مع الخصوم.</li>
-                                    <li><strong>الخلفية:</strong> من أسرة آل نوبخت الفارسية ذات النفوذ السياسي والعلمي.</li>
-                                </ul>
-                            </div>
-
-                            <div class="caliph-card">
-                                <div class="flex items-center mb-2">
-                                    <span class="safir-number">4</span>
-                                    <h4 class="mr-2">علي بن محمد السمري</h4>
-                                </div>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><strong>المدة:</strong> 3 سنوات (326هـ - 329هـ).</li>
-                                    <li><strong>النهاية:</strong> وفاته مثلت بداية "الغيبة الكبرى".</li>
-                                    <li><strong>التوقيع الأخير:</strong>
-                                        <div class="special-quote">"أجمع أمرك ولا توصِ إلى أحد... فقد وقعت الغيبة التامة"</div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="analysis-box p-6 mt-6">
-                        <div class="flex justify-between items-center border-b border-color pb-2 mb-4">
-                            <h4 class="font-bold text-lg">📜 مدرسة الفقهاء والوكلاء (التمهيد للمرجعية)</h4>
-                            <span class="badge badge-purple">البناء المؤسسي</span>
-                        </div>
-                        <p class="mb-3">أسس الإمام العسكري مبدأ الرجوع للفقهاء:</p>
-                        <div class="special-quote">"فأما من كان من الفقهاء صائناً لنفسه، حافظاً لدينه... فللعوام أن يقلدوه"</div>
-                        
-                        <div class="grid-responsive">
-                            <div>
-                                <strong class="text-blue-600 block mb-1">الوكلاء الميدانيون:</strong>
-                                <strong>داود بن الأسود</strong> (اللوجستي، حامل الخشبة)، <strong>خيران الخادم</strong> (الرسول للمدينة)، <strong>إبراهيم بن عبدة</strong> (وكيل نيسابور).
-                            </div>
-                            <div>
-                                <strong class="text-green-600 block mb-1">الفقهاء والمؤلفون:</strong>
-                                <strong>محمد بن الحسن الصفار</strong> (ألف 40 كتاباً، ت 290هـ)، <strong>علي بن بابويه القمي</strong> (الصدوق الأول، راسله الإمام وأوصاه)، <strong>أحمد بن إسحاق الأشعري</strong> (وكيل قم).
-                            </div>
-                        </div>
-                        <div class="mt-6 pt-4 border-t-2 border-dashed border-gray-300 text-center">
-                            <span class="inline-block bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full font-bold text-lg border border-indigo-200">
-                                📊 إحصائيات الرواة: (182) راوياً عن الهادي ، و (213) راوياً عن العسكري
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </details>
-
-            <details open class="group">
-                <summary>
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">👑</span>
-                        <div class="flex flex-col text-right">
-                            <span>سلاطين القهر: الخلفاء العباسيين</span>
-                            <span class="text-sm font-normal opacity-75">من المعتصم إلى المعتمد (فترة نفوذ الأتراك)</span>
-                        </div>
-                    </div>
-                    <span>▼</span>
-                </summary>
-
-                <div class="tree-section grid-responsive">
-                    
-                    <div class="caliph-card">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">1. المعتصم بالله</h3>
-                            <span class="badge badge-red">ت 227هـ</span>
-                        </div>
-                        <span class="caliph-full-name">مُحمَّد بن هارون الرَّشيد</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title">مع الإمام:</div>
-                                <div class="text-secondary leading-relaxed pr-2">عين <span class="badge badge-green">الجنيدي</span> لاحتواء الهادي صبياً.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title">الجيش:</div>
-                                <div class="text-secondary leading-relaxed pr-2">أدخل الأتراك (المغاربة والفراعنة) بدايةً، مما أدى لضعف الدولة لاحقاً.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="caliph-card">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">2. الواثق بالله</h3>
-                            <span class="badge badge-red">ت 232هـ</span>
-                        </div>
-                        <span class="caliph-full-name">هارون بن المعتصم</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title">فتنة القرآن:</div>
-                                <div class="text-secondary leading-relaxed pr-2">تشدد في <span class="badge badge-purple">خلق القرآن</span>. قتل <span class="badge badge-green">أحمد بن نصر الخزاعي</span> بيده وصلب رأسه ببغداد.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title">الأسرى:</div>
-                                <div class="text-secondary leading-relaxed pr-2">أطلق 1600 أسير بشرط القول ب<span class="badge badge-purple">خلق القرآن</span>.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="caliph-card border-l-4 border-l-red-600">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">3. المتوكل على الله</h3>
-                            <span class="badge badge-red">الطاغية</span>
-                        </div>
-                        <span class="caliph-full-name">جعفر بن المعتصم</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">العداء:</div>
-                                <div class="text-secondary leading-relaxed pr-2">هدم قبر الحسين (ع) وحرثه. فرض الحصار الاقتصادي (العلويات يصلين بثوب واحد).</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">🏚️ بذخ القصور:</div>
-                                <div class="text-secondary leading-relaxed pr-2">
-                                    أنفق الملايين على بناء قصور الملاهي: (الجعفري، البرج، المليح، الشبندار، المختار، الغرو، بركوار).
-                                </div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">الإجراء:</div>
-                                <div class="text-secondary leading-relaxed pr-2">أشخص الهادي لسامراء (234هـ).</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">النهاية:</div>
-                                <div class="text-secondary leading-relaxed pr-2">قتله ابنه "المنتصر" والأتراك (<span class="badge badge-red">باغر</span>) وهو سكران، وقطّعوه إرباً.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">موقف الإمام:</div>
-                                <div class="text-secondary leading-relaxed pr-2">سدد الإمام 4000 دينار لرجل كوفي من مال المتوكل (كرامة).</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="caliph-card border-l-4 border-l-green-600">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">4. المنتصر بالله</h3>
-                            <span class="badge badge-green">الانفراجة</span>
-                        </div>
-                        <span class="caliph-full-name">مُحمَّد بن المتوكل</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title text-green-700 dark:text-green-400">السياسة:</div>
-                                <div class="text-secondary leading-relaxed pr-2">خالف أبيه، رد فدك، أحسن للعلويين، أزال الخوف عنهم.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-green-700 dark:text-green-400">النهاية:</div>
-                                <div class="text-secondary leading-relaxed pr-2">قتله الأتراك (<span class="badge badge-red">ابن طيفور</span>) عبر فصده <strong>بريشة مسمومة</strong>.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="caliph-card">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">5. المستعين بالله</h3>
-                            <span class="badge badge-red">ت 252هـ</span>
-                        </div>
-                        <span class="caliph-full-name">أحمد بن المعتصم</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title">الوضع:</div>
-                                <div class="text-secondary leading-relaxed pr-2">"خليفة في قفص بين وصيف وبغا".</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title">النهاية:</div>
-                                <div class="text-secondary leading-relaxed pr-2">خلع ثم ذبح بمدينة واسط.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="caliph-card border-l-4 border-l-gray-600">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">6. المعتز بالله</h3>
-                            <span class="badge badge-red">قاتل الهادي</span>
-                        </div>
-                        <span class="caliph-full-name">الزبير بن المتوكل</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title">الجريمة:</div>
-                                <div class="text-secondary leading-relaxed pr-2">استشهاد الإمام الهادي (ع) في عهده. حاول ترحيل العسكري للكوفة.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title">تنبؤ الإمام:</div>
-                                <div class="text-secondary leading-relaxed pr-2">قال العسكري: "بعد ثلاث يأتيكم الفرج"، فخلع المعتز وقتل بعد 3 أيام.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title">النهاية:</div>
-                                <div class="text-secondary leading-relaxed pr-2">قتله الأتراك عطشاً (منعوه الماء وسقوه ثلجاً) لأنه عجز عن دفع رواتبهم. وهو <strong>أول خليفة في التاريخ يموت عطشاً</strong>.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="caliph-card border-l-4 border-l-yellow-600">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">7. المهتدي بالله</h3>
-                            <span class="badge badge-yellow">المخادع</span>
-                        </div>
-                        <span class="caliph-full-name">مُحمَّد بن الواثق</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title text-yellow-700 dark:text-yellow-400">الاستراتيجية:</div>
-                                <div class="text-secondary leading-relaxed pr-2">تظاهر بالزهد (مثل عمر بن عبدالعزيز) للإضرار بمكانة الإمام.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-yellow-700 dark:text-yellow-400">التهديد:</div>
-                                <div class="text-secondary leading-relaxed pr-2">"لأخلينهم عن جديد الأرض" (يقصد أهل البيت).</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-yellow-700 dark:text-yellow-400">النهاية:</div>
-                                <div class="text-secondary leading-relaxed pr-2">قتله الأتراك "عصراً" (عصروا خصيتيه حتى مات).</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="caliph-card border-l-4 border-l-red-600">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-lg">8. المعتمد على الله</h3>
-                            <span class="badge badge-red">قاتل العسكري</span>
-                        </div>
-                        <span class="caliph-full-name">أحمد بن المتوكل</span>
-                        <div class="space-y-4 mt-4">
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">الجريمة:</div>
-                                <div class="text-secondary leading-relaxed pr-2">دس السم للإمام العسكري (260هـ).</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">بركة السباع:</div>
-                                <div class="text-secondary leading-relaxed pr-2">أمر برمي الإمام للأسود، فلم تأكله، فاعتذر للإمام وطلب الدعاء.</div>
-                            </div>
-                            <div class="mb-6">
-                                <div class="item-title text-red-700 dark:text-red-400">التغطية:</div>
-                                <div class="text-secondary leading-relaxed pr-2">أرسل أطباء وقضاة ليشهدوا وفاة الإمام طبيعياً.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </details>
-
-            <details open class="group">
-                <summary>
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">🔥</span>
-                        <div class="flex flex-col text-right">
-                            <span>الثورات والاضطرابات</span>
-                            <span class="text-sm font-normal opacity-75">الزنج، العلويون، والخوارج</span>
-                        </div>
-                    </div>
-                    <span>▼</span>
-                </summary>
-
-                <div class="tree-section">
-                    <div class="analysis-box border-r-4 border-orange-500">
-                        <h3 class="font-bold text-xl mb-2">1. ثورة الزنج (255-270هـ)</h3>
-                        <p><strong>القائد:</strong> علي بن محمد (<span class="badge badge-red">صاحب الزنج</span>). ادعى النسب العلوي.</p>
-                        <p><strong>موقف الإمام العسكري:</strong> صرح بوضوح:</p>
-                        <div class="special-quote">"<span class="badge badge-red">صاحب الزنج</span> ليس منا أهل البيت"</div>
-                        <p class="text-xs mt-1">(براءة من أفعالهم الدموية والنهب).</p>
-                        <p class="mt-2"><strong>النطاق:</strong> البصرة والأهواز. استمرت 14 سنة من الخراب.</p>
-                    </div>
-
-                    <div class="grid-responsive mt-4">
-                        <div class="caliph-card">
-                            <div class="item-title">2. حركة ابن الصوفي (مصر)</div>
-                            <ul class="list-disc list-inside mt-2 text-secondary">
-                                <li><strong>القائد:</strong> إبراهيم بن محمد (من ولد عمر بن علي).</li>
-                                <li><strong>الخصم:</strong> أحمد بن طولون.</li>
-                                <li><strong>النتيجة:</strong> سيطر على "إسنا" ثم هزم وقبض عليه (259هـ).</li>
-                            </ul>
-                        </div>
-    
-                        <div class="caliph-card">
-                            <div class="item-title">3. ثورة يحيى بن عمر (الكوفة)</div>
-                            <ul class="list-disc list-inside mt-2 text-secondary">
-                                <li><strong>النسب:</strong> من أحفاد زيد بن علي.</li>
-                                <li><strong>الشعار:</strong> "الرضا من آل محمد".</li>
-                                <li><strong>النتيجة:</strong> قتل، وكان عادلاً محبوباً.</li>
-                            </ul>
-                        </div>
-    
-                        <div class="caliph-card">
-                            <div class="item-title">4. ثورة علي بن زيد (256هـ)</div>
-                            <ul class="list-disc list-inside mt-2 text-secondary">
-                                <li><strong>المكان:</strong> الكوفة.</li>
-                                <li><strong>النتيجة:</strong> هزم جيش "مكيال" ثم هزمه "كيجور التركي" في القادسية.</li>
-                            </ul>
-                        </div>
-                        <div class="caliph-card">
-                            <div class="item-title">5. وثبات واضطرابات متفرقة</div>
-                            <ul class="list-disc list-inside mt-2 text-secondary text-base">
-                                <li><strong>الأردن:</strong> ثورة رجل من لخم.</li>
-                                <li><strong>حمص:</strong> وثبة الأهالي بالعامل (<span class="badge badge-blue">كيدر الأشروسني</span>).</li>
-                                <li><strong>فارس:</strong> وثبة الجند ضد (<span class="badge badge-blue">الحسين بن خالد</span>).</li>
-                                <li><strong>سامراء:</strong> شغب الجند وقتل القائد (<span class="badge badge-red">لاوتاش</span>).</li>
-                                <li><strong>المدينة:</strong> حركة <span class="badge badge-green">إسماعيل بن يوسف</span>.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </details>
-
-            <details open class="group">
-                <summary>
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">📅</span>
-                        <div class="flex flex-col text-right">
-                            <span>السجل الزمني الدقيق وشامل</span>
-                            <span class="text-sm font-normal opacity-75">من ولادة الهادي (ع) إلى الغيبة الكبرى</span>
-                        </div>
-                    </div>
-                    <span>▼</span>
-                </summary>
-
-                <div class="tree-section pt-4">
-                    
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #22c55e;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #22c55e;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">ولادة النور</h3>
-                                <span class="badge badge-green">212 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">ولادة الإمام علي بن محمد الهادي (عليه السلام) في شهر ذي الحجة في صريا بالمدينة المنورة.</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #22c55e;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #22c55e;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">بداية الإمامة المبكرة</h3>
-                                <span class="badge badge-green">220 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>استشهاد الإمام محمد الجواد (عليه السلام) مسموماً بأمر المعتصم العباسي.</li>
-                                <li>تولي الإمام علي الهادي (عليه السلام) الإمامة وهو في الثامنة من عمره (الإمامة المبكرة الثانية في مدرسة أهل البيت).</li>
-                                <li>تعيين المعتصم لل<span class="badge badge-green">الجنيدي</span> الناصبي معلماً للإمام الهادي لتغذيته بعداوة أهل البيت، لكن <span class="badge badge-green">الجنيدي</span> انبهر بعلم الإمام وآمن بإمامته.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #6b7280;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #6b7280;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">هلاك المعتصم</h3>
-                                <span class="badge" style="color: #374151; border-color: #374151;">227 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">نهاية حكم المعتصم العباسي بعد 8 سنوات من الحكم (218-227 هـ).</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #a855f7;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #a855f7;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">تصعيد فتنة <span class="badge badge-purple">خلق القرآن</span></h3>
-                                <span class="badge badge-purple">231 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>قتل الواثق ل<span class="badge badge-green">أحمد بن نصر الخزاعي</span> بعد استفتاء فقهاء المعتزلة وصلب رأسه في بغداد وجثته في سامراء ست سنوات.</li>
-                                <li>إطلاق سراح 1600 أسير من الروم بشرط الإقرار ب<span class="badge badge-purple">خلق القرآن</span>.</li>
-                                <li>حبس أبي يعقوب بن يوسف البوطي (صاحب الشافعي) لرفضه القول ب<span class="badge badge-purple">خلق القرآن</span>.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #3b82f6;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #3b82f6;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">أحداث مفصلية كبرى</h3>
-                                <span class="badge badge-blue">232 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li><strong>ولادة الإمام الحسن العسكري (عليه السلام)</strong> في المدينة المنورة.</li>
-                                <li>هلاك الواثق العباسي (الذي امتحن الناس ب<span class="badge badge-purple">خلق القرآن</span>) بعد 5 سنوات و9 أشهر من الحكم.</li>
-                                <li>تولي المتوكل الخلافة (بداية العصر الأشد قسوة على الشيعة وآل البيت).</li>
-                                <li>إخبار الإمام الهادي (عليه السلام) خيران الخادم بوفاة الواثق وتولي المتوكل ومقتل ابن ال<span class="badge badge-green">زيات</span> قبل إعلانها.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #dc2626;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #dc2626;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">حادثة الإشخاص القسري</h3>
-                                <span class="badge badge-red">234 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>إشخاص الإمام الهادي (عليه السلام) مع عائلته (ومنهم الإمام العسكري البالغ عامين) من المدينة المنورة إلى سامراء بأمر المتوكل.</li>
-                                <li>وضعهم تحت المراقبة المشددة والمستمرة بسبب وشاية <span class="badge badge-red">بريحة العباسي</span> وخوف المتوكل من تأثير الإمام وكثرة أتباعه.</li>
-                                <li>نزول الإمام في خان الصعاليك عند وصوله سامراء.</li>
-                                <li>إقامة الإمام في سامراء 20 سنة حتى استشهاده.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">فترة الحروب والاضطرابات الكبرى</h3>
-                                <span class="badge" style="color: #c2410c; border-color: #c2410c;">238-253 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">سلسلة من الحروب الدامية والنهب في مختلف أنحاء الدولة العباسية بسبب ضعف السلطة المركزية.</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #eab308;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #eab308;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">رسالة الإشخاص الدعائية</h3>
-                                <span class="badge badge-yellow">243 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">إرسال المتوكل رسالة رسمية للإمام الهادي عبر <span class="badge badge-blue">يحيى بن هرثمة</span> يظهر فيها احترامه ويدعوه للقدوم إلى سامراء (كانت دعائية لكسب العامة وإخفاء النوايا الحقيقية).</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #4b5563;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #4b5563;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">نهاية الطاغية المتوكل</h3>
-                                <span class="badge" style="color: #1f2937; border-color: #1f2937;">247 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>مقتل المتوكل العباسي ووزيره الفتح بن خاقان على يد الأتراك (بقيادة <span class="badge badge-red">باغر</span> التركي) وابنه المنتصر ليلة الأربعاء 4 شوال، وقُطِّعا إرباً إرباً.</li>
-                                <li>وقع ذلك بعد ثلاثة أيام من دعاء الإمام الهادي (عليه السلام) عليه بدعاء المظلوم استجابة لظلمه الشديد.</li>
-                                <li>تولي المنتصر الخلافة وإحسانه للعلويين ورد فدك إليهم ورفع المحنة عنهم.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #9ca3af;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #9ca3af;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">تقلبات الخلافة السريعة</h3>
-                                <span class="badge" style="color: #374151; border-color: #374151;">248 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>وفاة المنتصر مسموماً (بتدبير الأتراك) بعد 6 أشهر فقط من الحكم لأنه كان يسبهم.</li>
-                                <li>تولي المستعين بن المعتصم الخلافة وكان ضعيفاً أمام الأتراك (وصيف وبغا).</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #dc2626;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #dc2626;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">سيطرة الأتراك الكاملة</h3>
-                                <span class="badge badge-red">252 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>خلع المعتز لأخيه المستعين وقتله (ذبحه <span class="badge badge-red">سعيد الحاجب</span> في 3 شوال وعمره 31 سنة) بعد نفيه لواسط.</li>
-                                <li>تولي المعتز (أحمد بن المتوكل) الخلافة (الذي شدد لاحقاً على الإمام الهادي).</li>
-                                <li>قتل المعتز لأخيه المؤيد (خلعه من ولاية العهد وضربه حتى مات في رجب).</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #16a34a;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #16a34a;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">استشهاد الإمام الهادي (عليه السلام)</h3>
-                                <span class="badge badge-green">254 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>استشهاد الإمام علي الهادي مسموماً يوم الإثنين في 3 رجب في سامراء على يد المعتز العباسي بعمر 40 سنة.</li>
-                                <li>بداية إمامة الإمام الحسن العسكري (عليه السلام) وهو في الـ22 من عمره بعد أن أوصى له والده قبل وفاته بـ 4 أشهر.</li>
-                                <li>صلى الإمام العسكري على والده (وهذه علامة الإمامة).</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #3b82f6;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #3b82f6;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">ولادة الأمل وتغيرات سياسية عاصفة</h3>
-                                <span class="badge badge-blue">255 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li><strong>ولادة الإمام محمد المهدي (عج)</strong> سراً في منتصف شعبان وعرضه على الخواص بعد 3 أيام.</li>
-                                <li>خلع المعتز وقتله عطشاً على يد الأتراك في شعبان (مُنع من الماء في الحمام حتى مات)، وكان أول من مات عطشاً بهذه الطريقة (تحقق تنبؤ الإمام العسكري بموته بعد 3 أيام).</li>
-                                <li>تولي المهتدي بن الواثق الخلافة (حاول التصنع بالزهد).</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">عام الاضطرابات الكبرى</h3>
-                                <span class="badge" style="color: #c2410c; border-color: #c2410c;">256 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>مقتل المهتدي على يد الأتراك (عُصر على خصيتيه فمات) بعد تهديده للإمام العسكري، وتحقق تنبؤ الإمام بمقتله.</li>
-                                <li>تولي المعتمد بن المتوكل الخلافة (الذي استشهد الإمام العسكري في عهده).</li>
-                                <li>اندلاع ثورة الزنج الكبرى بالبصرة (تبرأ منها الإمام العسكري).</li>
-                                <li>ثورة علي بن زيد العلوي في الكوفة وسجن الإمام العسكري عند <span class="badge badge-red">صالح بن وصيف</span>.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #9ca3af;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #9ca3af;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">حركة ابن الصوفي</h3>
-                                <span class="badge" style="color: #374151; border-color: #374151;">259 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">هزيمة إبراهيم بن محمد (ابن الصوفي) العلوي في صعيد مصر والقبض عليه وإرساله لابن طولون.</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #dc2626;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #dc2626;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">استشهاد الإمام العسكري وبداية الغيبة</h3>
-                                <span class="badge badge-red">260 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>استشهاد الإمام الحسن العسكري (عليه السلام) مسموماً يوم الجمعة 8 ربيع الأول على يد المعتمد العباسي بعمر 28 سنة.</li>
-                                <li>مدة إمامته 6 سنوات فقط (أقصر إمامة في تاريخ أهل البيت).</li>
-                                <li>ظهور الإمام المهدي (عج) صبياً للصلاة على أبيه ومنع عمه جعفر.</li>
-                                <li>بداية <strong>الغيبة الصغرى</strong> وتولي السفير الأول: عثمان بن سعيد العَمْري.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">اضطرابات ما وراء النهر</h3>
-                                <span class="badge" style="color: #c2410c; border-color: #c2410c;">261-279 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">سلسلة من الاضطرابات والفتن في منطقة ما وراء النهر استمرت 18 عاماً.</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #f97316;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #f97316;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">اضطرابات إضافية</h3>
-                                <span class="badge" style="color: #c2410c; border-color: #c2410c;">265 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">موجة أخرى من الاضطرابات في مناطق مختلفة من الدولة العباسية.</p>
-                        </div>
-                    </div>
-
-                    <div class="relative flex items-start gap-4 mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #6b7280; border-color: rgb(170, 187, 165);"></div>
-                        <div class="flex-1 rounded-lg p-4 shadow-sm relative border-r-4 content-card-light" style="border-right-color: #6b7280;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">نهاية حقبة</h3>
-                                <span class="badge" style="color: #1f2937; border-color: #1f2937;">270 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">القضاء النهائي على ثورة الزنج بعد 14 سنة من القتال والدمار، وهلاك المعتمد العباسي.</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #a855f7;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #a855f7;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">وفاة عالم كبير</h3>
-                                <span class="badge badge-purple">290 هـ</span>
-                            </div>
-                            <p style="color: var(--text-secondary);">وفاة محمد بن الحسن بن فروخ الصفار (صاحب كتاب بصائر الدرجات)، من أبرز أصحاب الإمام العسكري ورواة حديثه.</p>
-                        </div>
-                    </div>
-
-                    <div class="relative block mb-6 timeline-item">
-                        <div class="absolute -right-[2.45rem] top-4 w-4 h-4 rounded-full border-2 z-10" style="background-color: #000;"></div>
-                        <div class="p-4 relative border-r-4" style="border-right-color: #000;">
-                            <div class="flex justify-between items-center mb-2">
-                                <h3 class="font-bold text-lg">بداية الغيبة الكبرى</h3>
-                                <span class="badge" style="color: #000; border-color: #000;">329 هـ</span>
-                            </div>
-                            <ul class="list-disc list-inside space-y-1" style="color: var(--text-secondary);">
-                                <li>وفاة السفير الرابع علي بن محمد السمري وانتهاء الغيبة الصغرى (69 سنة).</li>
-                                <li>بداية الغيبة الكبرى وبداية مرحلة الاجتهاد والتقليد والرجوع للفقهاء العدول.</li>
-                                <li>السفراء الأربعة هم: عثمان بن سعيد، محمد بن عثمان، الحسين بن روح، علي بن محمد السمري.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="grid-responsive mt-8">
-                        <div class="analysis-box" style="border-right-color: #eab308;">
-                            <h4 class="font-bold text-lg mb-3">📝 ملاحظات مهمة</h4>
-                            <ul class="list-disc list-inside space-y-2" style="color: var(--text-secondary);">
-                                <li><strong>مدة إمامة الهادي (ع):</strong> 34 سنة (220-254 هـ).</li>
-                                <li><strong>مدة إمامة العسكري (ع):</strong> 6 سنوات (254-260 هـ) - الأقصر.</li>
-                                <li><strong>مدة الغيبة الصغرى:</strong> 69 سنة (260-329 هـ).</li>
-                                <li>عدد الخلفاء العباسيين في عهد الإمام الهادي: 6 خلفاء.</li>
-                                <li>عدد الخلفاء العباسيين في عهد الإمام العسكري: 3 خلفاء.</li>
-                            </ul>
-                        </div>
-
-                        <div class="analysis-box" style="border-right-color: #ef4444;">
-                            <h4 class="font-bold text-lg mb-3">⚙️ خصائص العصر العباسي الثاني (232-329 هـ)</h4>
-                            <ul class="list-disc list-inside space-y-2" style="color: var(--text-secondary);">
-                                <li>سيطرة <strong>الأتراك</strong> الكاملة وتحول الخلفاء لدمى بيدهم.</li>
-                                <li>كثرة خلع وقتل الخلفاء (المتوكل، المنتصر، المستعين، المعتز، المهتدي).</li>
-                                <li>انتشار اللهو والمجون واضطهاد شديد للعلويين.</li>
-                                <li>بداية ظهور الدويلات المستقلة (الطولونية، الصفارية، السامانية).</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </details>
-
-        </div>
-
+        <div id="bio-events-container" class="row gx-0 gy-4"></div>
     </div>
 
-<script src="../js/nav-loader.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4"></script>
+
+    <script src="../data/data_bio-events.js"></script>
+    <script src="../js/script_bio-events.js"></script>
+    
+<script src="../js/nav-loader.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
     loadNavbar({ 
-      pageType: 'sub',
-      showTools: false
+        pageType: 'subpage',
+        showTools: false  // ❌ لإخفاء الأدوات
     });
-  });
 </script>
 </body>
 </html>

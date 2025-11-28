@@ -9,7 +9,7 @@
     <title>النـص</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -3214,17 +3214,19 @@
     </div>
  </div> 
 
-<script src="../js/nav-loader.js"></script>
+
 <script src="../js/script_source-text.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    loadNavbar({ 
-      pageType: 'sub',
-      showTools: false
-    });
-  });
-</script>
-  </body>
+	<script src="../js/nav-loader.js"></script>
+    <script src="../js/page-init.js"></script> <script>
+        // Initialize the Navbar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNavbar({ 
+                pageType: 'sub',
+                showTools: true // Make sure this is true to see the gear icon
+            });
+        });
+    </script>
+</body>
 </html>
 
 
