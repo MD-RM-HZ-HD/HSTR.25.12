@@ -3,24 +3,18 @@ const totalQuestions = quizData.length;
 const questionsPerPage = 1;
 let currentPage = 1;
 const totalPages = Math.ceil(totalQuestions / questionsPerPage);
-let score = 0; // سيصبح عداداً للأسئلة المراجعة
+let score = 0; // يمثل الصفحة الحالية في وضع المراجعة
 
-// عناصر DOM
+// ❌ تم حذف تعريفات العناصر الثابتة (progressFill etc) لأنها ستكون ديناميكية
 const quizPages = document.getElementById('quiz-container');
-const progressFill = document.getElementById('progress-fill');
-const progressText = document.getElementById('progress-text');
-const scoreDisplay = document.getElementById('score-display'); 
-const questionCounter = document.getElementById('question-counter');
 const nextQuestionBtn = document.getElementById('next-question-btn');
 
-// 2. ⭐️⭐️ دالة بناء هيكل السؤال (معدلة لوضع المراجعة) ⭐️⭐️
+// 2. دالة بناء هيكل السؤال (كما هي)
 function buildQuestionHTML(q, displayNumber) {
     let inputsA = '';
     let inputsB = '';
 
-    // إنشاء حقول الإدخال بناءً على المعايير
     q.criteria.forEach((criterion, index) => {
-        // تم إضافة data-label="${criterion.label}"
         inputsA += `
             <textarea id="blank-input-${q.id}-A-${index}" 
                    placeholder="اكتب (${criterion.label}) هنا..."
@@ -30,7 +24,6 @@ function buildQuestionHTML(q, displayNumber) {
                    data-label="${criterion.label}"
                    data-index="${index}" data-side="A" disabled></textarea>
         `;
-        // تم إضافة data-label="${criterion.label}"
         inputsB += `
             <textarea id="blank-input-${q.id}-B-${index}" 
                    placeholder="اكتب (${criterion.label}) هنا..."
@@ -42,32 +35,24 @@ function buildQuestionHTML(q, displayNumber) {
         `;
     });
 
-    // بناء البطاقة الكاملة
     return `
         <div class="question-card fill-blank container-main" id="q-card-${q.id}" style="padding: 1rem 1.5rem 1.5rem;">
-            
             <div class="flex justify-between items-center mb-4">
-                
                 <div class="q-tag">
                     <span class="q-tag-word">السؤال</span>
                     <span class="q-tag-number">${displayNumber}</span>
                 </div>
-                
                 <h2 class="question-title-highlight text-lg md:text-xl font-bold text-right" style="color: var(--text); flex-grow: 1; margin: 0 1rem; line-height: 1.6;">
                     ${q.title}
                 </h2>
-                
             </div>
-
             <div class="grid grid-cols-2 gap-4">
-                
                 <div class="comparison-box">
                     <h3 class="text-xl font-bold mb-3 text-center card-title-review" style="color: var(--color-success-text);">${q.caseA_label}</h3>
                     <div class="flex flex-col gap-3">
                         ${inputsA}
                     </div>
                 </div>
-
                 <div class="comparison-box">
                     <h3 class="text-xl font-bold mb-3 text-center card-title-review" style="color: var(--color-danger-text);">${q.caseB_label}</h3>
                     <div class="flex flex-col gap-3">
@@ -75,13 +60,12 @@ function buildQuestionHTML(q, displayNumber) {
                     </div>
                 </div>
             </div>
-
             <p id="blank-feedback-${q.id}" class="mt-4 text-center font-bold" style="display: none;"></p>
         </div>
     `;
 }
 
-// 3. دالة عرض الأسئلة (معدلة)
+// 3. دالة عرض الأسئلة (كما هي)
 function renderPage(page = currentPage) {
     if (!quizPages) return;
     quizPages.innerHTML = '';
@@ -93,33 +77,27 @@ function renderPage(page = currentPage) {
     questionsToShow.forEach((q, index) => {
         const displayNumber = startIndex + index + 1;
         quizPages.innerHTML += buildQuestionHTML(q, displayNumber);
-        
-        // تفعيل وضع المراجعة (الكاتب الآلي)
         startReviewMode(q.id);
     });
 }
 
-// 4. ⭐️⭐️ وظيفة الكاتب الآلي الجديدة (متسلسلة) ⭐️⭐️
+// 4. وظيفة الكاتب الآلي (كما هي)
 async function startReviewMode(questionId) {
     const questionData = quizData.find(q => q.id === questionId);
     if (!questionData) return;
 
-    // المرور على كل معيار (صف) بالتسلسل
     for (let i = 0; i < questionData.criteria.length; i++) {
         const textareaA = document.getElementById(`blank-input-${questionId}-A-${i}`);
         const textareaB = document.getElementById(`blank-input-${questionId}-B-${i}`);
 
-        // انتظار انتهاء العمود "أ" (مع إرسال المعيار)
         if (textareaA) {
             await typeWordByWord(textareaA, textareaA.getAttribute('data-correct-answer'), textareaA.getAttribute('data-label'));
         }
-        // ثم انتظار انتهاء العمود "ب" (مع إرسال المعيار)
         if (textareaB) {
             await typeWordByWord(textareaB, textareaB.getAttribute('data-correct-answer'), textareaB.getAttribute('data-label'));
         }
     }
 
-    // عند انتهاء جميع الحقول، يتم تفعيل الزر التالي
     if (nextQuestionBtn) {
         nextQuestionBtn.disabled = false;
         if (currentPage === totalQuestions) {
@@ -131,45 +109,38 @@ async function startReviewMode(questionId) {
     }
 }
 
-// 5. ⭐️⭐️ وظيفة مساعد الكاتب الآلي (معدلة لإضافة المعيار والسرعة) ⭐️⭐️
+// 5. وظيفة مساعد الكاتب الآلي (كما هي)
 function typeWordByWord(textarea, text, label) {
     return new Promise(resolve => {
         const labelPrefix = `${label}: `;
-        
         if (!text || text.trim() === "") {
             textarea.value = labelPrefix + (text || "");
             resolve();
             return;
         }
-        
         const words = text.split(' ').filter(w => w.length > 0);
         let wordIndex = 0;
         textarea.value = labelPrefix; 
-
         if (words.length === 0) {
             textarea.value = labelPrefix + text;
-            resolve(); // Resolve immediately
-            return;
+            resolve(); return;
         }
-
         const interval = setInterval(() => {
             if (wordIndex < words.length) {
                 textarea.value = labelPrefix + words.slice(0, wordIndex + 1).join(' ');
                 wordIndex++;
             } else {
                 clearInterval(interval);
-                resolve(); // Resolve when done
+                resolve();
             }
-        }, 200); // السرعة 200ms
+        }, 200); 
     });
 }
 
-
-// 6. دالة تغيير الصفحة (معدلة)
+// 6. دالة تغيير الصفحة (كما هي)
 function changePage(step) {
-    // التحقق إذا كانت الصفحة الأخيرة
     if (currentPage === totalQuestions && step > 0) {
-        score = totalQuestions; // التأكد من اكتمال النتيجة
+        score = totalQuestions; 
         updateProgress();
         showFinalResults();
         return;
@@ -179,33 +150,39 @@ function changePage(step) {
     if (newPage === currentPage) return;
     currentPage = newPage;
     
-    // تحديث النتيجة بناءً على الصفحة الحالية
-    score = newPage; // تم تعديلها لتعكس الصفحة الجديدة
+    score = newPage; 
     updateProgress();
     
-    renderPage(currentPage); // سيقوم بعرض السؤال وبدء الأنيميشن
+    renderPage(currentPage); 
     window.scrollTo(0, 0);
 
-    // تعطيل الزر أثناء تحميل وعرض الأنيميشن
     if (nextQuestionBtn) {
         nextQuestionBtn.disabled = true;
         nextQuestionBtn.textContent = '...يتم عرض الإجابات...';
-        nextQuestionBtn.style.background = ''; // يعود للتنسيق الافتراضي
+        nextQuestionBtn.style.background = ''; 
     }
 }
 
-// 7. دالة تحديث شريط التقدم (معدلة)
+// ✅ 7. دالة تحديث شريط التقدم (معدلة لتجلب العناصر ديناميكياً)
 function updateProgress() {
-    // أصبح "score" يمثل رقم الصفحة الحالية التي تمت مراجعتها
+    // جلب العناصر التي أنشأها quiz-status-bar.js
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const scoreDisplay = document.getElementById('score-display'); 
+    const questionCounter = document.getElementById('question-counter');
+
     const progress = (score / totalQuestions) * 100;
     
     if (progressFill) progressFill.style.width = progress + '%';
     if (progressText) progressText.textContent = Math.round(progress) + '%';
-    if (scoreDisplay) scoreDisplay.textContent = score; // يعرض رقم الصفحة
-    if (questionCounter) questionCounter.textContent = `${score} / ${totalQuestions}`; // يعرض رقم الصفحة
+    
+    // في هذا الاختبار: النتيجة = رقم السؤال الحالي
+    if (scoreDisplay) scoreDisplay.textContent = score; 
+    
+    if (questionCounter) questionCounter.textContent = `${score} / ${totalQuestions}`;
 }
 
-// 8. دالة عرض النتائج النهائية
+// 8. دالة عرض النتائج النهائية (معدلة للإخفاء)
 function showFinalResults() {
     const message = 'أكملت المراجعة!';
     const emoji = '🏆'; 
@@ -227,14 +204,12 @@ function showFinalResults() {
         `;
     }
     if (nextQuestionBtn) nextQuestionBtn.style.display = 'none';
-    if (document.querySelector('.progress-bar')) document.querySelector('.progress-bar').parentElement.style.display = 'none';
     
-    // إخفاء شريط النتيجة العلوي بالكامل
-    const scoreBar = document.querySelector('.container-main.flex.justify-between.items-center');
-    if (scoreBar) scoreBar.style.display = 'none';
+    // إخفاء الشريط الموحد
+    const statusBar = document.getElementById('status-bar-placeholder');
+    if(statusBar) statusBar.style.display = 'none';
 }
 
-// 9. دالة خلط الأسئلة
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -242,20 +217,26 @@ function shuffleArray(array) {
     }
 }
 
-// 10. دالة التهيئة الشاملة (معدلة)
+// ✅ 10. دالة التهيئة الشاملة (معدلة)
 function init() {
+    // 1. بناء الشريط الموحد
+    if (typeof QuizStatusBar !== 'undefined') {
+        QuizStatusBar.init('status-bar-placeholder');
+    }
+
     shuffleArray(quizData);
-    score = 1; // نبدأ بالسؤال الأول
-    updateProgress(); // تحديث فوري لإظهار 1 / 84
+    score = 1; 
+    
+    updateProgress(); // تحديث فوري
+    
     renderPage();
     if (nextQuestionBtn) {
-        nextQuestionBtn.disabled = true; // يتم تعطيله أولاً
+        nextQuestionBtn.disabled = true; 
         nextQuestionBtn.textContent = '...يتم عرض الإجابات...';
         nextQuestionBtn.addEventListener('click', () => changePage(1));
     }
 }
 
-// تنفيذ دالة التهيئة
 document.addEventListener('DOMContentLoaded', () => {
      const titleEl = document.querySelector('.page-title-card h1');
      if(titleEl) document.title = titleEl.textContent;
@@ -266,53 +247,46 @@ document.addEventListener('DOMContentLoaded', () => {
      init();
 });
 
-// إضافة كلاس CSS لضبط التنسيق
+// Styles... (كما هي)
 document.head.insertAdjacentHTML('beforeend', `<style>
-    /* ستايل زر رقم السؤال الجديد (ليطابق الصورة) */
     .q-tag {
-        background-color: #f97316; /* Orange-600 */
+        background-color: #f97316; 
         color: white;
-        border-radius: 0.75rem; /* 12px */
+        border-radius: 0.75rem; 
         padding: 0.5rem 0.75rem;
         text-align: center;
         font-weight: bold;
         display: flex;
         flex-direction: column;
         line-height: 1.2;
-        min-width: 60px; /* عرض بسيط لضمان الشكل */
+        min-width: 60px; 
     }
     .q-tag-word {
-        font-size: 0.75rem; /* 12px */
+        font-size: 0.75rem; 
         opacity: 0.9;
     }
     .q-tag-number {
-        font-size: 1.125rem; /* 18px */
+        font-size: 1.125rem; 
     }
-
-    /* تعديل خط الأجوبة في الهاتف */
     @media (max-width: 640px) {
         textarea.review-mode:disabled {
-            font-size: 0.875rem; /* 14px */
-            min-h-[60px]; /* تقليل الارتفاع الأدنى */
+            font-size: 0.875rem; 
+            min-h-[60px]; 
         }
-        
-        /* تعديل خط العناوين الداخلية في الهاتف */
         .card-title-review {
-            font-size: 1.125rem; /* 18px */
+            font-size: 1.125rem; 
         }
     }
-
-    /* ستايل أساسي للـ textarea */
     textarea.review-mode:disabled {
-        background-color: #f0fdf4; /* أخضر فاتح جداً */
-        color: #15803d; /* أخضر غامق */
+        background-color: #f0fdf4; 
+        color: #15803d; 
         font-weight: bold;
         opacity: 1;
-        -webkit-text-fill-color: #15803d; /* لمتصفحات WebKit */
+        -webkit-text-fill-color: #15803d; 
     }
     html.dark body textarea.review-mode:disabled {
-        background-color: #052e16; /* أخضر غامق جداً */
-        color: #bbf7d0; /* أخضر فاتح */
+        background-color: #052e16; 
+        color: #bbf7d0; 
         -webkit-text-fill-color: #bbf7d0;
     }
-</style>`);
+</style>`);	

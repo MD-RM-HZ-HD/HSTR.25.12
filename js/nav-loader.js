@@ -133,7 +133,7 @@ function createExamDropdown(pageType, isMobile = false) {
           <span>امتحانات</span>
           <svg id="mobile-exams-dropdown-arrow" class="w-4 h-4 transition-transform text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
         </button>
-        <div id="mobile-exams-dropdown-menu" class="hidden bg-white bg-opacity-5 overflow-hidden">${links}</div>
+        <div id="mobile-exams-dropdown-menu" class="hidden bg-gradient-to-r from-green-600 to-emerald-700 overflow-hidden">${links}</div>
       </div>`;
   }
 

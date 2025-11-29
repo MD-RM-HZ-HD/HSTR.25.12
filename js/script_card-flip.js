@@ -1,17 +1,13 @@
-// المدة من ملف style.css (.card-face { transition: opacity 1.0s ... })
-const CONTENT_FADE_DURATION = 1000; // 1000ms = 1.0s
+// المدة من ملف style.css
+const CONTENT_FADE_DURATION = 1000; 
 
-let currentCardIndex = 1; // Start with 1-based index
+let currentCardIndex = 1; 
 let isFlipped = false;
 let shuffledCards = [];
 
-// العناصر
+// العناصر الأساسية (تم حذف مراجع التقدم الثابتة لأنها أصبحت ديناميكية)
 const cardElement = document.getElementById('flashcard');
-const progressText = document.getElementById('progress-text');
-const progressFill = document.getElementById('progress-fill');
 const totalCards = cardData.length;
-
-
 
 const frontFace = document.getElementById('front-face');
 const backFace = document.getElementById('back-face');
@@ -32,31 +28,44 @@ function shuffle(array) {
     return array;
 }
 
+// ✅ دالة تحديث الشريط الموحد (معدلة)
 function updateProgress(index) {
+    // نجلب العناصر ديناميكياً لأنها أُنشئت بواسطة QuizStatusBar
+    const progressText = document.getElementById('progress-text');
+    const progressFill = document.getElementById('progress-fill');
+    const questionCounter = document.getElementById('question-counter'); // مكان رقم البطاقة
+    const scoreDisplay = document.getElementById('score-display');     // مكان النتيجة
+
     if (totalCards > 0) {
-        // Using a 1-based index for calculation
+        // حساب النسبة
         const progressPercentage = (index / totalCards) * 100;
-        progressText.textContent = `${Math.round(progressPercentage)}%`;
-        progressFill.style.width = `${progressPercentage}%`;
+        
+        // تحديث الشريط
+        if(progressText) progressText.textContent = `${Math.round(progressPercentage)}%`;
+        if(progressFill) progressFill.style.width = `${progressPercentage}%`;
+
+        // تحديث العداد (البطاقة الحالية / الإجمالي)
+        if(questionCounter) questionCounter.textContent = `${index} / ${totalCards}`;
+
+        // تحديث خانة النتيجة لتشير إلى "البطاقات المنجزة" (السابقة)
+        // (index - 1) لأن البطاقة الحالية لم تكتمل بعد
+        if(scoreDisplay) scoreDisplay.textContent = Math.max(0, index - 1);
     }
 }
+
 function applyRandomStyle(displayNumber) {
-    // الوجه الأمامي (السؤال)
     frontFace.classList.add('card-face', 'card-front', 'flex', 'flex-col', 'justify-between');
     frontHeader.classList.add('card-header', 'shadow-md');
     frontContent.className = 'card-content';
 
-    // الوجه الخلفي (الإجابة)
     backFace.classList.add('card-face', 'card-back', 'flex', 'flex-col', 'justify-between');
     backHeader.classList.add('card-header', 'shadow-md');
     backContent.className = 'card-content';
 
-    // تحديث محتوى العنوان
     frontHeader.textContent = `البطاقة ${displayNumber}`;
     backHeader.textContent = `البطاقة ${displayNumber}`;
 }
 
-// --- دالة loadCard (مع إصلاح الوميض) ---
 function loadCard() {
     if (currentCardIndex > totalCards) {
         showEndScreen();
@@ -64,15 +73,11 @@ function loadCard() {
     }
 
     const card = shuffledCards[currentCardIndex - 1];
-
-    // تحقق مما إذا كانت البطاقة مقلوبة *قبل* إعادة تعيينها
     const wasFlipped = isFlipped;
 
-    // إعادة البطاقة لوضعها الطبيعي أولاً
     isFlipped = false;
-    cardElement.classList.remove('flipped'); // <-- بدء التحريك (إلغاء القلب)
+    cardElement.classList.remove('flipped'); 
 
-    // تعريف دالة لتحديث المحتوى (حتى نتمكن من تأخيرها)
     const updateContent = () => {
         frontContent.textContent = card.question;
         backContent.textContent = card.answer;
@@ -80,22 +85,16 @@ function loadCard() {
     };
 
     if (wasFlipped) {
-        // إذا كانت البطاقة مقلوبة (نحن ننتقل)
-        // انتظر حتى ينتهي تحريك التلاشي (1.0 ثانية) قبل تغيير النص
         setTimeout(updateContent, CONTENT_FADE_DURATION);
     } else {
-        // إذا لم تكن مقلوبة (التحميل الأولي)، قم بالتحديث فوراً
         updateContent();
     }
 
-    // تحديث الأزرار وشريط التقدم *فوراً*
     updateNavigationButtons();
     updateProgress(currentCardIndex);
 }
 
-
 function nextCard() {
-    // الأزرار معطلة إذا لم يتم القلب، لذا لا داعي للتحقق
     if (currentCardIndex < totalCards) {
         currentCardIndex++;
         loadCard();
@@ -105,7 +104,6 @@ function nextCard() {
 }
 
 function prevCard() {
-    // الأزرار معطلة إذا لم يتم القلب، لذا لا داعي للتحقق
     if (currentCardIndex > 1) {
         currentCardIndex--;
         loadCard();
@@ -116,12 +114,10 @@ window.flipCard = function() {
     if (currentCardIndex > totalCards) return;
 
     if (!isFlipped) {
-        // النقرة الأولى: إظهار الإجابة
         isFlipped = true;
         cardElement.classList.add('flipped');
         updateNavigationButtons();
     } else {
-        // النقرة الثانية: الانتقال إلى البطاقة التالية بنفس طريقة زر "Next"
         nextCard();
     }
 }
@@ -135,25 +131,37 @@ function showEndScreen() {
     if (cardElement) cardElement.classList.add('hidden');
     if (endScreen) endScreen.classList.remove('hidden');
     if (cardAndButtonsContainer) cardAndButtonsContainer.classList.add('hidden');
+    
+    // عند الانتهاء، نخفي الشريط الموحد
+    const statusBar = document.getElementById('status-bar-placeholder');
+    if(statusBar) statusBar.style.display = 'none';
 }
 
-// --- دالة restartQuiz (مع الإصلاح الجديد) ---
 window.restartQuiz = function() {
     if (endScreen) endScreen.classList.add('hidden');
     if (cardElement) cardElement.classList.remove('hidden');
     if (cardAndButtonsContainer) cardAndButtonsContainer.classList.remove('hidden');
     
+    // إعادة إظهار الشريط عند الإعادة
+    const statusBar = document.getElementById('status-bar-placeholder');
+    if(statusBar) statusBar.style.display = 'block';
+    
     currentCardIndex = 1;
-    isFlipped = false; // <-- ⭐️⭐️⭐️ هذا هو الإصلاح الجديد ⭐️⭐️⭐️
+    isFlipped = false; 
     
     shuffledCards = shuffle([...cardData]);
     loadCard();
-    // لا حاجة لاستدعاء updateProgress هنا لأن loadCard تقوم بذلك
 }
 
-// تهيئة التطبيق عند التحميل
 document.addEventListener('DOMContentLoaded', () => {
+    // ✅ 1. تهيئة الشريط الموحد أولاً
+    if (typeof QuizStatusBar !== 'undefined') {
+        QuizStatusBar.init('status-bar-placeholder');
+    }
+
     if (nextBtn) nextBtn.addEventListener('click', nextCard);
     if (prevBtn) prevBtn.addEventListener('click', prevCard);
+    
+    // البدء
     window.restartQuiz();
 });

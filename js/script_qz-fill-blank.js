@@ -7,18 +7,17 @@ let score = 0;
 const maxScore = totalQuestions;
 const pointsPerQuestion = 1;
 
-// تمت إضافة هذا المتغير لتتبع حالة كشف الأسئلة
+// تتبع حالة كشف الأسئلة
 const questionStates = {};
 
-// عناصر DOM
+// ❌ تم حذف تعريفات عناصر DOM الثابتة من هنا لتجنب الأخطاء
+// سيتم جلبها عند الحاجة داخل الدوال (مثل updateProgress)
+
 const quizPages = document.getElementById('quiz-container');
-const progressFill = document.getElementById('progress-fill');
-const progressText = document.getElementById('progress-text');
-const scoreDisplay = document.getElementById('score-display'); 
-const questionCounter = document.getElementById('question-counter'); 
 const nextQuestionBtn = document.getElementById('next-question-btn');
 
-// 2. ⭐️⭐️ دالة بناء هيكل السؤال (معدلة) ⭐️⭐️
+
+// ... (دالة buildQuestionHTML كما هي بدون تغيير) ...
 function buildQuestionHTML(q, displayNumber) {
     const isMultiBlank = Array.isArray(q.answer);
     const numBlanks = isMultiBlank ? q.answer.length : 1;
@@ -28,7 +27,6 @@ function buildQuestionHTML(q, displayNumber) {
     if (isMultiBlank) {
         let inputsHTML = '';
         for (let i = 0; i < numBlanks; i++) {
-            // تم إزالة "disabled" وإضافة "data-qid"
             inputsHTML += `
                 <input id="blank-input-${q.id}-${i}" type="text" placeholder="اضغط هنا لكشف الإجابة #${i + 1}"
                     class="p-2 border border-gray-300 rounded-lg text-right mb-2 bg-green-50 review-mode"
@@ -42,7 +40,6 @@ function buildQuestionHTML(q, displayNumber) {
             </div>
         `;
     } else {
-         // تم إزالة "disabled" وإضافة "data-qid"
          inputFieldsHTML = `
             <input id="blank-input-${q.id}-0" type="text" placeholder="اضغط هنا لكشف الإجابة..."
                 class="flex-1 p-2 border border-gray-300 rounded-lg text-right bg-green-50 review-mode"
@@ -68,7 +65,7 @@ function buildQuestionHTML(q, displayNumber) {
     `;
 }
 
-// 3. ⭐️⭐️ دالة عرض الأسئلة (معدلة) ⭐️⭐️
+// ... (دالة renderPage كما هي) ...
 function renderPage(page = currentPage) {
     if (!quizPages) return;
     quizPages.innerHTML = '';
@@ -79,7 +76,6 @@ function renderPage(page = currentPage) {
 
     let pageHTML = '';
     questionsToShow.forEach((q, index) => {
-        // تهيئة حالة السؤال
         if (!questionStates[q.id]) {
             questionStates[q.id] = { scored: false };
         }
@@ -88,37 +84,28 @@ function renderPage(page = currentPage) {
     });
     quizPages.innerHTML = pageHTML;
 
-    // إضافة مستمع النقر (Click) لكل حقل إدخال
     document.querySelectorAll(`#quiz-container input[type=text]`).forEach(input => {
         input.addEventListener('click', handleInputClick);
     });
 }
 
-// 4. ⭐️⭐️ وظيفة جديدة: معالج النقر على حقل الإدخال ⭐️⭐️
+// ... (دالة handleInputClick كما هي) ...
 async function handleInputClick(event) {
     const inputElement = event.target;
-    
-    // منع إعادة التشغيل إذا تم كشفه
     if (inputElement.disabled) return; 
 
-    // 🟢🟢🟢 الإصلاح: مسح الـ placeholder وتعطيل العنصر فوراً 🟢🟢🟢
-    inputElement.disabled = true; // تعطيله فوراً لمنع النقرات المتعددة
-    inputElement.placeholder = ''; // مسح النص المؤقت "اضغط هنا..."
+    inputElement.disabled = true; 
+    inputElement.placeholder = ''; 
 
     const qid = parseInt(inputElement.getAttribute('data-qid'));
 
-    // بدء الكشف
     await typeLetterByLetter(inputElement);
-    
-    // التحقق إذا كانت جميع الفراغات في هذا السؤال قد كُشفت
     checkAllRevealed(qid);
 }
 
-// 5. ⭐️⭐️ وظيفة جديدة: الكاتب الآلي (حرف بحرف) ⭐️⭐️
+// ... (دالة typeLetterByLetter كما هي) ...
 function typeLetterByLetter(inputElement) {
     return new Promise(resolve => { 
-        // (تم نقل التعطيل إلى دالة handleInputClick)
-
         const text = inputElement.getAttribute('data-correct-answer');
         
         if (!text || text.trim() === "") {
@@ -128,7 +115,7 @@ function typeLetterByLetter(inputElement) {
         }
 
         let charIndex = 0;
-        inputElement.value = ''; // إفراغ الحقل (وهو آمن الآن لأن الـ placeholder اختفى)
+        inputElement.value = ''; 
 
         const interval = setInterval(() => {
             if (charIndex < text.length) {
@@ -136,27 +123,25 @@ function typeLetterByLetter(inputElement) {
                 charIndex++;
             } else {
                 clearInterval(interval);
-                resolve(); // إبلاغ بأن الكشف انتهى
+                resolve(); 
             }
-        }, 100); // السرعة: 100ms (1/10 ثانية) لكل حرف
+        }, 100); 
     });
 }
 
-// 6. ⭐️⭐️ وظيفة جديدة: التحقق من كشف جميع الفراغات ⭐️⭐️
+// ... (دالة checkAllRevealed كما هي) ...
 function checkAllRevealed(questionId) {
     const allInputs = document.querySelectorAll(`#q-card-${questionId} input[type=text]`);
     const allDone = Array.from(allInputs).every(input => input.disabled);
 
     if (allDone) {
         const state = questionStates[questionId];
-        // منح النقطة وتحديث التقدم
         if (!state.scored) {
             state.scored = true;
             score++;
             updateProgress();
         }
         
-        // تفعيل زر "السؤال التالي"
         if (nextQuestionBtn) {
             nextQuestionBtn.disabled = false;
             if (currentPage === totalQuestions) {
@@ -169,8 +154,7 @@ function checkAllRevealed(questionId) {
     }
 }
 
-
-// 7. دالة تغيير الصفحة (معدلة لوضع المراجعة)
+// ... (دالة changePage كما هي) ...
 function changePage(step) {
     if (currentPage === totalQuestions && step > 0) {
         updateProgress();
@@ -185,20 +169,23 @@ function changePage(step) {
 
     window.scrollTo(0, 0);
 
-    // تعطيل الزر أثناء تحميل السؤال الجديد
     if (nextQuestionBtn) {
         nextQuestionBtn.disabled = true;
         nextQuestionBtn.textContent = '...اكشف جميع الإجابات...';
-        nextQuestionBtn.style.background = 'rgb(203, 213, 225)'; // Inactive background
+        nextQuestionBtn.style.background = 'rgb(203, 213, 225)';
     }
 }
 
-// (تم حذف الدوال القديمة: normalizeAr, updatePageInfo, checkBlank)
-
-// 8. دالة تحديث شريط التقدم (معدلة)
+// ✅ 8. دالة تحديث شريط التقدم (معدلة لتجلب العناصر ديناميكياً)
 function updateProgress() {
     const progress = (score / totalQuestions) * 100;
     
+    // نجلب العناصر هنا لأنها قد تكون أنشئت حديثاً بواسطة QuizStatusBar
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const scoreDisplay = document.getElementById('score-display');
+    const questionCounter = document.getElementById('question-counter');
+
     if (progressFill) {
         progressFill.style.width = progress + '%';
     }
@@ -209,14 +196,15 @@ function updateProgress() {
         scoreDisplay.textContent = score;
     }
     if (questionCounter) {
-        // يعرض الأسئلة التي تم مراجعتها من الإجمالي
+        // تم عكس العرض ليتناسب مع LTR CSS direction المستخدم في الشريط الجديد للأرقام
+        // أو يمكنك استخدام التنسيق الذي تفضله
         questionCounter.textContent = `${score} / ${totalQuestions}`;
     }
 }
 
-// 9. دالة عرض النتائج النهائية (معدلة لوضع المراجعة)
+// ... (دالة showFinalResults كما هي) ...
 function showFinalResults() {
-    const percentage = 100; // دائما 100% في المراجعة
+    const percentage = 100; 
     const finalScore = totalQuestions;
     let message = 'أكملت المراجعة!';
     let emoji = '🏆';
@@ -241,17 +229,13 @@ function showFinalResults() {
         `;
     }
 
-    // إخفاء زر "التالي" وأشرطة التقدم/النتيجة
     if (nextQuestionBtn) nextQuestionBtn.style.display = 'none';
-    if (document.querySelector('.container-main.p-4.md:p-6.mb-1.md:mb-2')) {
-        document.querySelector('.container-main.p-4.md:p-6.mb-1.md:mb-2').style.display = 'none';
-    }
-    if (document.querySelector('.container-main.p-4.md:p-6.mb-4.md:mb-6')) {
-        document.querySelector('.container-main.p-4.md:p-6.mb-4.md:mb-6').style.display = 'none';
-    }
+    
+    // إخفاء الشريط الموحد عند النتائج (اختياري)
+    const statusBar = document.getElementById('status-bar-placeholder');
+    if(statusBar) statusBar.style.display = 'none';
 }
 
-// Shuffle function to randomize questions
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -259,26 +243,28 @@ function shuffleArray(array) {
     }
 }
 
-// 10. دالة التهيئة الشاملة (معدلة)
+// ✅ 10. دالة التهيئة الشاملة (معدلة)
 function init() {
+    // 1. بناء شريط الحالة الموحد أولاً
+    if (typeof QuizStatusBar !== 'undefined') {
+        QuizStatusBar.init('status-bar-placeholder');
+    }
+
     shuffleArray(quizData);
 
-    if (scoreDisplay) scoreDisplay.textContent = '0';
-    if (questionCounter) questionCounter.textContent = `0 / ${totalQuestions}`;
-
+    // الآن يمكننا تحديث القيم لأن العناصر موجودة في الـ DOM
     updateProgress(); 
-    renderPage(); // سيعرض السؤال الأول
+    
+    renderPage();
 
-    // ضبط زر "التالي" ليكون معطلاً في البداية
     if (nextQuestionBtn) {
         nextQuestionBtn.disabled = true;
         nextQuestionBtn.textContent = '...اكشف جميع الإجابات...';
-        nextQuestionBtn.style.background = 'rgb(203, 213, 225)'; // Inactive background
+        nextQuestionBtn.style.background = 'rgb(203, 213, 225)'; 
         nextQuestionBtn.addEventListener('click', () => changePage(1));
     }
 }
 
-// تنفيذ دالة التهيئة عند تحميل الـ DOM
 document.addEventListener('DOMContentLoaded', () => {
      const titleEl = document.querySelector('.page-title-card h1');
      if(titleEl) {
@@ -296,22 +282,22 @@ document.addEventListener('DOMContentLoaded', () => {
      init();
 });
 
-// 🟢 إضافة كلاس CSS لضبط تنسيق حقول المراجعة
+// Styles injection... (كما هو)
 document.head.insertAdjacentHTML('beforeend', `<style>
     input[type="text"].review-mode {
-        cursor: pointer; /* تغيير شكل المؤشر ليدل أنه قابل للنقر */
+        cursor: pointer;
     }
     input[type="text"].review-mode:disabled {
-        background-color: #f0fdf4; /* أخضر فاتح جداً */
-        color: #15803d; /* أخضر غامق */
+        background-color: #f0fdf4;
+        color: #15803d;
         font-weight: bold;
         opacity: 1;
-        -webkit-text-fill-color: #15803d; /* لمتصفحات WebKit */
-        cursor: default; /* إرجاع المؤشر للشكل الافتراضي بعد الكشف */
+        -webkit-text-fill-color: #15803d;
+        cursor: default;
     }
     html.dark body input[type="text"].review-mode:disabled {
-        background-color: #052e16; /* أخضر غامق جداً */
-        color: #bbf7d0; /* أخضر فاتح */
+        background-color: #052e16;
+        color: #bbf7d0;
         -webkit-text-fill-color: #bbf7d0;
     }
 </style>`);

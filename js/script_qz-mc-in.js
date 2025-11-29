@@ -1,53 +1,53 @@
 // المتغيرات العامة
 let currentQuestionIndex = 0;
 let score = 0;
-let nextQuestionTimer; // ⬅️ متغير للاحتفاظ بمؤقت السؤال التالي
+let nextQuestionTimer; 
 
-// عناصر DOM
+// عناصر DOM الثابتة (تم إزالة عناصر التقدم والنتيجة لأنها ديناميكية الآن)
 const quizContainer = document.getElementById('quiz-container');
-const questionCounter = document.getElementById('question-counter');
-const scoreDisplay = document.getElementById('score-display');
-const progressFill = document.getElementById('progress-fill');
-const progressText = document.getElementById('progress-text');
 const nextButton = document.getElementById('next-question-btn');
 
-// دالة تحديث شريط التقدم
+// ✅ دالة تحديث شريط التقدم (معدلة)
 function updateProgress() {
-    const progress = ((currentQuestionIndex) / questions.length) * 100;
-    progressFill.style.width = progress + '%';
-    progressText.textContent = Math.round(progress) + '%';
+    // جلب العناصر ديناميكياً
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    
+    if (progressFill && progressText) {
+        const progress = ((currentQuestionIndex) / questions.length) * 100;
+        progressFill.style.width = progress + '%';
+        progressText.textContent = Math.round(progress) + '%';
+    }
 }
 
-// ⬅️ دالة إيقاف الحركة (تم تعطيلها)
-function stopIdleAnimation() {
-    // تم تعطيل الوظيفة لإزالة التأثيرات
-}
+// دالة إيقاف الحركة
+function stopIdleAnimation() {}
 
-// ⬅️ دالة بدء الحركة (تم تعطيلها)
-function startIdleAnimation() {
-    // تم تعطيل الوظيفة لإزالة التأثيرات
-}
+// دالة بدء الحركة
+function startIdleAnimation() {}
 
 // دالة تفعيل زر "السؤال التالي"
 function enableNextButton() {
-    nextButton.disabled = false;
+    if(nextButton) nextButton.disabled = false;
 }
 
 // دالة تعطيل زر "السؤال التالي"
 function disableNextButton() {
-    nextButton.disabled = true;
-    nextButton.textContent = 'أجب على السؤال للانتقال إلى التالي';
+    if(nextButton) {
+        nextButton.disabled = true;
+        nextButton.textContent = 'أجب على السؤال للانتقال إلى التالي';
+    }
 }
 
-// دالة الانتقال للسؤال التالي (الزر اليدوي)
+// دالة الانتقال للسؤال التالي
 window.nextQuestion = function() {
-    clearTimeout(nextQuestionTimer); // ⬅️ إلغاء المؤقت التلقائي عند الضغط اليدوي
+    clearTimeout(nextQuestionTimer); 
     disableNextButton();
     currentQuestionIndex++;
     renderQuestion(); 
 }
 
-// دالة عرض السؤال (تحديث للتحكم بزر التالي)
+// دالة عرض السؤال
 function renderQuestion() {
     if (questions.length === 0) {
         quizContainer.innerHTML = `
@@ -67,7 +67,6 @@ function renderQuestion() {
     
     disableNextButton();
 
-    // بناء أزرار الخيارات
     let optionsHtml = '';
     currentQ.options.forEach((option, index) => {
         optionsHtml += `
@@ -97,9 +96,15 @@ function renderQuestion() {
         <div id="feedback" class="hidden mt-4 md:mt-6"></div>
     `;
 
-    questionCounter.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
-    scoreDisplay.textContent = score;
-    // startIdleAnimation(); // ⬅️ تم إيقاف استدعاء الحركة هنا
+    // ✅ تحديث العدادات ديناميكياً
+    const questionCounter = document.getElementById('question-counter');
+    const scoreDisplay = document.getElementById('score-display');
+    
+    if (questionCounter) questionCounter.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
+    if (scoreDisplay) scoreDisplay.textContent = score;
+    
+    // تحديث شريط التقدم أيضاً عند عرض كل سؤال
+    updateProgress();
 }
 
 // دالة معالجة الإجابة
@@ -107,19 +112,16 @@ window.submitAnswer = function(userAnswerIndex) {
     const currentQ = questions[currentQuestionIndex];
     const feedbackDiv = document.getElementById('feedback');
     
-    // تعطيل جميع الأزرار
     const buttons = document.querySelectorAll('.btn-option');
     buttons.forEach(btn => btn.disabled = true);
 
     const isCorrect = userAnswerIndex === currentQ.correctIndex;
     
-    // تحديد الزر الصحيح والزر الذي تم اختياره
     const correctButton = document.getElementById(`btn-option-${currentQ.correctIndex}`);
     const selectedButton = document.getElementById(`btn-option-${userAnswerIndex}`);
 
-    // تلوين الأزرار
-    correctButton.classList.add('btn-correct');
-    if (!isCorrect) {
+    if(correctButton) correctButton.classList.add('btn-correct');
+    if (!isCorrect && selectedButton) {
         selectedButton.classList.add('btn-incorrect');
     }
 
@@ -153,7 +155,11 @@ window.submitAnswer = function(userAnswerIndex) {
     }
 
     feedbackDiv.classList.remove('hidden');
-    scoreDisplay.textContent = score;
+    
+    // ✅ تحديث النتيجة فوراً
+    const scoreDisplay = document.getElementById('score-display');
+    if(scoreDisplay) scoreDisplay.textContent = score;
+    
     updateProgress();
     startNextQuestionTimer();
 }
@@ -165,7 +171,6 @@ function startNextQuestionTimer() {
     const baseText = (currentQuestionIndex === questions.length - 1) ? 'عرض النتيجة' : 'السؤال التالي';
     nextButton.textContent = `${baseText} (${countdown})`;
 
-    // مؤقت لتحديث نص الزر كل ثانية
     const countdownInterval = setInterval(() => {
         countdown--;
         if (countdown > 0) {
@@ -177,9 +182,8 @@ function startNextQuestionTimer() {
         }
     }, 1000);
 
-    // المؤقت الرئيسي للانتقال بعد 15 ثانية
     nextQuestionTimer = setTimeout(() => {
-        clearInterval(countdownInterval); // إيقاف تحديث النص
+        clearInterval(countdownInterval); 
         nextQuestion();
     }, 15000);
 }
@@ -222,10 +226,18 @@ function showFinalResults() {
         </div>
     `;
 
-    progressFill.style.width = '100%';
-    progressText.textContent = '100%';
+    // تحديث نهائي للشريط (اختياري، أو يمكن إخفاؤه)
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    if(progressFill) progressFill.style.width = '100%';
+    if(progressText) progressText.textContent = '100%';
+    
     clearTimeout(nextQuestionTimer); 
     disableNextButton(); 
+    
+    // إخفاء الشريط الموحد عند النتائج (كما في الملفات السابقة)
+    const statusBar = document.getElementById('status-bar-placeholder');
+    if(statusBar) statusBar.style.display = 'none';
 }
 
 // دالة خلط المصفوفة
@@ -239,11 +251,18 @@ function shuffleArray(array) {
 
 // دالة تهيئة الاختبار
 function initQuiz() {
-    document.title = document.querySelector('.page-title-card h1').textContent;
+    // ✅ 1. تهيئة الشريط الموحد أولاً
+    if (typeof QuizStatusBar !== 'undefined') {
+        QuizStatusBar.init('status-bar-placeholder');
+    }
+    
+    const titleEl = document.querySelector('.page-title-card h1');
+    if(titleEl) document.title = titleEl.textContent;
+    
     shuffleArray(questions);
-    questionCounter.textContent = `1 / ${questions.length}`;
+    
+    // التحديث الأولي (سيقوم renderQuestion بتحديث النصوص)
     renderQuestion();
 }
 
-// بدء الاختبار عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initQuiz);
