@@ -200,22 +200,37 @@ const bioEventsData = [
                     </div>
                 </div>
 
-                <div class="caliph-card mb-4">
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-2 mb-2">
-                        <div><h3 class="font-bold text-lg">2. الواثق بالله <span class="text-sm text-gray-600 font-normal">(هارون بن المعتصم)</span></h3></div>
-                        <span class="badge badge-yellow">حكم: 227 - 232 هـ</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-sm mb-3 text-secondary">
-                        <div><strong>الولادة:</strong> 196 هـ</div>
-                        <div><strong>الوفاة:</strong> 232 هـ (36 سنة)</div>
-                    </div>
-                    <div class="bg-gray-100 p-2 rounded mb-2 text-sm border-r-4 border-gray-400">
-                        <strong>الوفاة:</strong> طبيعية (الاستسقاء - مات في تنور للعلاج).
-                    </div>
-                    <div class="text-sm border-t pt-2 mt-2">
-                        <strong>فتنة القرآن:</strong> تشدد فيها جداً. قتل <span class="badge badge-green">أحمد بن نصر الخزاعي</span> بيده. أطلق 1600 أسير بشرط القول بخلق القرآن.
-                    </div>
-                </div>
+				<div class="caliph-card mb-4">
+					<div class="flex justify-between items-center border-b border-gray-300 pb-2 mb-2">
+						<div><h3 class="font-bold text-lg">2. الواثق بالله <span class="text-sm text-gray-600 font-normal">(هارون بن المعتصم)</span></h3></div>
+						<span class="badge badge-yellow">حكم: 227 - 232 هـ</span>
+					</div>
+					<div class="grid grid-cols-2 gap-2 text-sm mb-3 text-secondary">
+						<div><strong>الولادة:</strong> 196 هـ</div>
+						<div><strong>الوفاة:</strong> 232 هـ (36 سنة)</div>
+					</div>
+					<div class="bg-gray-100 p-2 rounded mb-2 text-sm border-r-4 border-gray-400">
+						<strong>الوفاة:</strong> طبيعية (الاستسقاء - مات في تنور للعلاج).
+					</div>
+					<div class="text-sm border-t pt-2 mt-2">
+					<strong>فتنة القرآن (المحنة):</strong>
+					تشدد الواثق فيها جداً، حيث استولى <span class="badge badge-green">أحمد بن أبي دؤاد</span> على الخليفة وحمله على التشدّد في المحنة ودعا الناس إلى القول بخلق القرآن.
+						<ul>
+						<li><strong>الظلم والقتل:</strong> قام الواثق بقتل <span class="badge badge-green">أحمد بن نصر الخزاعي</span> بيده ثم صلبه لمدة ست سنين.</li>
+						<li><strong>ضحايا المحنة:</strong> من جملة من شملهم الظلم <span class="badge badge-green">أبو يعقوب يوسف بن يحيى البويطي</span> (صاحب الشافعي) - الذي توفي في السجن سنة 231 هـ - محبوساً ومقيداً لرفضه القول بخلق القرآن.</li>
+						<li><strong>الإفراج المشروط:</strong> أطلق الواثق 1600 أسير بشرط القول بخلق القرآن.</li>
+						</ul>
+					</div>
+					<div class="text-sm border-t pt-2 mt-2">
+						<strong>الإسراف في اللهو والمفاسد:</strong> كان الواثق كأسلافه مُسرفاً في حياته ومائلاً للمفاسد واللهو.
+					</div>
+					<div class="text-sm border-t pt-2 mt-2">
+						<strong>الغناء:</strong> كان أعلم الخلفاء بالغناء، وألّف نحو <span class="badge badge-green">مائة صوت ولحن</span>، وكان وافر الأدب ومليح الشعر وحاذقاً في ضرب العود.
+					</div>
+					<div class="text-sm border-t pt-2 mt-2">
+						<strong>الميل للغلمان والتعبير الشعري:</strong> كان الواثق مُحباً للغلمان، وقال شعراً في <span class="badge badge-green">خادمه الذي صدّه</span>، مُظهراً شدة هواه وسلطة المحبوب عليه.
+					</div>
+				</div>
 
                 <div class="caliph-card mb-4 border-l-4 border-l-red-600">
                     <div class="flex justify-between items-center border-b border-gray-300 pb-2 mb-2">
