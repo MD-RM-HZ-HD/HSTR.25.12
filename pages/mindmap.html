@@ -6,161 +6,12 @@
 	<meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
 	<title>الخريطة الذهنية</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
     
-    <style>
-        /* --- تأثيرات العقد --- */
-        @keyframes shine-button {
-            0% { transform: translateX(-100%) skewX(-20deg); }
-            100% { transform: translateX(200%) skewX(-20deg); }
-        }
-        
-        @keyframes glow-light {
-            0%, 100% { box-shadow: 0 0 4px rgba(0,0,0,0.1); }
-            50% { box-shadow: 0 0 12px 4px rgba(0,0,0,0.15); }
-        }
-        @keyframes glow-dark {
-            0%, 100% { box-shadow: 0 0 4px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 0 12px 4px rgba(255,255,255,0.15); }
-        }
-
-        /* --- تنسيق الخريطة الذهنية العمودية --- */
-        .mindmap-wrapper {
-            width: 100%;
-            overflow-x: auto; 
-            padding: 2rem 1rem;
-            background-color: rgb(170, 187, 165);
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        html.dark body .mindmap-wrapper {
-            background-color: #1f2937;
-        }
-        
-        .mindmap-v-tree {
-            display: inline-block; 
-            min-width: 100%;
-        }
-
-        .mindmap-v-tree ul {
-            position: relative;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            padding-right: 30px; /* مسافة للخطوط */
-        }
-        
-        /* === هذا هو الكود المسؤول عن الطي === */
-        .mindmap-v-tree li.collapsed > ul {
-            display: none !important;
-        }
-        /* ================================= */
-
-        .mindmap-v-tree li {
-            position: relative;
-            padding: 8px 0;
-            white-space: nowrap; 
-        }
-
-        /* تنسيق العقدة (Span) */
-        .mindmap-v-tree li > span {
-            display: inline-block;
-            padding: 10px 20px;
-            border: 1.5px solid #ddd;
-            border-radius: 8px;
-            font-weight: 700;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            min-width: 160px; 
-            text-align: center;
-            position: relative; 
-            z-index: 1; 
-            cursor: pointer; /* مؤشر اليد */
-            transition: all 0.2s ease;
-            background-color: #fff;
-            color: #333;
-        }
-
-        /* الفروع (Branch Nodes) - التي لها أبناء */
-        .mindmap-v-tree li > span.branch-node {
-            overflow: hidden;
-        }
-        /* إضافة تأثير اللمعان للفروع لتشجيع النقر */
-        .mindmap-v-tree li > span.branch-node::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 50%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
-            opacity: 0.6;
-            animation: shine-button 4s infinite linear;
-        }
-        
-        /* الأوراق النهائية (Leaf Nodes) */
-        .mindmap-v-tree li > span.leaf-node {
-             animation: glow-light 2.5s infinite ease-in-out;
-             white-space: normal; 
-             max-width: 400px;    
-             text-align: right;   
-             font-weight: 400;    
-             cursor: default; /* لا يظهر مؤشر اليد للأوراق */
-        }
-        
-        /* ألوان العقد حسب المستويات (Levels) */
-        .mindmap-v-tree > ul > li > span { background-color: #0d9488; color: white; border-color: #047857; font-size: 1.25rem; }
-        .mindmap-v-tree > ul > li > ul > li > span { background-color: #f0f9ff; border-color: #7dd3fc; color: #0369a1; }
-        .mindmap-v-tree > ul > li > ul > li > ul > li > span { background-color: #fdf2f8; border-color: #fbcfe8; color: #9d174d; }
-
-/* المستوى الرابع - رمادي مزرق (Slate) */
-.mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > span { 
-    background-color: #f8fafc; /* أبيض مائل للرمادي */
-    border-color: #475569;     /* إطار رصاصي */
-    color: #0f172a;            /* نص أسود تقريباً */
-}
-
-/* المستوى الخامس - طوبي/قرميدي (Burnt Orange) */
-.mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > ul > li > span { 
-    background-color: #ffedd5; /* مشمشي فاتح جداً */
-    border-color: #c2410c;     /* إطار قرميدي */
-    color: #7c2d12;            /* نص طوبي داكن */
-}
-
-		/* المستوى السادس - بنفسجي (Purple) - إضافي في حال تشعبت الخريطة أكثر */
-		.mindmap-v-tree > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > span { 
-			background-color: #f5f3ff; /* خلفية بنفسجي فاتح */
-			border-color: #a78bfa;     /* حدود بنفسجي */
-			color: #5b21b6;            /* نص بنفسجي داكن */
-		}
-        /* الخطوط الرابطة */
-        .mindmap-v-tree ul > li::before {
-            content: ""; position: absolute; top: 0; right: -15px; width: 2px; height: 100%; background-color: #cbd5e1;
-        }
-        .mindmap-v-tree ul > li::after {
-            content: ""; position: absolute; top: 25px; right: -15px; width: 15px; height: 2px; background-color: #cbd5e1;
-        }
-        .mindmap-v-tree ul > li:last-child::before { height: 25px; }
-        .mindmap-v-tree > ul > li::before, .mindmap-v-tree > ul > li::after { display: none; }
-
-        /* الوضع الليلي */
-        html.dark body .mindmap-v-tree li > span { color: #f3f4f6; background-color: #374151; border-color: #4b5563; }
-        html.dark body .mindmap-v-tree ul > li::before, html.dark body .mindmap-v-tree ul > li::after { background-color: #4b5563; }
-
-        /* تنسيق الهيدر الصوتي (مثل source-text) */
-        .content-container {
-            border: 1px solid #e0e0e0; border-radius: 8px; background-color: rgb(170, 187, 165); box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden;
-        }
-        html.dark body .content-container { background: #1f2937; border-color: #4b5563; }
-        .accordion-button {
-            width: 100%; background-color: rgb(170, 187, 165); padding: 1.25rem 1rem; border: none; text-align: right; cursor: default; display: flex; align-items: center; color: #333;
-        }
-        html.dark body .accordion-button { background: #374151; color: #f3f4f6; }
-        .header-title-style { font-size: 1.5rem; line-height: 1.3; font-weight: 700; color: #004d40; margin: 0; }
-        .header-subtitle-style { font-size: 1rem; line-height: 1.3; color: #333; margin: 0; font-weight: 400; }
-        html.dark body .header-title-style { color: #a7f3d0; }
-        html.dark body .header-subtitle-style { color: #d1d5db; }
-        
-    </style>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="min-h-screen" 
       x-data="{ 'fontSize': 18, 'darkMode': false }"
@@ -176,7 +27,6 @@
         <div class="accordion-button">
             <div class="accordion-title-group" style="flex-direction: column; align-items: flex-end;"> 
                 <h1 class="header-title-style">خريطة ذهنية</h1>
-                <p class="header-subtitle-style">انقر على العقد للتوسيع وعرض التفاصيل.</p>
             </div>
             <audio controls src="https://www.dropbox.com/scl/fi/bmlywjjkj7qmvgwpxyl8o/source-text-001.mp3?rlkey=zmoohiwyuk16dgz0kyrgarocw&st=s46firbw&raw=1" onclick="event.stopPropagation()">
             <p class="muted">متصفحك لا يدعم الصوت.</p>
