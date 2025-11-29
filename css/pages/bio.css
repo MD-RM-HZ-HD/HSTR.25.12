@@ -1,0 +1,222 @@
+/* =========================================================
+   13. BIO EVENTS PAGE STYLES (SCOPED)
+   تنسيقات خاصة بصفحة السيرة التاريخية فقط
+   ========================================================= */
+
+body.bio-page {
+    /* متغيرات خاصة لهذه الصفحة */
+    --bio-bg-body: #344C41; 
+    --bio-bg-card: rgb(170, 187, 165);
+    --bio-bg-glass: rgba(255, 255, 255, 0.45);
+    --bio-text-primary: #0f172a;
+    --bio-border: #1f2937;
+
+    /* Override Bootstrap variables locally */
+    background: var(--bio-bg-body) !important;
+    color: #ffffff !important;
+}
+
+/* إصلاحات الناف بار الخاصة بهذه الصفحة (لضمان تباين الألوان) */
+body.bio-page #navbar-placeholder nav a,
+body.bio-page #navbar-placeholder nav button {
+    color: #ffffff !important;
+}
+body.bio-page #navbar-placeholder nav div[class*="absolute"] a,
+body.bio-page #navbar-placeholder nav div[class*="absolute"] button {
+    color: #1f2937 !important; /* هذا لروابط القائمة المنسدلة الفرعية، وقد يكون بحاجة لتعديل إلى #ffffff بناءً على التنسيق النهائي لـ nav-loader.js */
+}
+body.bio-page #navbar-placeholder nav button svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* تنسيقات البطاقات والعناصر */
+.bio-page .tree-node, 
+.bio-page .caliph-card, 
+.bio-page .safir-box, 
+.bio-page .analysis-box, 
+.bio-page details {
+    background-color: var(--bio-bg-card);
+    color: var(--bio-text-primary);
+    border: 1px solid var(--bio-border);
+    border-radius: 0.75rem;
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1rem;
+    /* Reset generic Bootstrap styles */
+    display: block;
+}
+
+/* تأثير الزجاج */
+.bio-page .tree-node, 
+.bio-page .caliph-card, 
+.bio-page .safir-box, 
+.bio-page .analysis-box, 
+.bio-page .timeline-item {
+    background-color: var(--bio-bg-glass);
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: none;
+    border-radius: 0.5rem;
+}
+
+/* العناوين داخل البطاقات */
+.bio-page h3, 
+.bio-page h4, 
+.bio-page .item-title {
+    color: #064e3b !important; 
+    font-weight: 800;
+}
+
+.bio-page .item-title {
+    margin-bottom: 0.25rem;
+}
+
+/* خلفية بيضاء شفافة للعناوين الفرعية */
+.bio-page .tree-node h3, 
+.bio-page .caliph-card h4, 
+.bio-page .analysis-box h4, 
+.bio-page .timeline-item h3 {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    width: fit-content;
+    margin-bottom: 0.75rem;
+}
+
+/* البادجات (Badges) */
+.bio-page .badge { 
+    display: inline-block;
+    padding: 0.2em 0.8em;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin: 0 2px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    color: inherit;
+}
+
+.bio-page .badge-red { color: #991b1b !important; }
+.bio-page .badge-green { color: #166534 !important; }
+.bio-page .badge-blue { color: #1e40af !important; }
+.bio-page .badge-purple { color: #6b21a8 !important; }
+.bio-page .badge-yellow { color: #854d0e !important; }
+.bio-page .badge-gray { color: #374151 !important; }
+
+/* الأكورديون (Details/Summary) */
+.bio-page details > summary {
+    background-color: var(--bio-bg-card) !important;
+    color: var(--bio-text-primary) !important;
+    padding: 1rem 1.25rem;
+    font-weight: 800;
+    font-size: 1.2em;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bio-page details[open] > summary {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.05) !important;
+}
+
+/* الاقتباسات (Quotes) */
+.bio-page .special-quote {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-right: 4px solid #b45309;
+    color: #451a03;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    font-style: italic;
+}
+
+/* الشبكة المتجاوبة (Responsive Grid) */
+.bio-page .grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding-top: 1rem;
+}
+
+.timeline-item {
+        margin-bottom: 1.5rem;
+    }
+
+.timeline-item .badge {
+        background-color: #ffffff !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb !important;
+    }
+
+.bio-page .badge-orange {
+    color: #f97316 !important;
+}
+.bio-page .timeline-item [class*="badge"] {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+    padding: 0.25em 0.8em !important;
+    border-radius: 6px !important;
+}
+/* --- إجبار البطاقات على الظهور في عمودين (Side-by-Side) --- */
+@media (min-width: 768px) {
+    .bio-page .grid-responsive {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* عمودين بالتساوي */
+        gap: 1.5rem !important; /* مسافة بين البطاقات */
+        align-items: start; /* محاذاة للأعلى */
+    }
+}
+
+/* في الموبايل تبقى عمود واحد */
+@media (max-width: 767px) {
+    .bio-page .grid-responsive {
+        grid-template-columns: 1fr !important;
+    }
+}
+/* --- ضغط المسافات (Compact Mode) --- */
+
+/* 1. تقليل المسافة بين الأقسام الرئيسية (مثل: الأئمة، الخلفاء، السجل الزمني) */
+body.bio-page details {
+    margin-bottom: 0.25rem !important; /* كانت كبيرة سابقاً */
+    padding-bottom: 0 !important;
+}
+
+/* 2. تقليل المسافة بين البطاقات الداخلية (مثل بطاقات الخلفاء والتواريخ) */
+body.bio-page .caliph-card, 
+body.bio-page .tree-node, 
+body.bio-page .timeline-item {
+    margin-bottom: 0.25rem !important; /* تقليل الفراغ تحت كل بطاقة */
+}
+
+/* 3. تقليل الفجوة بين العمودين (في شاشات الكمبيوتر) */
+@media (min-width: 768px) {
+    body.bio-page .grid-responsive {
+        gap: 0.25rem !important; /* تقليل المسافة الفاصلة بين العمودين */
+        padding-top: 0.25rem !important;
+    }
+}
+
+/* 4. تقليل الهوامش الداخلية للبطاقات نفسها لتبدو أرشق */
+body.bio-page .caliph-card,
+body.bio-page .tree-node {
+    padding: 0.25rem !important; /* تقليل الحشو الداخلي */
+}
+/* --- تصحيح: تقليل المسافات العمودية للحاوية (Bootstrap Gutter) --- */
+
+/* 1. تقليل الفراغ العمودي الذي يضيفه بوتستراب (gy-4) */
+#bio-events-container {
+    --bs-gutter-y: 0.5rem !important; /* تقليل المسافة من 1.5rem إلى 0.5rem */
+}
+
+/* 2. إزالة أي هوامش إضافية قد تكون متبقية في العناصر المباشرة */
+#bio-events-container > div {
+    margin-top: var(--bs-gutter-y) !important; /* استخدام القيمة الجديدة المصغرة */
+}
