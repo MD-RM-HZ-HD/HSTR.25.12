@@ -293,7 +293,7 @@ const bioEventsData = [
 
                 <div class="caliph-card mb-4 border-l-4 border-l-gray-600">
                     <div class="flex justify-between items-center border-b border-gray-300 pb-2 mb-2">
-                        <div><h3 class="font-bold text-lg">6. المعتز بالله (الزبري) <span class="badge badge-red">قاتل الهادي</span></h3></div>
+                        <div><h3 class="font-bold text-lg">6. المعتز بالله (الزبيري) <span class="badge badge-red">قاتل الهادي</span></h3></div>
                         <span class="badge badge-yellow">حكم: 252 - 255 هـ</span>
                     </div>
                     <div class="grid grid-cols-2 gap-2 text-sm mb-3 text-secondary">
