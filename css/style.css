@@ -1,7 +1,6 @@
 /* ==========================================================================
    STYLE.CSS (BOOTSTRAP 5 COMPATIBLE EDITION)
-   Lines: ~1400
-   Target: Full functionality preservation with Bootstrap 5 integration
+   Revised: To include Mandatory Mobile Font Enforcement
    ========================================================================== */
 
 /* === 1. GLOBAL VARIABLES & BOOTSTRAP OVERRIDES === */
@@ -1313,8 +1312,6 @@ html.dark body .a { color: #d1d5db; }
 .nav-tools .icon-btn:hover, .nav-tools .btn:hover {
     background: rgba(255, 255, 255, 0.4);
 }
-
-
 /* =========================================================
    13. BIO EVENTS PAGE STYLES (SCOPED)
    تنسيقات خاصة بصفحة السيرة التاريخية فقط
@@ -1333,14 +1330,14 @@ body.bio-page {
     color: #ffffff !important;
 }
 
-/* إصلاحات الناف بار الخاصة بهذه الصفحة */
+/* إصلاحات الناف بار الخاصة بهذه الصفحة (لضمان تباين الألوان) */
 body.bio-page #navbar-placeholder nav a,
 body.bio-page #navbar-placeholder nav button {
     color: #ffffff !important;
 }
 body.bio-page #navbar-placeholder nav div[class*="absolute"] a,
 body.bio-page #navbar-placeholder nav div[class*="absolute"] button {
-    color: #1f2937 !important;
+    color: #1f2937 !important; /* هذا لروابط القائمة المنسدلة الفرعية، وقد يكون بحاجة لتعديل إلى #ffffff بناءً على التنسيق النهائي لـ nav-loader.js */
 }
 body.bio-page #navbar-placeholder nav button svg {
     color: #ffffff !important;
@@ -1536,4 +1533,109 @@ body.bio-page .tree-node {
 /* 2. إزالة أي هوامش إضافية قد تكون متبقية في العناصر المباشرة */
 #bio-events-container > div {
     margin-top: var(--bs-gutter-y) !important; /* استخدام القيمة الجديدة المصغرة */
+}
+
+/* ==========================================================================
+   14. MANDATORY MOBILE FONT ENFORCEMENT
+   Target: Viewports < 768px
+   Action: Override all previous styles with !important
+   ========================================================================== */
+
+@media (max-width: 767px) {
+    
+    /* 1. Body Text & General Content */
+    /* Target: Body, Paragraphs, List Items, Content Articles */
+    body, 
+    p, 
+    li,
+    .p-content, 
+    .li-content,
+    .card-content,
+    article.content p, 
+    article.content li,
+    .accordion-button {
+        font-size: 1.125rem !important; /* 18px */
+        line-height: 1.5 !important;
+    }
+
+    /* 2. H1 / Page Titles */
+    /* Target: Main Headers, Page Title Cards */
+    h1, 
+    .page-title-card h1,
+    .bio-page h1 {
+        font-size: 2rem !important; /* 32px */
+        line-height: 1.3 !important;
+    }
+
+    /* 3. H2 / Section Titles */
+    /* Target: Sub-headers, Section dividers */
+    h2, 
+    .section, 
+    article.content h2.section,
+    .bio-page h2 {
+        font-size: 1.5rem !important; /* 24px */
+        line-height: 1.4 !important;
+    }
+
+    /* 4. H3 / Card Titles & Subsections */
+    /* Target: Content Headers, Card Titles, Bio Page Items */
+    h3, 
+    h4,
+    .h3-content-title, 
+    .h4-content-title,
+    .h5-content-title,
+    article.content h3.sub,
+    .card-title,
+    .bio-page h3, 
+    .bio-page h4,
+    .item-title,
+    .q-title,
+    #front-header,
+    #back-header {
+        font-size: 1.25rem !important; /* 20px */
+        line-height: 1.4 !important;
+    }
+
+    /* 5. Secondary / Small Text */
+    /* Target: Badges, Meta info, Navigation links */
+    small, 
+    .text-muted, 
+    .text-sm,
+    .badge, 
+    .question-number, 
+    .nav-link-desktop,
+    .btn-custom,
+    .btn-answer,
+    footer {
+        font-size: 0.875rem !important; /* 14px */
+    }
+
+    /* 6. Form Inputs (Prevents iOS Zoom on focus) */
+    input, 
+    select, 
+    textarea,
+    .question-card.fill-blank input {
+        font-size: 1.125rem !important; /* 18px - Safe for mobile */
+    }
+}
+/* ==========================================================================
+   15. SPECIFIC PAGE FIXES (إصلاحات خاصة بالصفحات)
+   ========================================================================== */
+
+/* 1. حل مشكلة تلاصق الأزرار في الأسفل */
+#navigation-buttons {
+    gap: 1.5rem !important; /* يضيف مسافة 24px واضحة بين الزرين */
+}
+
+/* في حال كانت كلاسات Tailwind تسبب تداخل في الهوامش مع اتجاه RTL */
+#navigation-buttons > * {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+}
+
+/* 2. تقليل الفراغ (Padding) في حاوية البطاقة للنصف */
+/* الـ Padding الأصلي كان p-8 يعني 32px، قمنا بتقليله هنا */
+#card-and-buttons-container {
+    padding-top: 2.25rem !important;    /* أصبح 16px بدلاً من 32px */
+    padding-bottom: 1rem !important; /* للحفاظ على التناسق */
 }
